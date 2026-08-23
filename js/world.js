@@ -106,12 +106,35 @@ function makeLimb(len, rTop, rBot, mat){
   bone.position.y = -len * 0.5; wrap.add(bone);
   return wrap;
 }
+function addHair(parent, hairM){
+  const hair = new THREE.Group();
+  hair.position.y = 0.8;
+  const cap = new THREE.Mesh(new THREE.SphereGeometry(0.14, 12, 10), hairM);
+  cap.scale.set(1.12, 0.95, 1.16);
+  cap.position.set(0, 0.055, -0.018);
+  hair.add(cap);
+  const back = new THREE.Mesh(new THREE.SphereGeometry(0.12, 10, 8), hairM);
+  back.position.set(0, 0.0, -0.09);
+  back.scale.set(1.15, 0.95, 1.0);
+  hair.add(back);
+  const fringe = new THREE.Mesh(new THREE.SphereGeometry(0.075, 8, 6), hairM);
+  fringe.position.set(0, 0.03, 0.11);
+  fringe.scale.set(1.45, 0.42, 0.55);
+  hair.add(fringe);
+  for (const sx of [-0.12, 0.12]){
+    const side = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 6), hairM);
+    side.position.set(sx, -0.01, 0.02);
+    side.scale.set(0.75, 1.15, 0.9);
+    hair.add(side);
+  }
+  parent.add(hair);
+}
 export function makeHuman(){
   const g = new THREE.Group();
   const skin = new THREE.MeshStandardMaterial({ color: 0xb88962, roughness: 0.58 });
   const shirt = new THREE.MeshStandardMaterial({ color: 0x5a6750, roughness: 0.8 });
   const pants = new THREE.MeshStandardMaterial({ color: 0x3d3832, roughness: 0.86 });
-  const hairM = new THREE.MeshStandardMaterial({ color: 0x1c1612, roughness: 0.95 });
+  const hairM = new THREE.MeshStandardMaterial({ color: 0x1a1410, roughness: 0.92 });
   const boot = new THREE.MeshStandardMaterial({ color: 0x2a241e, roughness: 0.9 });
   const hips = new THREE.Group(); hips.position.y = 0.94; g.add(hips);
   const pelvis = new THREE.Mesh(new THREE.SphereGeometry(0.12, 10, 8), pants);
@@ -130,7 +153,7 @@ export function makeHuman(){
   const rFore = makeLimb(0.28, 0.033, 0.028, skin); rFore.position.y = -0.3; rArm.add(rFore);
   const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.048, 0.1, 8), skin); neck.position.y = 0.66; torsoG.add(neck);
   const head = new THREE.Mesh(new THREE.SphereGeometry(0.122, 14, 12), skin); head.position.y = 0.8; head.scale.set(0.94, 1.06, 0.96); torsoG.add(head);
-  const hair = new THREE.Mesh(new THREE.SphereGeometry(0.126, 12, 10), hairM); hair.position.set(0, 0.84, -0.012); hair.scale.set(1.03, 0.68, 1.06); torsoG.add(hair);
+  addHair(torsoG, hairM);
   g.userData.legs = [lLeg, rLeg];
   g.userData.shins = [lShin, rShin];
   g.userData.arms = [lArm, rArm];
@@ -138,6 +161,19 @@ export function makeHuman(){
   g.userData.torso = torsoG;
   g.traverse(o => { if (o.isMesh) o.castShadow = true; });
   return g;
+}
+export function makeStoneRing(scene, cx, cz){
+  const stone = new THREE.MeshStandardMaterial({ color: 0x6a6660, roughness: 0.95 });
+  const y = heightAt(cx, cz);
+  for (let i = 0; i < 8; i++){
+    const a = i * 0.785;
+    const h = 0.9 + (i % 3) * 0.35;
+    const s = new THREE.Mesh(new THREE.BoxGeometry(0.38, h, 0.28), stone);
+    s.position.set(cx + Math.cos(a) * 2.4, y + h * 0.5, cz + Math.sin(a) * 2.4);
+    s.rotation.y = a;
+    scene.add(s);
+  }
+  return { x: cx, z: cz, name: 'The Old Ring' };
 }
 export function makeRiverWater(waterMat){
   const group = new THREE.Group();
@@ -150,6 +186,7 @@ export function makeRiverWater(waterMat){
   return group;
 }
 export function currentPlace(x, z){
+  if (Math.hypot(x + 18, z - 8) < 8) return 'The Old Ring';
   if (Math.hypot(x - 4, z - 18) < 24) return 'The Clearing';
   if (riverDist(x, z) < 14) return 'Reedford Crossing';
   if (heightAt(x, z) > 13) return 'High Spine';
