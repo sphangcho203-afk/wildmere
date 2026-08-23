@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { Sky } from 'three/addons/objects/Sky.js';
 import {
   WORLD, WATER_Y, SEED,
-  vnoise, riverDist, heightAt,
+  riverDist, heightAt,
   makeTree, treeKindAt, addBerryBush,
   makeHuman, makeRiverWater, currentPlace
 } from './world.js';
@@ -12,11 +12,11 @@ renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
 renderer.setSize(innerWidth, innerHeight);
 renderer.shadowMap.enabled = true;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.72;
+renderer.toneMappingExposure = 0.75;
 document.body.prepend(renderer.domElement);
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x9bb3c0, 0.0062);
+scene.fog = new THREE.FogExp2(0x9bb3c0, 0.006);
 const camera = new THREE.PerspectiveCamera(62, innerWidth / innerHeight, 0.12, 900);
 const blocker = document.getElementById('blocker');
 let playing = false;
@@ -42,11 +42,12 @@ document.addEventListener('pointerlockchange', () => {
 const sky = new Sky(); sky.scale.setScalar(4500); scene.add(sky);
 const sun = new THREE.Vector3();
 const skyU = sky.material.uniforms;
-skyU.turbidity.value = 6; skyU.rayleigh.value = 2.2;
+skyU.turbidity.value = 5; skyU.rayleigh.value = 2.1;
 skyU.mieCoefficient.value = 0.005; skyU.mieDirectionalG.value = 0.75;
-scene.add(new THREE.HemisphereLight(0xcfe6ff, 0x3d4a32, 0.7));
+const hemi = new THREE.HemisphereLight(0xcfe6ff, 0x3d4a32, 0.7);
+scene.add(hemi);
 const dir = new THREE.DirectionalLight(0xfff1d0, 2);
-dir.position.set(40, 70, 20); dir.castShadow = true; scene.add(dir);
+dir.castShadow = true; scene.add(dir);
 
 const terrainGeo = new THREE.PlaneGeometry(WORLD, WORLD, 140, 140);
 terrainGeo.rotateX(-Math.PI / 2);
@@ -69,44 +70,76 @@ scene.add(new THREE.Mesh(terrainGeo, new THREE.MeshStandardMaterial({ vertexColo
 scene.add(makeRiverWater(new THREE.MeshStandardMaterial({ color: 0x3d6e7a, roughness: 0.2, transparent: true, opacity: 0.72 })));
 
 const interactives = [];
-for (let i = 0; i < 1600 && interactives.length < 140; i++){
-  const x = (Math.random() - 0.5) * (WORLD - 30);
-  const z = (Math.random() - 0.5) * (WORLD - 30);
+const fires = [];
+function addThing(mesh, type, x, y, z, hp){
+  mesh.position.set(x, type === 'rock' ? y + 0.2 : y, z);
+  scene.add(mesh);
+  interactives.push({ mesh, type, hp, x, z, y });
+}
+for (let a = 0; a < 10; a++){
+  const ang = a * 0.63, r = 11 + (a % 3) * 3;
+  const x = 10 + Math.cos(ang) * r, z = 26 + Math.sin(ang) * r;
   const y = heightAt(x, z);
-  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 14) continue;
-  const tr = makeTree(0.85 + Math.random() * 0.45, treeKindAt(x, z));
-  tr.position.set(x, y, z); scene.add(tr);
-  interactives.push({ mesh: tr, type: 'tree', hp: 3, x, z, y });
+  if (y < WATER_Y + 0.6) continue;
+  addThing(makeTree(0.9, treeKindAt(x, z)), 'tree', x, y, z, 3);
+}
+for (let i = 0; i < 1200 && interactives.filter(t => t.type === 'tree').length < 110; i++){
+  const x = (Math.random() - 0.5) * 380, z = (Math.random() - 0.5) * 380;
+  const y = heightAt(x, z);
+  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9) continue;
+  addThing(makeTree(0.8 + Math.random() * 0.5, treeKindAt(x, z)), 'tree', x, y, z, 3);
+}
+for (let i = 0; i < 16; i++){
+  const a = Math.random() * 6.28, r = 8 + Math.random() * 24;
+  const x = 10 + Math.cos(a) * r, z = 26 + Math.sin(a) * r;
+  const y = heightAt(x, z);
+  if (y < WATER_Y + 0.5 || riverDist(x, z) < 6) continue;
+  addThing(addBerryBush(scene, x, y, z, true), 'berry', x, y, z, 1);
+}
+const rockMat = new THREE.MeshStandardMaterial({ color: 0x6a6660, roughness: 0.95 });
+for (let i = 0; i < 14; i++){
+  const a = Math.random() * 6.28, r = 7 + Math.random() * 20;
+  const x = 10 + Math.cos(a) * r, z = 26 + Math.sin(a) * r;
+  const y = heightAt(x, z);
+  const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(0.3 + Math.random() * 0.3, 0), rockMat);
+  addThing(rock, 'rock', x, y, z, 2);
 }
 
 const hero = makeHuman();
 hero.position.set(10, heightAt(10, 26), 26);
 scene.add(hero);
 
-const player = { wood: 0, food: 0, stone: 0, health: 100, hunger: 100, thirst: 100, warmth: 72 };
+const player = { wood: 0, food: 0, stone: 0, health: 100, hunger: 100, thirst: 100, warmth: 74 };
 const keys = { w:0, a:0, s:0, d:0 };
 const stick = { x: 0, z: 0 };
-let yaw = 0, pitch = 0.12, buildIndex = 0;
-const BUILDS = [{ id: 'post', label: 'wooden post', wood: 2 }, { id: 'cabin', label: 'small cabin', wood: 18 }];
+let yaw = 0.4, pitch = 0.12, buildIndex = 0, worldTime = 0.22;
+const BUILDS = [
+  { id: 'post', label: 'wooden post', wood: 2 },
+  { id: 'fire', label: 'campfire', wood: 5 },
+  { id: 'cabin', label: 'small cabin', wood: 16 }
+];
 
 function toast(msg){
   const el = document.getElementById('toast'); if (!el) return;
   el.textContent = msg; el.classList.add('show');
-  clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove('show'), 1400);
+  clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove('show'), 1500);
 }
 function hud(){
   const set = (id, v) => {
     const bar = document.querySelector('#' + id + ' i');
     const lab = document.querySelector('#' + id + ' .v');
-    if (bar) bar.style.transform = 'scaleX(' + (Math.max(0, v) / 100) + ')';
+    if (bar) bar.style.transform = 'scaleX(' + (Math.max(0, Math.min(100, v)) / 100) + ')';
     if (lab) lab.textContent = Math.round(v);
   };
   set('hp', player.health); set('hun', player.hunger); set('thirst', player.thirst); set('warm', player.warmth);
   const w = document.getElementById('wood-n'); if (w) w.textContent = player.wood;
+  const f = document.getElementById('food-n'); if (f) f.textContent = player.food;
+  const s = document.getElementById('stone-n'); if (s) s.textContent = player.stone;
+  const chip = document.getElementById('build-chip'); if (chip) chip.textContent = 'Build: ' + BUILDS[buildIndex].label;
 }
 hud();
 function nearest(){
-  let best = null, bd = 4;
+  let best = null, bd = 3.6;
   for (const it of interactives){
     if (!it.mesh.visible) continue;
     const d = Math.hypot(it.x - hero.position.x, it.z - hero.position.z);
@@ -116,27 +149,52 @@ function nearest(){
 }
 function gather(){
   if (!playing) return;
+  if (riverDist(hero.position.x, hero.position.z) < 8){
+    player.thirst = Math.min(100, player.thirst + 28); toast('Drank from the stream'); hud(); return;
+  }
   const it = nearest();
-  if (!it){ toast('Walk up to a tree'); return; }
-  player.wood += 2; it.hp -= 1; it.mesh.scale.multiplyScalar(0.9);
-  if (it.hp <= 0) it.mesh.visible = false;
-  toast('+2 wood'); hud();
+  if (!it){ toast('Walk to a tree, bush, or stone'); return; }
+  if (it.type === 'tree'){
+    player.wood += 2; it.hp -= 1; it.mesh.scale.multiplyScalar(0.88);
+    if (it.hp <= 0) it.mesh.visible = false; toast('+2 wood');
+  } else if (it.type === 'berry'){
+    player.food += 2; it.mesh.visible = false; toast('+2 berries');
+  } else if (it.type === 'rock'){
+    player.stone += 1; it.hp -= 1; if (it.hp <= 0) it.mesh.visible = false; toast('+1 stone');
+  }
+  hud();
+}
+function eat(){
+  if (player.food < 1){ toast('Pick berries first'); return; }
+  player.food -= 1; player.hunger = Math.min(100, player.hunger + 24); toast('Ate a berry'); hud();
 }
 function place(){
   if (!playing) return;
   const spec = BUILDS[buildIndex];
   if (player.wood < spec.wood){ toast('Need ' + spec.wood + ' wood'); return; }
   player.wood -= spec.wood;
-  const x = hero.position.x + Math.sin(hero.rotation.y) * 2.4;
-  const z = hero.position.z + Math.cos(hero.rotation.y) * 2.4;
-  const mesh = new THREE.Mesh(new THREE.BoxGeometry(spec.id === 'cabin' ? 3 : 0.2, spec.id === 'cabin' ? 1.8 : 1.6, spec.id === 'cabin' ? 3 : 0.2), new THREE.MeshStandardMaterial({ color: 0x6b5340 }));
-  mesh.position.set(x, heightAt(x, z) + 0.8, z); scene.add(mesh);
+  const x = hero.position.x + Math.sin(hero.rotation.y) * 2.5;
+  const z = hero.position.z + Math.cos(hero.rotation.y) * 2.5;
+  const y = heightAt(x, z);
+  const woodM = new THREE.MeshStandardMaterial({ color: 0x6b5340 });
+  let mesh;
+  if (spec.id === 'post') mesh = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.6, 0.18), woodM);
+  else if (spec.id === 'fire'){
+    mesh = new THREE.Group();
+    const flame = new THREE.Mesh(new THREE.ConeGeometry(0.2, 0.5, 6), new THREE.MeshBasicMaterial({ color: 0xff6622 }));
+    flame.position.y = 0.35; mesh.add(flame);
+    mesh.add(new THREE.PointLight(0xff8844, 1.6, 10));
+    fires.push({ x, z });
+  } else {
+    mesh = new THREE.Mesh(new THREE.BoxGeometry(3.1, 1.8, 3.1), woodM);
+  }
+  mesh.position.set(x, spec.id === 'post' ? y + 0.8 : y, z); scene.add(mesh);
   toast(spec.label); hud();
 }
 addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
   if (keys[k] !== undefined) keys[k] = 1;
-  if (k === 'e') gather(); if (k === 'f') place();
+  if (k === 'e') gather(); if (k === 'f') place(); if (k === 'g') eat();
 });
 addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== undefined) keys[k] = 0; });
 
@@ -148,10 +206,10 @@ addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== 
   let walkId = null, lookId = null, lx = 0, ly = 0;
   function setKnob(el, nx, nz){ if (el) el.style.transform = 'translate(' + (nx * 36) + 'px,' + (-nz * 36) + 'px)'; }
   function applyWalk(t){
-    const cx = walk ? walk.getBoundingClientRect() : { left: 40, top: innerHeight - 180, width: 140, height: 140 };
-    const nx = Math.max(-1, Math.min(1, (t.clientX - (cx.left + cx.width / 2)) / 60));
-    const ny = Math.max(-1, Math.min(1, (t.clientY - (cx.top + cx.height / 2)) / 60));
-    stick.x = nx; stick.z = -ny; setKnob(knob, stick.x, stick.z);
+    const cx = walk ? walk.getBoundingClientRect() : { left: 36, top: innerHeight - 190, width: 140, height: 140 };
+    stick.x = Math.max(-1, Math.min(1, (t.clientX - (cx.left + cx.width / 2)) / 58));
+    stick.z = -Math.max(-1, Math.min(1, (t.clientY - (cx.top + cx.height / 2)) / 58));
+    setKnob(knob, stick.x, stick.z);
   }
   function find(id, list){ for (let i = 0; i < list.length; i++) if (list[i].identifier === id) return list[i]; return null; }
   function onStart(e){
@@ -170,16 +228,14 @@ addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== 
       if (t){
         yaw -= (t.clientX - lx) * 0.01;
         pitch = Math.max(-0.35, Math.min(0.65, pitch + (t.clientY - ly) * 0.007));
-        lx = t.clientX; ly = t.clientY;
-        setKnob(lookKnob, (t.clientX / innerWidth - 0.75) * 2, 0);
-        e.preventDefault();
+        lx = t.clientX; ly = t.clientY; e.preventDefault();
       }
     }
   }
   function onEnd(e){
     for (const t of e.changedTouches){
       if (t.identifier === walkId){ walkId = null; stick.x = 0; stick.z = 0; setKnob(knob, 0, 0); }
-      if (t.identifier === lookId){ lookId = null; setKnob(lookKnob, 0, 0); }
+      if (t.identifier === lookId) lookId = null;
     }
   }
   const opts = { passive: false };
@@ -189,7 +245,8 @@ addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== 
   addEventListener('touchcancel', onEnd, opts);
   const be = document.getElementById('btn-e'); if (be) be.addEventListener('click', gather);
   const bf = document.getElementById('btn-f'); if (bf) bf.addEventListener('click', place);
-  const bq = document.getElementById('btn-q'); if (bq) bq.addEventListener('click', () => { buildIndex = (buildIndex + 1) % BUILDS.length; hud(); });
+  const bg = document.getElementById('btn-g'); if (bg) bg.addEventListener('click', eat);
+  const bq = document.getElementById('btn-q'); if (bq) bq.addEventListener('click', () => { buildIndex = (buildIndex + 1) % BUILDS.length; hud(); toast(BUILDS[buildIndex].label); });
 })();
 
 const clock = new THREE.Clock();
@@ -197,23 +254,28 @@ addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; cam
 function animate(){
   requestAnimationFrame(animate);
   const dt = Math.min(0.05, clock.getDelta());
-  sun.setFromSphericalCoords(1, THREE.MathUtils.degToRad(48), 0.9);
+  worldTime = (worldTime + dt / 360) % 1;
+  const elev = Math.sin(worldTime * Math.PI * 2);
+  const up = Math.max(0, elev);
+  sun.setFromSphericalCoords(1, THREE.MathUtils.degToRad(90 - elev * 42), worldTime * 6.28);
   skyU.sunPosition.value.copy(sun);
+  dir.position.copy(sun).multiplyScalar(80);
+  dir.intensity = 0.2 + up * 2; hemi.intensity = 0.2 + up * 0.55;
+  renderer.toneMappingExposure = 0.38 + up * 0.42;
+  scene.fog.color.setHSL(0.55, 0.14 + up * 0.12, 0.16 + up * 0.46);
   if (playing){
     const fx = Math.sin(yaw), fz = Math.cos(yaw);
     let mx = fx * stick.z + Math.cos(yaw) * stick.x;
     let mz = fz * stick.z - Math.sin(yaw) * stick.x;
-    if (keys.w){ mx += fx; mz += fz; }
-    if (keys.s){ mx -= fx; mz -= fz; }
-    if (keys.d){ mx += Math.cos(yaw); mz -= Math.sin(yaw); }
-    if (keys.a){ mx -= Math.cos(yaw); mz += Math.sin(yaw); }
+    if (keys.w){ mx += fx; mz += fz; } if (keys.s){ mx -= fx; mz -= fz; }
+    if (keys.d){ mx += Math.cos(yaw); mz -= Math.sin(yaw); } if (keys.a){ mx -= Math.cos(yaw); mz += Math.sin(yaw); }
     const len = Math.hypot(mx, mz);
+    let moving = 0;
     if (len > 0.08){
-      mx /= len; mz /= len;
-      hero.position.x += mx * 6.8 * dt;
-      hero.position.z += mz * 6.8 * dt;
+      mx /= len; mz /= len; moving = 1;
+      hero.position.x += mx * 6.8 * dt; hero.position.z += mz * 6.8 * dt;
       hero.rotation.y = Math.atan2(mx, mz);
-      const swing = Math.sin(clock.elapsedTime * 11) * 0.4;
+      const swing = Math.sin(clock.elapsedTime * 11) * 0.42;
       if (hero.userData.legs){ hero.userData.legs[0].rotation.x = swing; hero.userData.legs[1].rotation.x = -swing; }
     } else if (hero.userData.legs){
       hero.userData.legs[0].rotation.x *= 0.7; hero.userData.legs[1].rotation.x *= 0.7;
@@ -221,12 +283,29 @@ function animate(){
     hero.position.x = THREE.MathUtils.clamp(hero.position.x, -200, 200);
     hero.position.z = THREE.MathUtils.clamp(hero.position.z, -200, 200);
     hero.position.y = heightAt(hero.position.x, hero.position.z);
-    camera.position.set(hero.position.x - Math.sin(yaw) * 5.6, hero.position.y + 2.2 + pitch, hero.position.z - Math.cos(yaw) * 5.6);
+    const bob = moving ? Math.sin(clock.elapsedTime * 11) * 0.06 : 0;
+    camera.position.set(hero.position.x - Math.sin(yaw) * 5.6, hero.position.y + 2.15 + pitch + bob, hero.position.z - Math.cos(yaw) * 5.6);
     camera.lookAt(hero.position.x, hero.position.y + 1.35, hero.position.z);
+    const nearFire = fires.some(f => Math.hypot(f.x - hero.position.x, f.z - hero.position.z) < 4);
+    if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 16);
+    else player.warmth = Math.max(0, player.warmth - dt * (up < 0.12 ? 2.2 : 0.28));
+    player.hunger = Math.max(0, player.hunger - dt * 0.55);
+    player.thirst = Math.max(0, player.thirst - dt * 0.7);
+    if (player.hunger < 1 || player.thirst < 1 || player.warmth < 8) player.health = Math.max(0, player.health - dt * 2);
+    const it = nearest();
     const pr = document.getElementById('prompt');
-    if (pr) pr.textContent = nearest() ? 'E gather' : 'Hold left side to walk';
-    const pl = document.getElementById('place');
-    if (pl) pl.textContent = currentPlace(hero.position.x, hero.position.z);
+    if (pr){
+      if (it && it.type === 'tree') pr.textContent = 'E  wood';
+      else if (it && it.type === 'berry') pr.textContent = 'E  berries';
+      else if (it && it.type === 'rock') pr.textContent = 'E  stone';
+      else if (riverDist(hero.position.x, hero.position.z) < 8) pr.textContent = 'E  drink';
+      else if (nearFire) pr.textContent = 'Warm by the fire';
+      else pr.textContent = 'Hold left to walk · right to look';
+    }
+    const pl = document.getElementById('place'); if (pl) pl.textContent = currentPlace(hero.position.x, hero.position.z);
+    const ck = document.getElementById('clock');
+    if (ck) ck.textContent = elev > 0.3 ? 'Day' : elev > 0.05 ? 'Morning' : elev > -0.15 ? 'Dusk' : 'Night';
+    if ((Math.floor(clock.elapsedTime * 2) % 4) === 0) hud();
   }
   renderer.render(scene, camera);
 }
