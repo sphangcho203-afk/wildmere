@@ -61,64 +61,81 @@ export function makeBroadleaf(scale = 1){
   const trunk = new THREE.Mesh(new THREE.CylinderGeometry(trunkR * 0.62, trunkR, trunkH, 8), barkLeaf);
   trunk.position.y = trunkH * 0.5; trunk.castShadow = true; g.add(trunk);
   const canopy = new THREE.Group();
-  const branches = 3 + (Math.random() * 3 | 0);
-  for (let i = 0; i < branches; i++){
+  for (let i = 0; i < 4; i++){
     const len = (0.7 + Math.random() * 0.9) * scale;
     const br = new THREE.Mesh(new THREE.CylinderGeometry(0.035 * scale, 0.055 * scale, len, 5), barkLeaf);
-    const a = (i / branches) * Math.PI * 2 + Math.random() * 0.4;
-    br.position.set(Math.sin(a) * 0.18 * scale, trunkH * (0.58 + Math.random() * 0.22), Math.cos(a) * 0.18 * scale);
-    br.rotation.z = Math.cos(a) * 0.85; br.rotation.x = Math.sin(a) * 0.85; br.castShadow = true; g.add(br);
+    const a = (i / 4) * Math.PI * 2;
+    br.position.set(Math.sin(a) * 0.18 * scale, trunkH * 0.65, Math.cos(a) * 0.18 * scale);
+    br.rotation.z = Math.cos(a) * 0.8; br.rotation.x = Math.sin(a) * 0.8; g.add(br);
   }
-  for (let i = 0; i < 5; i++){
-    const fol = new THREE.Mesh(new THREE.SphereGeometry((0.85 + Math.random()) * scale, 8, 6), leafMats[i % leafMats.length]);
-    fol.position.set((Math.random() - 0.5) * 1.7 * scale, trunkH * 0.78 + Math.random() * 1.15 * scale, (Math.random() - 0.5) * 1.7 * scale);
+  for (let i = 0; i < 6; i++){
+    const fol = new THREE.Mesh(new THREE.SphereGeometry((0.7 + Math.random() * 0.55) * scale, 8, 6), leafMats[i % 4]);
+    fol.position.set((Math.random() - 0.5) * 1.5 * scale, trunkH * 0.8 + Math.random() * 1.1 * scale, (Math.random() - 0.5) * 1.5 * scale);
     fol.castShadow = true; canopy.add(fol);
   }
-  g.add(canopy); g.userData.canopy = canopy; return g;
+  g.add(canopy); return g;
 }
 export function makePine(scale = 1){
   const g = new THREE.Group();
-  const trunkH = (5.2 + Math.random() * 2.6) * scale;
-  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.08 * scale, 0.16 * scale, trunkH, 7), barkPine);
+  const trunkH = (5.2 + Math.random() * 2.2) * scale;
+  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.07 * scale, 0.15 * scale, trunkH, 7), barkPine);
   trunk.position.y = trunkH * 0.5; trunk.castShadow = true; g.add(trunk);
-  const canopy = new THREE.Group();
-  const layers = 5;
-  for (let i = 0; i < layers; i++){
-    const t = i / (layers - 1);
-    const cone = new THREE.Mesh(new THREE.ConeGeometry((1.55 - t * 1.15) * scale, (1.35 - t * 0.25) * scale, 8), pineMat);
-    cone.position.y = trunkH * 0.38 + i * 0.85 * scale; cone.castShadow = true; canopy.add(cone);
+  for (let i = 0; i < 5; i++){
+    const t = i / 4;
+    const cone = new THREE.Mesh(new THREE.ConeGeometry((1.5 - t * 1.1) * scale, 1.2 * scale, 8), pineMat);
+    cone.position.y = trunkH * 0.4 + i * 0.82 * scale; cone.castShadow = true; g.add(cone);
   }
-  g.add(canopy); return g;
+  return g;
 }
 export function makeTree(scale = 1, kind = 'leaf'){ return kind === 'pine' ? makePine(scale) : makeBroadleaf(scale); }
 export function treeKindAt(x, z){
   if (heightAt(x, z) > 11.5 || fbm(x * 0.01 + 3, z * 0.01 + 9, 3) > 0.56) return 'pine';
   return 'leaf';
 }
-export function addBerryBush(scene, x, y, z, grown = true){
+export function addBerryBush(scene, x, y, z){
   const bush = new THREE.Group();
-  const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.55, 7, 5), new THREE.MeshStandardMaterial({ color: 0x2a4a24, roughness: 0.9 }));
-  leaf.position.y = 0.45; bush.add(leaf);
+  const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.5, 8, 6), new THREE.MeshStandardMaterial({ color: 0x2a4a24, roughness: 0.88 }));
+  leaf.position.y = 0.42; bush.add(leaf);
+  const berry = new THREE.Mesh(new THREE.SphereGeometry(0.08, 6, 5), new THREE.MeshStandardMaterial({ color: 0x8b2040 }));
+  berry.position.set(0.2, 0.5, 0.15); bush.add(berry);
   bush.position.set(x, y, z); scene.add(bush); return bush;
+}
+function makeLimb(len, rTop, rBot, mat){
+  const wrap = new THREE.Group();
+  const bone = new THREE.Mesh(new THREE.CylinderGeometry(rBot, rTop, len, 8), mat);
+  bone.position.y = -len * 0.5; wrap.add(bone);
+  return wrap;
 }
 export function makeHuman(){
   const g = new THREE.Group();
-  const skin = new THREE.MeshStandardMaterial({ color: 0xc9a07a, roughness: 0.72 });
-  const shirt = new THREE.MeshStandardMaterial({ color: 0x4d5e46, roughness: 0.86 });
-  const pants = new THREE.MeshStandardMaterial({ color: 0x3a332c, roughness: 0.9 });
-  const hair = new THREE.MeshStandardMaterial({ color: 0x2b2118, roughness: 0.95 });
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.13, 10, 8), skin); head.position.y = 1.58; g.add(head);
-  const hairCap = new THREE.Mesh(new THREE.SphereGeometry(0.135, 10, 8), hair); hairCap.position.set(0, 1.64, -0.01); hairCap.scale.set(1.02, 0.72, 1.05); g.add(hairCap);
-  const torso = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.48, 0.2), shirt); torso.position.y = 1.22; g.add(torso);
-  for (const sx of [-0.22, 0.22]){
-    const arm = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.46, 0.08), shirt); arm.position.set(sx, 1.16, 0); g.add(arm);
-  }
-  const hips = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.16, 0.18), pants); hips.position.y = 0.92; g.add(hips);
-  const legs = [];
-  for (const sx of [-0.09, 0.09]){
-    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.84, 0.1), pants); leg.position.set(sx, 0.46, 0); g.add(leg); legs.push(leg);
-  }
-  g.userData.legs = legs;
+  const skin = new THREE.MeshStandardMaterial({ color: 0xb88962, roughness: 0.58 });
+  const shirt = new THREE.MeshStandardMaterial({ color: 0x5a6750, roughness: 0.8 });
+  const pants = new THREE.MeshStandardMaterial({ color: 0x3d3832, roughness: 0.86 });
+  const hairM = new THREE.MeshStandardMaterial({ color: 0x1c1612, roughness: 0.95 });
+  const boot = new THREE.MeshStandardMaterial({ color: 0x2a241e, roughness: 0.9 });
+  const hips = new THREE.Group(); hips.position.y = 0.94; g.add(hips);
+  const pelvis = new THREE.Mesh(new THREE.SphereGeometry(0.12, 10, 8), pants);
+  pelvis.scale.set(1.2, 0.52, 0.88); hips.add(pelvis);
+  const lLeg = makeLimb(0.44, 0.055, 0.046, pants); lLeg.position.set(-0.075, 0, 0.015); hips.add(lLeg);
+  const rLeg = makeLimb(0.44, 0.055, 0.046, pants); rLeg.position.set(0.075, 0, 0.015); hips.add(rLeg);
+  const lShin = makeLimb(0.42, 0.045, 0.038, pants); lShin.position.y = -0.44; lLeg.add(lShin);
+  const rShin = makeLimb(0.42, 0.045, 0.038, pants); rShin.position.y = -0.44; rLeg.add(rShin);
+  const lFoot = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.045, 0.16), boot); lFoot.position.set(0, -0.44, 0.04); lShin.add(lFoot);
+  rShin.add(lFoot.clone());
+  const torsoG = new THREE.Group(); torsoG.position.y = 0.94; g.add(torsoG);
+  const chest = new THREE.Mesh(new THREE.CapsuleGeometry(0.145, 0.36, 6, 10), shirt); chest.position.y = 0.36; torsoG.add(chest);
+  const lArm = makeLimb(0.3, 0.04, 0.034, shirt); lArm.position.set(-0.195, 0.56, 0); torsoG.add(lArm);
+  const rArm = makeLimb(0.3, 0.04, 0.034, shirt); rArm.position.set(0.195, 0.56, 0); torsoG.add(rArm);
+  const lFore = makeLimb(0.28, 0.033, 0.028, skin); lFore.position.y = -0.3; lArm.add(lFore);
+  const rFore = makeLimb(0.28, 0.033, 0.028, skin); rFore.position.y = -0.3; rArm.add(rFore);
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.048, 0.1, 8), skin); neck.position.y = 0.66; torsoG.add(neck);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.122, 14, 12), skin); head.position.y = 0.8; head.scale.set(0.94, 1.06, 0.96); torsoG.add(head);
+  const hair = new THREE.Mesh(new THREE.SphereGeometry(0.126, 12, 10), hairM); hair.position.set(0, 0.84, -0.012); hair.scale.set(1.03, 0.68, 1.06); torsoG.add(hair);
+  g.userData.legs = [lLeg, rLeg];
+  g.userData.shins = [lShin, rShin];
+  g.userData.arms = [lArm, rArm];
+  g.userData.fores = [lFore, rFore];
+  g.userData.torso = torsoG;
   g.traverse(o => { if (o.isMesh) o.castShadow = true; });
   return g;
 }
