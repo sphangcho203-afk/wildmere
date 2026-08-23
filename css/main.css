@@ -45,3 +45,27 @@ canvas { display: block; }
 #toast { position: absolute; top: 46%; left: 50%; transform: translate(-50%, -20px); opacity: 0; transition: opacity .3s; font-size: 0.9rem; color: var(--sun); text-shadow: 0 2px 10px #000; }
 #toast.show { opacity: 1; }
 #build-chip { position: absolute; bottom: 64px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #d8c898; }
+#touch-layer { display: none; position: absolute; inset: 0; pointer-events: none; z-index: 6; }
+#stick-walk, #stick-look {
+  pointer-events: auto;
+  position: absolute; bottom: 28px; width: 112px; height: 112px;
+  border-radius: 50%; border: 1px solid rgba(232,213,163,.28);
+  background: rgba(10,16,12,.28);
+}
+#stick-walk { left: 18px; }
+#stick-walk i {
+  position: absolute; left: 50%; top: 50%; width: 42px; height: 42px; margin: -21px 0 0 -21px;
+  border-radius: 50%; background: rgba(232,213,163,.35);
+}
+#stick-look { right: 18px; border-radius: 16px; width: 132px; height: 132px; }
+#touch-actions {
+  pointer-events: auto;
+  position: absolute; right: 18px; bottom: 175px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+#touch-actions button {
+  width: 48px; height: 48px; border-radius: 8px;
+  border: 1px solid rgba(232,213,163,.35);
+  background: rgba(18,26,20,.55); color: #e8d5a3;
+  font-size: 0.72rem; letter-spacing: 0.06em;
+}
