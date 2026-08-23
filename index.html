@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wildmere — Open Ground</title>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <div id="blocker">
+    <div id="start-card">
+      <div class="sub">A quiet valley</div>
+      <h1>WILDMERE</h1>
+      <p>Not a block world. Hills, a stream, timber, and enough room to decide what to do with a day. Gather. Plant. Build a little. Watch the light change.</p>
+      <p class="hint">Click to look around. K saves, L loads. This is a living prototype.</p>
+      <button id="start-btn">Enter the valley</button>
+      <p class="hint" style="margin-top:16px">WASD · Shift · E gather · F build · G plant · C craft axe · Z rest by fire</p>
+    </div>
+  </div>
+  <div id="hud">
+    <div id="top-left">
+      <div class="stat" id="hp"><label><span>Strength</span><span class="v">100</span></label><div class="bar"><i></i></div></div>
+      <div class="stat" id="hun"><label><span>Hunger</span><span class="v">100</span></label><div class="bar"><i></i></div></div>
+      <div class="stat" id="thirst"><label><span>Thirst</span><span class="v">100</span></label><div class="bar"><i></i></div></div>
+      <div class="stat" id="warm"><label><span>Warmth</span><span class="v">70</span></label><div class="bar"><i></i></div></div>
+    </div>
+    <div id="inv">
+      Wood <b id="wood-n">0</b><br/>
+      Berries <b id="food-n">0</b><br/>
+      Stone <b id="stone-n">0</b><br/>
+      Axe <b id="axe-n">no</b>
+    </div>
+    <div id="compass">N<div id="place">The Clearing</div></div>
+    <div id="crosshair"></div>
+    <div id="prompt"></div>
+    <div id="build-chip">Build: wooden post</div>
+    <div id="controls-help">
+      E gather &nbsp; F place &nbsp; Tab cycle build &nbsp; G plant &nbsp; C axe<br/>
+      1 eat &nbsp; 2 drink in stream &nbsp; Z rest at fire &nbsp; K save &nbsp; L load
+    </div>
+    <div id="meta"><div id="clock">Morning</div><div id="seedline">seed 2041</div></div>
+    <div id="toast"></div>
+  </div>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>
