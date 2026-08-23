@@ -14,15 +14,15 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Hand axe
 - [x] Named places + compass
 - [x] Save / load
+- [x] Leaf trees with branches, pines on high ground
+- [x] Cabin kit
+- [x] Passing rain
+- [x] Birds, grass, wind in the leaves
+- [x] Phone walk / look pads
 
 ## Next
 
-- [ ] Split the single HTML into `js/` modules without breaking one-click play
-- [ ] Better tree shapes (branches, two species)
-- [ ] A real small cabin kit (floor, door gap, roof peak)
 - [ ] Farming plot: soil, water, three crops
-- [ ] Weather: overcast, light rain, wet ground darkening
-- [ ] Birds that cross the sky
 - [ ] Distant ridge fade that feels like more land, not a wall
 - [ ] Sleep that actually advances time instead of a jump
 - [ ] GitHub Pages live play URL
@@ -32,5 +32,4 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [ ] A second region past High Spine (stone terrace, thin grass)
 - [ ] Fishing at the slow bend of the stream
 - [ ] A notebook / map you fill in by walking
-- [ ] Wind in the canopies
 - [ ] Multiplayer is not a goal. One person and a piece of land is the goal.
