@@ -99,7 +99,7 @@ export function makePine(scale = 1){
   const canopy = new THREE.Group();
   const layers = 4 + (Math.random() * 2 | 0);
   for (let i = 0; i < layers; i++){
-    const t = i / (layers - 1);
+    const t = i / Math.max(1, layers - 1);
     const r = (1.55 - t * 1.15) * scale;
     const h = (1.35 - t * 0.25) * scale;
     const cone = new THREE.Mesh(new THREE.ConeGeometry(r, h, 8), pineMat);
@@ -116,7 +116,6 @@ export function makePine(scale = 1){
 export function makeTree(scale = 1, kind = 'leaf'){
   return kind === 'pine' ? makePine(scale) : makeBroadleaf(scale);
 }
-
 export function treeKindAt(x, z){
   const y = heightAt(x, z);
   const pineBelt = fbm(x * 0.01 + 3, z * 0.01 + 9, 3);
@@ -127,13 +126,8 @@ export function treeKindAt(x, z){
 export function addBerryBush(scene, x, y, z, grown = true){
   const bush = new THREE.Group();
   const s = grown ? 1 : 0.35;
-  const leaf = new THREE.Mesh(
-    new THREE.SphereGeometry(0.55, 7, 5),
-    new THREE.MeshStandardMaterial({ color: 0x2a4a24, roughness: 0.9 })
-  );
-  leaf.position.y = 0.45;
-  leaf.castShadow = true;
-  bush.add(leaf);
+  const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.55, 7, 5), new THREE.MeshStandardMaterial({ color: 0x2a4a24, roughness: 0.9 }));
+  leaf.position.y = 0.45; leaf.castShadow = true; bush.add(leaf);
   if (grown){
     const berryMat = new THREE.MeshStandardMaterial({ color: 0x8b2040, roughness: 0.5 });
     for (let b = 0; b < 5; b++){
@@ -148,49 +142,51 @@ export function addBerryBush(scene, x, y, z, grown = true){
   return bush;
 }
 
-export function makeGrassTuft(){
-  const g = new THREE.Group();
-  const mat = new THREE.MeshStandardMaterial({ color: 0x4a6a32, roughness: 1, side: THREE.DoubleSide });
-  for (let i = 0; i < 4; i++){
-    const blade = new THREE.Mesh(new THREE.PlaneGeometry(0.07, 0.38 + Math.random() * 0.22), mat);
-    blade.position.y = 0.18;
-    blade.rotation.y = i * 0.8 + Math.random() * 0.3;
-    blade.rotation.x = (Math.random() - 0.5) * 0.25;
-    g.add(blade);
-  }
-  return g;
-}
-
 export function makeDeer(){
   const g = new THREE.Group();
   const hide = new THREE.MeshStandardMaterial({ color: 0x6b4a32, roughness: 0.85 });
   const body = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.38, 0.9), hide);
   body.position.y = 0.72; g.add(body);
-  const neck = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.32, 0.16), hide);
-  neck.position.set(0, 1.02, 0.38); g.add(neck);
-  const head = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.16, 0.28), hide);
-  head.position.set(0, 1.18, 0.52); g.add(head);
-  for (const sx of [-0.14, 0.14]){
-    for (const sz of [-0.28, 0.28]){
-      const leg = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.55, 0.08), hide);
-      leg.position.set(sx, 0.28, sz); g.add(leg);
-    }
-  }
   return g;
 }
 
-export function makeBird(){
+export function makeHuman(){
   const g = new THREE.Group();
-  const mat = new THREE.MeshStandardMaterial({ color: 0x2a2a28, roughness: 0.7 });
-  const body = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.05, 0.22), mat);
-  g.add(body);
-  const wingL = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.015, 0.1), mat);
-  wingL.position.set(-0.16, 0, 0);
-  const wingR = wingL.clone();
-  wingR.position.x = 0.16;
-  g.add(wingL); g.add(wingR);
-  g.userData.wings = [wingL, wingR];
+  const skin = new THREE.MeshStandardMaterial({ color: 0xc9a07a, roughness: 0.72 });
+  const shirt = new THREE.MeshStandardMaterial({ color: 0x4d5e46, roughness: 0.86 });
+  const pants = new THREE.MeshStandardMaterial({ color: 0x3a332c, roughness: 0.9 });
+  const hair = new THREE.MeshStandardMaterial({ color: 0x2b2118, roughness: 0.95 });
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.13, 10, 8), skin);
+  head.position.y = 1.58; g.add(head);
+  const hairCap = new THREE.Mesh(new THREE.SphereGeometry(0.135, 10, 8), hair);
+  hairCap.position.set(0, 1.64, -0.01); hairCap.scale.set(1.02, 0.72, 1.05); g.add(hairCap);
+  const torso = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.48, 0.2), shirt);
+  torso.position.y = 1.22; g.add(torso);
+  for (const sx of [-0.22, 0.22]){
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.46, 0.08), shirt);
+    arm.position.set(sx, 1.16, 0); g.add(arm);
+  }
+  const hips = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.16, 0.18), pants);
+  hips.position.y = 0.92; g.add(hips);
+  for (const sx of [-0.09, 0.09]){
+    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.84, 0.1), pants);
+    leg.position.set(sx, 0.46, 0); g.add(leg);
+  }
+  g.traverse(o => { if (o.isMesh) o.castShadow = true; });
   return g;
+}
+
+export function makeRiverWater(waterMat){
+  const group = new THREE.Group();
+  const geo = new THREE.PlaneGeometry(16, 10);
+  for (let z = -210; z <= 210; z += 8){
+    const x = 14 * Math.sin(z * 0.016) + 7 * Math.sin(z * 0.049 + 1.7);
+    const slab = new THREE.Mesh(geo, waterMat);
+    slab.rotation.x = -Math.PI / 2;
+    slab.position.set(x, WATER_Y, z);
+    group.add(slab);
+  }
+  return group;
 }
 
 export function currentPlace(x, z){
