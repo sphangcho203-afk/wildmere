@@ -175,6 +175,25 @@ export function makeStoneRing(scene, cx, cz){
   }
   return { x: cx, z: cz, name: 'The Old Ring' };
 }
+export function makeMossSeat(scene, cx, cz){
+  const moss = new THREE.MeshStandardMaterial({ color: 0x4a5a38, roughness: 0.9 });
+  const stone = new THREE.MeshStandardMaterial({ color: 0x5e5a54, roughness: 0.95 });
+  const y = heightAt(cx, cz);
+  for (let i = 0; i < 5; i++){
+    const a = -0.7 + i * 0.35;
+    const h = 0.22 + (i % 2) * 0.14;
+    const s = new THREE.Mesh(new THREE.BoxGeometry(0.42, h, 0.3), stone);
+    s.position.set(cx + Math.cos(a) * 1.55, y + h * 0.5, cz + Math.sin(a) * 1.55);
+    s.rotation.y = a;
+    s.castShadow = true;
+    scene.add(s);
+  }
+  const pad = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.15, 0.07, 12), moss);
+  pad.position.set(cx, y + 0.035, cz);
+  pad.receiveShadow = true;
+  scene.add(pad);
+  return { x: cx, z: cz, name: 'The Moss Seat' };
+}
 export function makeRiverWater(waterMat){
   const group = new THREE.Group();
   const geo = new THREE.PlaneGeometry(16, 10);
@@ -187,6 +206,7 @@ export function makeRiverWater(waterMat){
 }
 export function currentPlace(x, z){
   if (Math.hypot(x + 18, z - 8) < 8) return 'The Old Ring';
+  if (Math.hypot(x - 32, z + 14) < 6) return 'The Moss Seat';
   if (Math.hypot(x - 4, z - 18) < 24) return 'The Clearing';
   if (riverDist(x, z) < 14) return 'Reedford Crossing';
   if (heightAt(x, z) > 13) return 'High Spine';
