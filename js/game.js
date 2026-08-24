@@ -4,7 +4,7 @@ import {
   WORLD, WATER_Y, SEED,
   riverDist, heightAt,
   makeTree, treeKindAt, addBerryBush,
-  makeHuman, makeRiverWater, currentPlace, makeStoneRing
+  makeHuman, makeRiverWater, currentPlace, makeStoneRing, makeMossSeat
 } from './world.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
@@ -21,6 +21,7 @@ const camera = new THREE.PerspectiveCamera(62, innerWidth / innerHeight, 0.12, 9
 const blocker = document.getElementById('blocker');
 let playing = false;
 let foundRing = false;
+let foundMoss = false;
 function enterValley(e){
   if (e) e.preventDefault();
   playing = true;
@@ -110,6 +111,7 @@ const hero = makeHuman();
 hero.position.set(10, heightAt(10, 26), 26);
 scene.add(hero);
 makeStoneRing(scene, -18, 8);
+makeMossSeat(scene, 32, -14);
 
 const player = { wood: 0, food: 0, stone: 0, health: 100, hunger: 100, thirst: 100, warmth: 74 };
 const keys = { w:0, a:0, s:0, d:0 };
@@ -296,6 +298,9 @@ function animate(){
     if (!foundRing && Math.hypot(hero.position.x + 18, hero.position.z - 8) < 7){
       foundRing = true; toast('The Old Ring. Stones older than the pines.');
     }
+    if (!foundMoss && Math.hypot(hero.position.x - 32, hero.position.z + 14) < 5.5){
+      foundMoss = true; toast('The Moss Seat. Soft stone, quiet ground.');
+    }
     const nearFire = fires.some(f => Math.hypot(f.x - hero.position.x, f.z - hero.position.z) < 4);
     if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 16);
     else player.warmth = Math.max(0, player.warmth - dt * (up < 0.12 ? 2.2 : 0.28));
@@ -311,6 +316,7 @@ function animate(){
       else if (riverDist(hero.position.x, hero.position.z) < 8) pr.textContent = 'E  drink';
       else if (nearFire) pr.textContent = 'Warm by the fire';
       else if (Math.hypot(hero.position.x + 18, hero.position.z - 8) < 8) pr.textContent = 'Old stone ring';
+      else if (Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6) pr.textContent = 'Moss seat';
       else pr.textContent = 'Hold left to walk · right to look';
     }
     const pl = document.getElementById('place'); if (pl) pl.textContent = currentPlace(hero.position.x, hero.position.z);
