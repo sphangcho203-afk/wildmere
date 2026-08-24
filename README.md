@@ -22,21 +22,14 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 
 | Key | Action |
 | --- | --- |
-| Click | Lock mouse, enter the valley |
+| Click | Enter the valley |
 | WASD | Walk |
-| Shift | Walk faster |
-| Mouse | Look |
-| Space | Small hop |
-| E | Gather wood / berries / stone |
+| Mouse / right pad | Look |
+| E | Gather wood / berries / stone · water soil · harvest crops · drink in stream |
 | Tab or Q | Cycle build piece |
-| F | Place selected piece (post, wall, lean-to, fire) |
-| G | Plant a berry bush (needs 1 berry) |
-| 1 | Eat a berry |
-| 2 | Drink — stand in the stream |
-| C | Craft a hand axe (3 wood + 2 stone) |
-| Z | Rest by a fire at night |
-| K | Save |
-| L | Load |
+| F | Place selected piece (post, fire, cabin, soil bed) |
+| G | Plant a crop in a soil bed (needs 1 berry) |
+| 1 | Eat |
 | Esc | Release mouse |
 
 ## What is in the valley
@@ -44,13 +37,10 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - A carved stream (Reedford Crossing) and a starting meadow (The Clearing)
 - High ground (High Spine) and thicker timber (The Quiet Pines)
 - Trees, berry bushes, stone
-- Peaceful deer that wander and startle
 - Day and night with a real sky model
-- Fireflies after dusk
 - Warmth near a campfire
-- Planted bushes that grow
-- A hand axe that gathers faster
-- Local save
+- Soil beds you place, water, and grow three crops (leaf greens, roots, grain)
+- Local feel of a quiet piece of ground
 
 ## Project
 

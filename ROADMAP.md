@@ -19,10 +19,10 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Passing rain
 - [x] Birds, grass, wind in the leaves
 - [x] Phone walk / look pads
+- [x] Farming plot: soil, water, three crops
 
 ## Next
 
-- [ ] Farming plot: soil, water, three crops
 - [ ] Distant ridge fade that feels like more land, not a wall
 - [x] Sleep that actually advances time instead of a jump
 - [ ] GitHub Pages live play URL
@@ -30,6 +30,10 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 ## Note (2026-08-23)
 
 Sleep by a fire at night no longer snaps the clock. Time runs forward through the remaining dark into morning over a few seconds of real time while you stay by the coals.
+
+## Note (2026-08-24)
+
+Soil beds can be placed (cycle build to soil bed, F). Plant with a berry (G). Water with E. Three crops — leaf greens, roots, grain — grow through the day when watered. Harvest when ready.
 
 ## Later
 
