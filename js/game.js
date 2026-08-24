@@ -4,7 +4,7 @@ import {
   WORLD, WATER_Y, SEED,
   riverDist, heightAt,
   makeTree, treeKindAt, addBerryBush,
-  makeHuman, makeRiverWater, currentPlace, makeStoneRing, makeMossSeat
+  makeHuman, makeRiverWater, currentPlace, makeStoneRing
 } from './world.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
@@ -21,7 +21,6 @@ const camera = new THREE.PerspectiveCamera(62, innerWidth / innerHeight, 0.12, 9
 const blocker = document.getElementById('blocker');
 let playing = false;
 let foundRing = false;
-let foundMoss = false;
 function enterValley(e){
   if (e) e.preventDefault();
   playing = true;
@@ -74,6 +73,7 @@ scene.add(makeRiverWater(new THREE.MeshStandardMaterial({ color: 0x3d6e7a, rough
 
 const interactives = [];
 const fires = [];
+const plots = [];
 function addThing(mesh, type, x, y, z, hp){
   mesh.position.set(x, type === 'rock' ? y + 0.2 : y, z);
   scene.add(mesh);
@@ -111,17 +111,24 @@ const hero = makeHuman();
 hero.position.set(10, heightAt(10, 26), 26);
 scene.add(hero);
 makeStoneRing(scene, -18, 8);
-makeMossSeat(scene, 32, -14);
 
 const player = { wood: 0, food: 0, stone: 0, health: 100, hunger: 100, thirst: 100, warmth: 74 };
 const keys = { w:0, a:0, s:0, d:0 };
 const stick = { x: 0, z: 0 };
-let yaw = 0.4, pitch = 0.12, buildIndex = 0, worldTime = 0.22;
+let yaw = 0.4, pitch = 0.12, buildIndex = 0, worldTime = 0.22, cropIndex = 0;
 const BUILDS = [
   { id: 'post', label: 'wooden post', wood: 2 },
   { id: 'fire', label: 'campfire', wood: 5 },
-  { id: 'cabin', label: 'small cabin', wood: 16 }
+  { id: 'cabin', label: 'small cabin', wood: 16 },
+  { id: 'plot', label: 'soil bed', wood: 3 }
 ];
+const CROPS = [
+  { id: 'greens', label: 'leaf greens', color: 0x3a7a32, yield: 3 },
+  { id: 'roots', label: 'roots', color: 0xc48a4a, yield: 2 },
+  { id: 'grain', label: 'grain', color: 0xc9b86a, yield: 4 }
+];
+const soilMat = new THREE.MeshStandardMaterial({ color: 0x4a3a28, roughness: 0.95 });
+const wetSoilMat = new THREE.MeshStandardMaterial({ color: 0x3a2e1e, roughness: 0.9 });
 
 function toast(msg){
   const el = document.getElementById('toast'); if (!el) return;
@@ -139,6 +146,8 @@ function hud(){
   const w = document.getElementById('wood-n'); if (w) w.textContent = player.wood;
   const f = document.getElementById('food-n'); if (f) f.textContent = player.food;
   const s = document.getElementById('stone-n'); if (s) s.textContent = player.stone;
+  const chip = document.getElementById('build-chip');
+  if (chip) chip.textContent = 'Build: ' + BUILDS[buildIndex].label;
 }
 hud();
 function nearest(){
@@ -150,13 +159,75 @@ function nearest(){
   }
   return best;
 }
+function nearestPlot(){
+  let best = null, bd = 3.2;
+  for (const p of plots){
+    const d = Math.hypot(p.x - hero.position.x, p.z - hero.position.z);
+    if (d < bd){ bd = d; best = p; }
+  }
+  return best;
+}
+function makeCropMesh(crop, growth){
+  const g = new THREE.Group();
+  const h = 0.12 + growth * 0.55;
+  const stem = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.02, 0.03, h, 5),
+    new THREE.MeshStandardMaterial({ color: 0x2f4a22, roughness: 0.9 })
+  );
+  stem.position.y = h * 0.5;
+  g.add(stem);
+  if (growth > 0.35){
+    const top = new THREE.Mesh(
+      new THREE.SphereGeometry(0.08 + growth * 0.12, 6, 5),
+      new THREE.MeshStandardMaterial({ color: crop.color, roughness: 0.85 })
+    );
+    top.position.y = h + 0.06;
+    g.add(top);
+  }
+  return g;
+}
+function refreshPlotLook(p){
+  if (p.cropMesh){
+    scene.remove(p.cropMesh);
+    p.cropMesh = null;
+  }
+  p.bed.material = p.watered ? wetSoilMat : soilMat;
+  if (p.crop && p.growth > 0.05){
+    p.cropMesh = makeCropMesh(p.crop, p.growth);
+    p.cropMesh.position.set(p.x, p.y + 0.06, p.z);
+    scene.add(p.cropMesh);
+  }
+}
 function gather(){
   if (!playing) return;
+  const plot = nearestPlot();
+  if (plot){
+    if (plot.crop && plot.growth >= 1){
+      player.food += plot.crop.yield;
+      toast('Harvested ' + plot.crop.label + ' (+' + plot.crop.yield + ')');
+      plot.crop = null;
+      plot.growth = 0;
+      plot.watered = false;
+      refreshPlotLook(plot);
+      hud();
+      return;
+    }
+    if (plot.crop && !plot.watered){
+      plot.watered = true;
+      refreshPlotLook(plot);
+      toast('Watered the soil');
+      return;
+    }
+    if (!plot.crop){
+      toast('Soil bed — plant with G (needs a berry)');
+      return;
+    }
+  }
   if (riverDist(hero.position.x, hero.position.z) < 8){
     player.thirst = Math.min(100, player.thirst + 28); toast('Drank from the stream'); hud(); return;
   }
   const it = nearest();
-  if (!it){ toast('Walk to a tree, bush, or stone'); return; }
+  if (!it){ toast('Walk to a tree, bush, stone, or soil bed'); return; }
   if (it.type === 'tree'){
     player.wood += 2; it.hp -= 1; it.mesh.scale.multiplyScalar(0.88);
     if (it.hp <= 0) it.mesh.visible = false; toast('+2 wood');
@@ -168,8 +239,24 @@ function gather(){
   hud();
 }
 function eat(){
-  if (player.food < 1){ toast('Pick berries first'); return; }
-  player.food -= 1; player.hunger = Math.min(100, player.hunger + 24); toast('Ate a berry'); hud();
+  if (player.food < 1){ toast('Pick berries or harvest a crop first'); return; }
+  player.food -= 1; player.hunger = Math.min(100, player.hunger + 24); toast('Ate'); hud();
+}
+function plant(){
+  if (!playing) return;
+  const plot = nearestPlot();
+  if (!plot){ toast('Stand by a soil bed to plant'); return; }
+  if (plot.crop){ toast('Already planted — water or wait'); return; }
+  if (player.food < 1){ toast('Need a berry to plant'); return; }
+  player.food -= 1;
+  const crop = CROPS[cropIndex % CROPS.length];
+  cropIndex = (cropIndex + 1) % CROPS.length;
+  plot.crop = crop;
+  plot.growth = 0.08;
+  plot.watered = false;
+  refreshPlotLook(plot);
+  toast('Planted ' + crop.label);
+  hud();
 }
 function place(){
   if (!playing) return;
@@ -181,21 +268,44 @@ function place(){
   const y = heightAt(x, z);
   const woodM = new THREE.MeshStandardMaterial({ color: 0x6b5340 });
   let mesh;
-  if (spec.id === 'post') mesh = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.6, 0.18), woodM);
-  else if (spec.id === 'fire'){
+  if (spec.id === 'post'){
+    mesh = new THREE.Mesh(new THREE.BoxGeometry(0.18, 1.6, 0.18), woodM);
+    mesh.position.set(x, y + 0.8, z);
+  } else if (spec.id === 'fire'){
     mesh = new THREE.Group();
     const flame = new THREE.Mesh(new THREE.ConeGeometry(0.2, 0.5, 6), new THREE.MeshBasicMaterial({ color: 0xff6622 }));
     flame.position.y = 0.35; mesh.add(flame);
     mesh.add(new THREE.PointLight(0xff8844, 1.6, 10));
+    mesh.position.set(x, y, z);
     fires.push({ x, z });
-  } else mesh = new THREE.Mesh(new THREE.BoxGeometry(3.1, 1.8, 3.1), woodM);
-  mesh.position.set(x, spec.id === 'post' ? y + 0.8 : y, z); scene.add(mesh);
-  toast(spec.label); hud();
+  } else if (spec.id === 'plot'){
+    const bed = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.12, 1.6), soilMat);
+    bed.position.set(x, y + 0.05, z);
+    mesh = bed;
+    const plot = { x, z, y, bed, crop: null, growth: 0, watered: false, cropMesh: null };
+    plots.push(plot);
+    toast('Soil bed ready');
+  } else {
+    mesh = new THREE.Mesh(new THREE.BoxGeometry(3.1, 1.8, 3.1), woodM);
+    mesh.position.set(x, y, z);
+  }
+  scene.add(mesh);
+  if (spec.id !== 'plot') toast(spec.label);
+  hud();
 }
 addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
   if (keys[k] !== undefined) keys[k] = 1;
-  if (k === 'e') gather(); if (k === 'f') place(); if (k === 'g') eat();
+  if (k === 'e') gather();
+  if (k === 'f') place();
+  if (k === 'g') plant();
+  if (k === '1') eat();
+  if (k === 'tab' || k === 'q'){
+    e.preventDefault();
+    buildIndex = (buildIndex + 1) % BUILDS.length;
+    hud();
+    toast(BUILDS[buildIndex].label);
+  }
 });
 addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== undefined) keys[k] = 0; });
 
@@ -245,7 +355,7 @@ addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== 
   addEventListener('touchcancel', onEnd, opts);
   const be = document.getElementById('btn-e'); if (be) be.addEventListener('click', gather);
   const bf = document.getElementById('btn-f'); if (bf) bf.addEventListener('click', place);
-  const bg = document.getElementById('btn-g'); if (bg) bg.addEventListener('click', eat);
+  const bg = document.getElementById('btn-g'); if (bg) bg.addEventListener('click', plant);
   const bq = document.getElementById('btn-q'); if (bq) bq.addEventListener('click', () => { buildIndex = (buildIndex + 1) % BUILDS.length; hud(); toast(BUILDS[buildIndex].label); });
 })();
 
@@ -298,25 +408,40 @@ function animate(){
     if (!foundRing && Math.hypot(hero.position.x + 18, hero.position.z - 8) < 7){
       foundRing = true; toast('The Old Ring. Stones older than the pines.');
     }
-    if (!foundMoss && Math.hypot(hero.position.x - 32, hero.position.z + 14) < 5.5){
-      foundMoss = true; toast('The Moss Seat. Soft stone, quiet ground.');
-    }
     const nearFire = fires.some(f => Math.hypot(f.x - hero.position.x, f.z - hero.position.z) < 4);
     if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 16);
     else player.warmth = Math.max(0, player.warmth - dt * (up < 0.12 ? 2.2 : 0.28));
     player.hunger = Math.max(0, player.hunger - dt * 0.55);
     player.thirst = Math.max(0, player.thirst - dt * 0.7);
     if (player.hunger < 1 || player.thirst < 1 || player.warmth < 8) player.health = Math.max(0, player.health - dt * 2);
+
+    for (const p of plots){
+      if (p.crop && p.watered && p.growth < 1){
+        const rate = 0.018 + up * 0.028;
+        const prev = p.growth;
+        p.growth = Math.min(1, p.growth + dt * rate);
+        if (Math.floor(prev * 4) !== Math.floor(p.growth * 4) || p.growth >= 1){
+          refreshPlotLook(p);
+        }
+        if (p.growth >= 1) toast(p.crop.label + ' ready to pick');
+      }
+    }
+
     const it = nearest();
+    const plot = nearestPlot();
     const pr = document.getElementById('prompt');
     if (pr){
-      if (it && it.type === 'tree') pr.textContent = 'E  wood';
+      if (plot){
+        if (plot.crop && plot.growth >= 1) pr.textContent = 'E  harvest ' + plot.crop.label;
+        else if (plot.crop && !plot.watered) pr.textContent = 'E  water the soil';
+        else if (plot.crop) pr.textContent = plot.crop.label + ' growing…';
+        else pr.textContent = 'G  plant (berry) · E  look';
+      } else if (it && it.type === 'tree') pr.textContent = 'E  wood';
       else if (it && it.type === 'berry') pr.textContent = 'E  berries';
       else if (it && it.type === 'rock') pr.textContent = 'E  stone';
       else if (riverDist(hero.position.x, hero.position.z) < 8) pr.textContent = 'E  drink';
       else if (nearFire) pr.textContent = 'Warm by the fire';
       else if (Math.hypot(hero.position.x + 18, hero.position.z - 8) < 8) pr.textContent = 'Old stone ring';
-      else if (Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6) pr.textContent = 'Moss seat';
       else pr.textContent = 'Hold left to walk · right to look';
     }
     const pl = document.getElementById('place'); if (pl) pl.textContent = currentPlace(hero.position.x, hero.position.z);
