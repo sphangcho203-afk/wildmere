@@ -4,7 +4,8 @@ import {
   WORLD, WATER_Y, SEED,
   riverDist, heightAt,
   makeTree, treeKindAt, addBerryBush,
-  makeHuman, makeRiverWater, currentPlace, makeStoneRing, makeMossSeat
+  makeHuman, makeRiverWater, currentPlace, makeStoneRing,
+  addDistantRidges
 } from './world.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
@@ -16,12 +17,11 @@ renderer.toneMappingExposure = 0.75;
 document.body.prepend(renderer.domElement);
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x9bb3c0, 0.006);
-const camera = new THREE.PerspectiveCamera(62, innerWidth / innerHeight, 0.12, 900);
+scene.fog = new THREE.FogExp2(0x9bb3c0, 0.0055);
+const camera = new THREE.PerspectiveCamera(62, innerWidth / innerHeight, 0.12, 1100);
 const blocker = document.getElementById('blocker');
 let playing = false;
 let foundRing = false;
-let foundMoss = false;
 function enterValley(e){
   if (e) e.preventDefault();
   playing = true;
@@ -72,6 +72,8 @@ terrainGeo.computeVertexNormals();
 scene.add(new THREE.Mesh(terrainGeo, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.92 })));
 scene.add(makeRiverWater(new THREE.MeshStandardMaterial({ color: 0x3d6e7a, roughness: 0.2, transparent: true, opacity: 0.72 })));
 
+addDistantRidges(scene);
+
 const interactives = [];
 const fires = [];
 const plots = [];
@@ -112,7 +114,6 @@ const hero = makeHuman();
 hero.position.set(10, heightAt(10, 26), 26);
 scene.add(hero);
 makeStoneRing(scene, -18, 8);
-makeMossSeat(scene, 32, -14);
 
 const player = { wood: 0, food: 0, stone: 0, health: 100, hunger: 100, thirst: 100, warmth: 74 };
 const keys = { w:0, a:0, s:0, d:0 };
@@ -410,9 +411,6 @@ function animate(){
     if (!foundRing && Math.hypot(hero.position.x + 18, hero.position.z - 8) < 7){
       foundRing = true; toast('The Old Ring. Stones older than the pines.');
     }
-    if (!foundMoss && Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6){
-      foundMoss = true; toast('The Moss Seat. A quiet place to rest.');
-    }
     const nearFire = fires.some(f => Math.hypot(f.x - hero.position.x, f.z - hero.position.z) < 4);
     if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 16);
     else player.warmth = Math.max(0, player.warmth - dt * (up < 0.12 ? 2.2 : 0.28));
@@ -447,7 +445,6 @@ function animate(){
       else if (riverDist(hero.position.x, hero.position.z) < 8) pr.textContent = 'E  drink';
       else if (nearFire) pr.textContent = 'Warm by the fire';
       else if (Math.hypot(hero.position.x + 18, hero.position.z - 8) < 8) pr.textContent = 'Old stone ring';
-      else if (Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6) pr.textContent = 'Moss seat';
       else pr.textContent = 'Hold left to walk · right to look';
     }
     const pl = document.getElementById('place'); if (pl) pl.textContent = currentPlace(hero.position.x, hero.position.z);

@@ -148,7 +148,7 @@ export function makeHuman(){
   const torsoG = new THREE.Group(); torsoG.position.y = 0.94; g.add(torsoG);
   const chest = new THREE.Mesh(new THREE.CapsuleGeometry(0.145, 0.36, 6, 10), shirt); chest.position.y = 0.36; torsoG.add(chest);
   const lArm = makeLimb(0.3, 0.04, 0.034, shirt); lArm.position.set(-0.195, 0.56, 0); torsoG.add(lArm);
-  const rArm = makeLimb(0.3, 0.04, 0.034, shirt); rArm.position.set(0.195, 0.56, 0); torsoG.add(rArm);
+  const rArm = makeLimb(0.3, 0.04, 0.034, skin); rArm.position.set(0.195, 0.56, 0); torsoG.add(rArm);
   const lFore = makeLimb(0.28, 0.033, 0.028, skin); lFore.position.y = -0.3; lArm.add(lFore);
   const rFore = makeLimb(0.28, 0.033, 0.028, skin); rFore.position.y = -0.3; rArm.add(rFore);
   const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.048, 0.1, 8), skin); neck.position.y = 0.66; torsoG.add(neck);
@@ -212,4 +212,85 @@ export function currentPlace(x, z){
   if (heightAt(x, z) > 13) return 'High Spine';
   if (fbm(x * 0.01 + 3, z * 0.01 + 9, 3) > 0.58 && heightAt(x, z) > 3) return 'The Quiet Pines';
   return 'Open ground';
+}
+
+/** Low, soft hills past the walkable ground so the horizon reads as more land, not a hard edge. */
+export function addDistantRidges(scene){
+  const nearMat = new THREE.MeshStandardMaterial({
+    color: 0x5c6e48,
+    roughness: 0.96,
+    flatShading: true
+  });
+  const midMat = new THREE.MeshStandardMaterial({
+    color: 0x62725a,
+    roughness: 0.97,
+    flatShading: true
+  });
+  const farMat = new THREE.MeshStandardMaterial({
+    color: 0x6a7a70,
+    roughness: 0.98,
+    flatShading: true
+  });
+  const group = new THREE.Group();
+  group.name = 'distant-ridges';
+
+  // Nearer ring — still green, just beyond the playable clamp
+  for (let i = 0; i < 28; i++){
+    const a = (i / 28) * Math.PI * 2 + hash2(i, 3) * 0.4;
+    const r = 255 + hash2(i, 7) * 55;
+    const x = Math.cos(a) * r;
+    const z = Math.sin(a) * r;
+    const baseH = 14 + hash2(i, 11) * 22;
+    const w = 28 + hash2(i, 13) * 36;
+    const ridge = new THREE.Mesh(
+      new THREE.ConeGeometry(w * 0.55, baseH, 5 + (i % 3)),
+      nearMat
+    );
+    ridge.position.set(x, baseH * 0.28, z);
+    ridge.rotation.y = a + hash2(i, 17) * 1.2;
+    ridge.scale.set(1 + hash2(i, 19) * 0.6, 1, 0.55 + hash2(i, 23) * 0.5);
+    ridge.receiveShadow = false;
+    ridge.castShadow = false;
+    group.add(ridge);
+    // small secondary hump beside it
+    if (hash2(i, 29) > 0.45){
+      const h2 = baseH * (0.45 + hash2(i, 31) * 0.35);
+      const side = new THREE.Mesh(new THREE.ConeGeometry(w * 0.28, h2, 5), nearMat);
+      const off = 18 + hash2(i, 37) * 14;
+      side.position.set(x + Math.cos(a + 1.1) * off, h2 * 0.25, z + Math.sin(a + 1.1) * off);
+      side.scale.set(1.2, 1, 0.7);
+      group.add(side);
+    }
+  }
+
+  // Middle ring — cooler tone, farther out
+  for (let i = 0; i < 20; i++){
+    const a = (i / 20) * Math.PI * 2 + 0.3 + hash2(i + 40, 5) * 0.35;
+    const r = 340 + hash2(i + 40, 9) * 50;
+    const x = Math.cos(a) * r;
+    const z = Math.sin(a) * r;
+    const baseH = 22 + hash2(i + 40, 15) * 28;
+    const w = 40 + hash2(i + 40, 21) * 45;
+    const ridge = new THREE.Mesh(new THREE.ConeGeometry(w * 0.5, baseH, 5), midMat);
+    ridge.position.set(x, baseH * 0.3, z);
+    ridge.rotation.y = a;
+    ridge.scale.set(1.1, 1, 0.6);
+    group.add(ridge);
+  }
+
+  // Far haze ring — grey-green, meant to dissolve into fog
+  for (let i = 0; i < 14; i++){
+    const a = (i / 14) * Math.PI * 2 + 0.7;
+    const r = 420 + hash2(i + 80, 4) * 40;
+    const x = Math.cos(a) * r;
+    const z = Math.sin(a) * r;
+    const baseH = 30 + hash2(i + 80, 12) * 35;
+    const ridge = new THREE.Mesh(new THREE.ConeGeometry(55 + hash2(i + 80, 18) * 40, baseH, 6), farMat);
+    ridge.position.set(x, baseH * 0.32, z);
+    ridge.scale.set(1.3, 1, 0.55);
+    group.add(ridge);
+  }
+
+  scene.add(group);
+  return group;
 }
