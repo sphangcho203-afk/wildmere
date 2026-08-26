@@ -4,7 +4,7 @@ import {
   WORLD, WATER_Y, SEED,
   riverDist, heightAt,
   makeTree, treeKindAt, addBerryBush,
-  makeHuman, makeRiverWater, currentPlace, makeStoneRing, makeMossSeat,
+  makeHuman, makeRiverWater, currentPlace, makeStoneRing,
   addDistantRidges
 } from './world.js';
 
@@ -22,7 +22,6 @@ const camera = new THREE.PerspectiveCamera(62, innerWidth / innerHeight, 0.12, 1
 const blocker = document.getElementById('blocker');
 let playing = false;
 let foundRing = false;
-let foundMoss = false;
 function enterValley(e){
   if (e) e.preventDefault();
   playing = true;
@@ -115,12 +114,14 @@ const hero = makeHuman();
 hero.position.set(10, heightAt(10, 26), 26);
 scene.add(hero);
 makeStoneRing(scene, -18, 8);
-makeMossSeat(scene, 32, -14);
 
 const player = { wood: 0, food: 0, stone: 0, health: 100, hunger: 100, thirst: 100, warmth: 74 };
 const keys = { w:0, a:0, s:0, d:0 };
 const stick = { x: 0, z: 0 };
 let yaw = 0.4, pitch = 0.12, buildIndex = 0, worldTime = 0.22, cropIndex = 0;
+let resting = false;
+let restTarget = 0;
+let restSpeed = 0;
 const BUILDS = [
   { id: 'post', label: 'wooden post', wood: 2 },
   { id: 'fire', label: 'campfire', wood: 5 },
@@ -204,7 +205,7 @@ function refreshPlotLook(p){
   }
 }
 function gather(){
-  if (!playing) return;
+  if (!playing || resting) return;
   const plot = nearestPlot();
   if (plot){
     if (plot.crop && plot.growth >= 1){
@@ -244,11 +245,12 @@ function gather(){
   hud();
 }
 function eat(){
+  if (resting) return;
   if (player.food < 1){ toast('Pick berries or harvest a crop first'); return; }
   player.food -= 1; player.hunger = Math.min(100, player.hunger + 24); toast('Ate'); hud();
 }
 function plant(){
-  if (!playing) return;
+  if (!playing || resting) return;
   const plot = nearestPlot();
   if (!plot){ toast('Stand by a soil bed to plant'); return; }
   if (plot.crop){ toast('Already planted — water or wait'); return; }
@@ -264,7 +266,7 @@ function plant(){
   hud();
 }
 function place(){
-  if (!playing) return;
+  if (!playing || resting) return;
   const spec = BUILDS[buildIndex];
   if (player.wood < spec.wood){ toast('Need ' + spec.wood + ' wood'); return; }
   player.wood -= spec.wood;
@@ -298,6 +300,43 @@ function place(){
   if (spec.id !== 'plot') toast(spec.label);
   hud();
 }
+function nearAnyFire(){
+  return fires.some(f => Math.hypot(f.x - hero.position.x, f.z - hero.position.z) < 4);
+}
+function startRest(){
+  if (!playing || resting) return;
+  if (!nearAnyFire()){
+    toast('Rest needs a campfire nearby');
+    return;
+  }
+  const elev = Math.sin(worldTime * Math.PI * 2);
+  // Only meaningful at night / late dusk; daytime just sits a moment
+  if (elev > 0.05){
+    toast('Sit by the coals a moment');
+    player.warmth = Math.min(100, player.warmth + 12);
+    player.health = Math.min(100, player.health + 4);
+    hud();
+    return;
+  }
+  // Advance remaining dark into morning over a few real seconds
+  // Morning target around worldTime 0.22 (elev ~ sin(0.22*2pi) positive)
+  restTarget = 0.22;
+  let remain = restTarget - worldTime;
+  if (remain <= 0) remain += 1;
+  // ~4.5 real seconds of rest
+  restSpeed = remain / 4.5;
+  resting = true;
+  toast('Resting by the fire…');
+}
+function finishRest(){
+  resting = false;
+  player.warmth = Math.min(100, player.warmth + 28);
+  player.health = Math.min(100, player.health + 10);
+  player.hunger = Math.max(0, player.hunger - 6);
+  player.thirst = Math.max(0, player.thirst - 4);
+  toast('Morning light. The valley is still.');
+  hud();
+}
 addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
   if (keys[k] !== undefined) keys[k] = 1;
@@ -305,11 +344,14 @@ addEventListener('keydown', e => {
   if (k === 'f') place();
   if (k === 'g') plant();
   if (k === '1') eat();
+  if (k === 'r') startRest();
   if (k === 'tab' || k === 'q'){
     e.preventDefault();
-    buildIndex = (buildIndex + 1) % BUILDS.length;
-    hud();
-    toast(BUILDS[buildIndex].label);
+    if (!resting){
+      buildIndex = (buildIndex + 1) % BUILDS.length;
+      hud();
+      toast(BUILDS[buildIndex].label);
+    }
   }
 });
 addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== undefined) keys[k] = 0; });
@@ -361,7 +403,8 @@ addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== 
   const be = document.getElementById('btn-e'); if (be) be.addEventListener('click', gather);
   const bf = document.getElementById('btn-f'); if (bf) bf.addEventListener('click', place);
   const bg = document.getElementById('btn-g'); if (bg) bg.addEventListener('click', plant);
-  const bq = document.getElementById('btn-q'); if (bq) bq.addEventListener('click', () => { buildIndex = (buildIndex + 1) % BUILDS.length; hud(); toast(BUILDS[buildIndex].label); });
+  const bq = document.getElementById('btn-q'); if (bq) bq.addEventListener('click', () => { if (!resting){ buildIndex = (buildIndex + 1) % BUILDS.length; hud(); toast(BUILDS[buildIndex].label); } });
+  const br = document.getElementById('btn-r'); if (br) br.addEventListener('click', startRest);
 })();
 
 const clock = new THREE.Clock();
@@ -370,7 +413,18 @@ function settle(o, k){ if (o) o.rotation[k] *= 0.72; }
 function animate(){
   requestAnimationFrame(animate);
   const dt = Math.min(0.05, clock.getDelta());
-  worldTime = (worldTime + dt / 360) % 1;
+  if (resting){
+    worldTime += restSpeed * dt;
+    if (worldTime >= 1) worldTime -= 1;
+    // Crossed into morning band
+    const elevNow = Math.sin(worldTime * Math.PI * 2);
+    if (elevNow > 0.08 || Math.abs(worldTime - restTarget) < 0.015){
+      worldTime = restTarget;
+      finishRest();
+    }
+  } else {
+    worldTime = (worldTime + dt / 360) % 1;
+  }
   const elev = Math.sin(worldTime * Math.PI * 2);
   const up = Math.max(0, elev);
   sun.setFromSphericalCoords(1, THREE.MathUtils.degToRad(90 - elev * 42), worldTime * 6.28);
@@ -380,66 +434,77 @@ function animate(){
   renderer.toneMappingExposure = 0.38 + up * 0.42;
   scene.fog.color.setHSL(0.55, 0.14 + up * 0.12, 0.16 + up * 0.46);
   if (playing){
-    const fx = Math.sin(yaw), fz = Math.cos(yaw);
-    let mx = fx * stick.z + Math.cos(yaw) * stick.x;
-    let mz = fz * stick.z - Math.sin(yaw) * stick.x;
-    if (keys.w){ mx += fx; mz += fz; } if (keys.s){ mx -= fx; mz -= fz; }
-    if (keys.d){ mx += Math.cos(yaw); mz -= Math.sin(yaw); } if (keys.a){ mx -= Math.cos(yaw); mz += Math.sin(yaw); }
-    const len = Math.hypot(mx, mz);
-    const u = hero.userData;
-    let moving = 0;
-    if (len > 0.08){
-      mx /= len; mz /= len; moving = 1;
-      hero.position.x += mx * 6.8 * dt; hero.position.z += mz * 6.8 * dt;
-      hero.rotation.y = Math.atan2(mx, mz);
-      const t = clock.elapsedTime * 9;
-      const swing = Math.sin(t) * 0.55;
-      if (u.legs){ u.legs[0].rotation.x = swing; u.legs[1].rotation.x = -swing; }
-      if (u.shins){ u.shins[0].rotation.x = Math.max(0, -swing) * 0.55; u.shins[1].rotation.x = Math.max(0, swing) * 0.55; }
-      if (u.arms){ u.arms[0].rotation.x = -swing * 0.75; u.arms[1].rotation.x = swing * 0.75; }
-      if (u.torso) u.torso.rotation.y = Math.sin(t) * 0.07;
+    const nearFire = nearAnyFire();
+    if (resting){
+      // stay still; still warm by the coals
+      if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 8);
+      stick.x = 0; stick.z = 0;
+      keys.w = keys.a = keys.s = keys.d = 0;
     } else {
-      if (u.legs){ settle(u.legs[0], 'x'); settle(u.legs[1], 'x'); }
-      if (u.shins){ settle(u.shins[0], 'x'); settle(u.shins[1], 'x'); }
-      if (u.arms){ settle(u.arms[0], 'x'); settle(u.arms[1], 'x'); }
-      if (u.torso) settle(u.torso, 'y');
-    }
-    hero.position.x = THREE.MathUtils.clamp(hero.position.x, -200, 200);
-    hero.position.z = THREE.MathUtils.clamp(hero.position.z, -200, 200);
-    hero.position.y = heightAt(hero.position.x, hero.position.z);
-    const bob = moving ? Math.sin(clock.elapsedTime * 9) * 0.05 : 0;
-    camera.position.set(hero.position.x - Math.sin(yaw) * 5.6, hero.position.y + 2.15 + pitch + bob, hero.position.z - Math.cos(yaw) * 5.6);
-    camera.lookAt(hero.position.x, hero.position.y + 1.35, hero.position.z);
-    if (!foundRing && Math.hypot(hero.position.x + 18, hero.position.z - 8) < 7){
-      foundRing = true; toast('The Old Ring. Stones older than the pines.');
-    }
-    if (!foundMoss && Math.hypot(hero.position.x - 32, hero.position.z + 14) < 5){
-      foundMoss = true; toast('The Moss Seat. Soft stone and quiet grass.');
-    }
-    const nearFire = fires.some(f => Math.hypot(f.x - hero.position.x, f.z - hero.position.z) < 4);
-    if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 16);
-    else player.warmth = Math.max(0, player.warmth - dt * (up < 0.12 ? 2.2 : 0.28));
-    player.hunger = Math.max(0, player.hunger - dt * 0.55);
-    player.thirst = Math.max(0, player.thirst - dt * 0.7);
-    if (player.hunger < 1 || player.thirst < 1 || player.warmth < 8) player.health = Math.max(0, player.health - dt * 2);
-
-    for (const p of plots){
-      if (p.crop && p.watered && p.growth < 1){
-        const rate = 0.018 + up * 0.028;
-        const prev = p.growth;
-        p.growth = Math.min(1, p.growth + dt * rate);
-        if (Math.floor(prev * 4) !== Math.floor(p.growth * 4) || p.growth >= 1){
-          refreshPlotLook(p);
-        }
-        if (p.growth >= 1) toast(p.crop.label + ' ready to pick');
+      const fx = Math.sin(yaw), fz = Math.cos(yaw);
+      let mx = fx * stick.z + Math.cos(yaw) * stick.x;
+      let mz = fz * stick.z - Math.sin(yaw) * stick.x;
+      if (keys.w){ mx += fx; mz += fz; } if (keys.s){ mx -= fx; mz -= fz; }
+      if (keys.d){ mx += Math.cos(yaw); mz -= Math.sin(yaw); } if (keys.a){ mx -= Math.cos(yaw); mz += Math.sin(yaw); }
+      const len = Math.hypot(mx, mz);
+      const u = hero.userData;
+      let moving = 0;
+      if (len > 0.08){
+        mx /= len; mz /= len; moving = 1;
+        hero.position.x += mx * 6.8 * dt; hero.position.z += mz * 6.8 * dt;
+        hero.rotation.y = Math.atan2(mx, mz);
+        const t = clock.elapsedTime * 9;
+        const swing = Math.sin(t) * 0.55;
+        if (u.legs){ u.legs[0].rotation.x = swing; u.legs[1].rotation.x = -swing; }
+        if (u.shins){ u.shins[0].rotation.x = Math.max(0, -swing) * 0.55; u.shins[1].rotation.x = Math.max(0, swing) * 0.55; }
+        if (u.arms){ u.arms[0].rotation.x = -swing * 0.75; u.arms[1].rotation.x = swing * 0.75; }
+        if (u.torso) u.torso.rotation.y = Math.sin(t) * 0.07;
+      } else {
+        if (u.legs){ settle(u.legs[0], 'x'); settle(u.legs[1], 'x'); }
+        if (u.shins){ settle(u.shins[0], 'x'); settle(u.shins[1], 'x'); }
+        if (u.arms){ settle(u.arms[0], 'x'); settle(u.arms[1], 'x'); }
+        if (u.torso) settle(u.torso, 'y');
       }
+      hero.position.x = THREE.MathUtils.clamp(hero.position.x, -200, 200);
+      hero.position.z = THREE.MathUtils.clamp(hero.position.z, -200, 200);
+      hero.position.y = heightAt(hero.position.x, hero.position.z);
+      const bob = moving ? Math.sin(clock.elapsedTime * 9) * 0.05 : 0;
+      camera.position.set(hero.position.x - Math.sin(yaw) * 5.6, hero.position.y + 2.15 + pitch + bob, hero.position.z - Math.cos(yaw) * 5.6);
+      camera.lookAt(hero.position.x, hero.position.y + 1.35, hero.position.z);
+      if (!foundRing && Math.hypot(hero.position.x + 18, hero.position.z - 8) < 7){
+        foundRing = true; toast('The Old Ring. Stones older than the pines.');
+      }
+      if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 16);
+      else player.warmth = Math.max(0, player.warmth - dt * (up < 0.12 ? 2.2 : 0.28));
+      player.hunger = Math.max(0, player.hunger - dt * 0.55);
+      player.thirst = Math.max(0, player.thirst - dt * 0.7);
+      if (player.hunger < 1 || player.thirst < 1 || player.warmth < 8) player.health = Math.max(0, player.health - dt * 2);
+
+      for (const p of plots){
+        if (p.crop && p.watered && p.growth < 1){
+          const rate = 0.018 + up * 0.028;
+          const prev = p.growth;
+          p.growth = Math.min(1, p.growth + dt * rate);
+          if (Math.floor(prev * 4) !== Math.floor(p.growth * 4) || p.growth >= 1){
+            refreshPlotLook(p);
+          }
+          if (p.growth >= 1) toast(p.crop.label + ' ready to pick');
+        }
+      }
+    }
+
+    // camera still tracks while resting
+    if (resting){
+      camera.position.set(hero.position.x - Math.sin(yaw) * 5.6, hero.position.y + 2.15 + pitch, hero.position.z - Math.cos(yaw) * 5.6);
+      camera.lookAt(hero.position.x, hero.position.y + 1.35, hero.position.z);
     }
 
     const it = nearest();
     const plot = nearestPlot();
     const pr = document.getElementById('prompt');
     if (pr){
-      if (plot){
+      if (resting) pr.textContent = 'Resting… light returns';
+      else if (plot){
         if (plot.crop && plot.growth >= 1) pr.textContent = 'E  harvest ' + plot.crop.label;
         else if (plot.crop && !plot.watered) pr.textContent = 'E  water the soil';
         else if (plot.crop) pr.textContent = plot.crop.label + ' growing…';
@@ -448,9 +513,12 @@ function animate(){
       else if (it && it.type === 'berry') pr.textContent = 'E  berries';
       else if (it && it.type === 'rock') pr.textContent = 'E  stone';
       else if (riverDist(hero.position.x, hero.position.z) < 8) pr.textContent = 'E  drink';
-      else if (nearFire) pr.textContent = 'Warm by the fire';
+      else if (nearFire){
+        const elevNow = Math.sin(worldTime * Math.PI * 2);
+        if (elevNow <= 0.05) pr.textContent = 'R  rest through the night';
+        else pr.textContent = 'Warm by the fire · R rest';
+      }
       else if (Math.hypot(hero.position.x + 18, hero.position.z - 8) < 8) pr.textContent = 'Old stone ring';
-      else if (Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6) pr.textContent = 'Moss seat';
       else pr.textContent = 'Hold left to walk · right to look';
     }
     const pl = document.getElementById('place'); if (pl) pl.textContent = currentPlace(hero.position.x, hero.position.z);

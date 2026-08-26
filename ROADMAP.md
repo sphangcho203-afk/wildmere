@@ -21,6 +21,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Phone walk / look pads
 - [x] Farming plot: soil, water, three crops
 - [x] Distant ridge fade that feels like more land, not a wall
+- [x] Sleep / rest by fire advances time through the night
 
 ## Next
 
@@ -37,6 +38,10 @@ Soil beds can be placed (cycle build to soil bed, F). Plant with a berry (G). Wa
 ## Note (2026-08-25)
 
 Distant ridges sit past the walkable ground in three soft rings. Nearer hills stay green; farther ones cool and dissolve into fog so the horizon reads as more land, not a hard wall. Fog density eased a little and camera far plane extended to match.
+
+## Note (2026-08-26)
+
+Rest (R) by a campfire at night. The remaining dark runs forward into morning over about four and a half real seconds. You stay by the coals; warmth and strength recover a little. Daytime rest is a short sit only. Phone has an R button.
 
 ## Later
 

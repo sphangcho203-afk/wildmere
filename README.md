@@ -29,6 +29,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 | Tab or Q | Cycle build piece |
 | F | Place selected piece (post, fire, cabin, soil bed) |
 | G | Plant a crop in a soil bed (needs 1 berry) |
+| R | Rest by a campfire (night: advances time to morning) |
 | 1 | Eat |
 | Esc | Release mouse |
 
@@ -38,7 +39,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - High ground (High Spine) and thicker timber (The Quiet Pines)
 - Trees, berry bushes, stone
 - Day and night with a real sky model
-- Warmth near a campfire
+- Warmth near a campfire; rest by the fire through the night
 - Soil beds you place, water, and grow three crops (leaf greens, roots, grain)
 - Local feel of a quiet piece of ground
 
