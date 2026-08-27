@@ -60,7 +60,6 @@ export function makeBroadleaf(scale = 1){
   const trunkR = (0.15 + Math.random() * 0.09) * scale;
   const trunk = new THREE.Mesh(new THREE.CylinderGeometry(trunkR * 0.62, trunkR, trunkH, 8), barkLeaf);
   trunk.position.y = trunkH * 0.5; trunk.castShadow = true; g.add(trunk);
-  const canopy = new THREE.Group();
   for (let i = 0; i < 4; i++){
     const len = (0.7 + Math.random() * 0.9) * scale;
     const br = new THREE.Mesh(new THREE.CylinderGeometry(0.035 * scale, 0.055 * scale, len, 5), barkLeaf);
@@ -71,9 +70,9 @@ export function makeBroadleaf(scale = 1){
   for (let i = 0; i < 6; i++){
     const fol = new THREE.Mesh(new THREE.SphereGeometry((0.7 + Math.random() * 0.55) * scale, 8, 6), leafMats[i % 4]);
     fol.position.set((Math.random() - 0.5) * 1.5 * scale, trunkH * 0.8 + Math.random() * 1.1 * scale, (Math.random() - 0.5) * 1.5 * scale);
-    fol.castShadow = true; canopy.add(fol);
+    fol.castShadow = true; g.add(fol);
   }
-  g.add(canopy); return g;
+  return g;
 }
 export function makePine(scale = 1){
   const g = new THREE.Group();
@@ -214,27 +213,12 @@ export function currentPlace(x, z){
   return 'Open ground';
 }
 
-/** Low, soft hills past the walkable ground so the horizon reads as more land, not a hard edge. */
 export function addDistantRidges(scene){
-  const nearMat = new THREE.MeshStandardMaterial({
-    color: 0x5c6e48,
-    roughness: 0.96,
-    flatShading: true
-  });
-  const midMat = new THREE.MeshStandardMaterial({
-    color: 0x62725a,
-    roughness: 0.97,
-    flatShading: true
-  });
-  const farMat = new THREE.MeshStandardMaterial({
-    color: 0x6a7a70,
-    roughness: 0.98,
-    flatShading: true
-  });
+  const nearMat = new THREE.MeshStandardMaterial({ color: 0x5c6e48, roughness: 0.96, flatShading: true });
+  const midMat = new THREE.MeshStandardMaterial({ color: 0x62725a, roughness: 0.97, flatShading: true });
+  const farMat = new THREE.MeshStandardMaterial({ color: 0x6a7a70, roughness: 0.98, flatShading: true });
   const group = new THREE.Group();
   group.name = 'distant-ridges';
-
-  // Nearer ring — still green, just beyond the playable clamp
   for (let i = 0; i < 28; i++){
     const a = (i / 28) * Math.PI * 2 + hash2(i, 3) * 0.4;
     const r = 255 + hash2(i, 7) * 55;
@@ -242,17 +226,11 @@ export function addDistantRidges(scene){
     const z = Math.sin(a) * r;
     const baseH = 14 + hash2(i, 11) * 22;
     const w = 28 + hash2(i, 13) * 36;
-    const ridge = new THREE.Mesh(
-      new THREE.ConeGeometry(w * 0.55, baseH, 5 + (i % 3)),
-      nearMat
-    );
+    const ridge = new THREE.Mesh(new THREE.ConeGeometry(w * 0.55, baseH, 5 + (i % 3)), nearMat);
     ridge.position.set(x, baseH * 0.28, z);
     ridge.rotation.y = a + hash2(i, 17) * 1.2;
     ridge.scale.set(1 + hash2(i, 19) * 0.6, 1, 0.55 + hash2(i, 23) * 0.5);
-    ridge.receiveShadow = false;
-    ridge.castShadow = false;
     group.add(ridge);
-    // small secondary hump beside it
     if (hash2(i, 29) > 0.45){
       const h2 = baseH * (0.45 + hash2(i, 31) * 0.35);
       const side = new THREE.Mesh(new THREE.ConeGeometry(w * 0.28, h2, 5), nearMat);
@@ -262,8 +240,6 @@ export function addDistantRidges(scene){
       group.add(side);
     }
   }
-
-  // Middle ring — cooler tone, farther out
   for (let i = 0; i < 20; i++){
     const a = (i / 20) * Math.PI * 2 + 0.3 + hash2(i + 40, 5) * 0.35;
     const r = 340 + hash2(i + 40, 9) * 50;
@@ -277,8 +253,6 @@ export function addDistantRidges(scene){
     ridge.scale.set(1.1, 1, 0.6);
     group.add(ridge);
   }
-
-  // Far haze ring — grey-green, meant to dissolve into fog
   for (let i = 0; i < 14; i++){
     const a = (i / 14) * Math.PI * 2 + 0.7;
     const r = 420 + hash2(i + 80, 4) * 40;
@@ -289,78 +263,6 @@ export function addDistantRidges(scene){
     ridge.position.set(x, baseH * 0.32, z);
     ridge.scale.set(1.3, 1, 0.55);
     group.add(ridge);
-  }
-
-  scene.add(group);
-  return group;
-}
-
-/** Simple low-poly bird for distant flight. */
-export function makeBird(){
-  const g = new THREE.Group();
-  const bodyM = new THREE.MeshStandardMaterial({ color: 0x3a3a42, roughness: 0.85 });
-  const wingM = new THREE.MeshStandardMaterial({ color: 0x4a4a52, roughness: 0.88 });
-  const body = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.32, 5), bodyM);
-  body.rotation.x = Math.PI / 2;
-  g.add(body);
-  const left = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.02, 0.12), wingM);
-  left.position.set(-0.14, 0, 0);
-  left.name = 'wingL';
-  g.add(left);
-  const right = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.02, 0.12), wingM);
-  right.position.set(0.14, 0, 0);
-  right.name = 'wingR';
-  g.add(right);
-  g.scale.setScalar(1.1);
-  return g;
-}
-
-/**
- * Spawn a few birds that circle or drift high above the valley.
- * Returns an array of { mesh, cx, cz, r, speed, phase, elev } for the animate loop.
- */
-export function addBirds(scene, count = 5){
-  const birds = [];
-  for (let i = 0; i < count; i++){
-    const mesh = makeBird();
-    const cx = (Math.random() - 0.5) * 120;
-    const cz = (Math.random() - 0.5) * 120;
-    const r = 18 + Math.random() * 36;
-    const elev = 12 + Math.random() * 10 + Math.max(0, heightAt(cx, cz));
-    const speed = 0.18 + Math.random() * 0.22;
-    const phase = Math.random() * Math.PI * 2;
-    mesh.position.set(cx + r, elev, cz);
-    scene.add(mesh);
-    birds.push({ mesh, cx, cz, r, speed, phase, elev, wingT: Math.random() * 10 });
-  }
-  return birds;
-}
-
-/** Sparse grass tufts near the clearing and stream banks. */
-export function addGrassTufts(scene, count = 80){
-  const mat = new THREE.MeshStandardMaterial({ color: 0x4a6a38, roughness: 0.92, side: THREE.DoubleSide });
-  const group = new THREE.Group();
-  group.name = 'grass';
-  for (let i = 0; i < count; i++){
-    const a = Math.random() * Math.PI * 2;
-    const rad = 4 + Math.random() * 38;
-    const x = 10 + Math.cos(a) * rad + (Math.random() - 0.5) * 8;
-    const z = 26 + Math.sin(a) * rad + (Math.random() - 0.5) * 8;
-    const y = heightAt(x, z);
-    if (y < WATER_Y + 0.4 || riverDist(x, z) < 5) continue;
-    const tuft = new THREE.Group();
-    for (let b = 0; b < 3; b++){
-      const blade = new THREE.Mesh(
-        new THREE.PlaneGeometry(0.04 + Math.random() * 0.03, 0.28 + Math.random() * 0.22),
-        mat
-      );
-      blade.position.set((Math.random() - 0.5) * 0.12, 0.12, (Math.random() - 0.5) * 0.12);
-      blade.rotation.y = Math.random() * Math.PI;
-      blade.rotation.z = (Math.random() - 0.5) * 0.25;
-      tuft.add(blade);
-    }
-    tuft.position.set(x, y, z);
-    group.add(tuft);
   }
   scene.add(group);
   return group;
