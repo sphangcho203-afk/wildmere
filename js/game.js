@@ -7,6 +7,7 @@ import {
   makeHuman, makeRiverWater, currentPlace, makeStoneRing, makeMossSeat,
   addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
+import { atSlowBend, placeSlowBend } from './bend.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
@@ -118,14 +119,18 @@ hero.position.set(10, heightAt(10, 26), 26);
 scene.add(hero);
 makeStoneRing(scene, -18, 8);
 makeMossSeat(scene, 32, -14);
+const slowBend = placeSlowBend(scene);
+let foundBend = false;
 
-const player = { wood: 0, food: 0, stone: 0, health: 100, hunger: 100, thirst: 100, warmth: 74 };
+const player = { wood: 0, food: 0, stone: 0, fish: 0, health: 100, hunger: 100, thirst: 100, warmth: 74 };
 const keys = { w:0, a:0, s:0, d:0 };
 const stick = { x: 0, z: 0 };
 let yaw = 0.4, pitch = 0.12, buildIndex = 0, worldTime = 0.22, cropIndex = 0;
 let resting = false;
 let restTarget = 0;
 let restSpeed = 0;
+let fishing = false;
+let fishWait = 0;
 const BUILDS = [
   { id: 'post', label: 'wooden post', wood: 2 },
   { id: 'fire', label: 'campfire', wood: 5 },
@@ -156,6 +161,7 @@ function hud(){
   const w = document.getElementById('wood-n'); if (w) w.textContent = player.wood;
   const f = document.getElementById('food-n'); if (f) f.textContent = player.food;
   const s = document.getElementById('stone-n'); if (s) s.textContent = player.stone;
+  const fi = document.getElementById('fish-n'); if (fi) fi.textContent = player.fish;
   const chip = document.getElementById('build-chip');
   if (chip) chip.textContent = 'Build: ' + BUILDS[buildIndex].label;
 }
@@ -210,6 +216,7 @@ function refreshPlotLook(p){
 }
 function gather(){
   if (!playing || resting) return;
+  if (fishing){ toast('Wait — the line is still'); return; }
   const plot = nearestPlot();
   if (plot){
     if (plot.crop && plot.growth >= 1){
@@ -233,6 +240,18 @@ function gather(){
       return;
     }
   }
+  if (atSlowBend(hero.position.x, hero.position.z)){
+    if (player.thirst < 72){
+      player.thirst = Math.min(100, player.thirst + 28);
+      toast('Drank at the slow bend');
+      hud();
+      return;
+    }
+    fishing = true;
+    fishWait = 2.6;
+    toast('Line in the still water…');
+    return;
+  }
   if (riverDist(hero.position.x, hero.position.z) < 8){
     player.thirst = Math.min(100, player.thirst + 28); toast('Drank from the stream'); hud(); return;
   }
@@ -250,7 +269,7 @@ function gather(){
 }
 function eat(){
   if (resting) return;
-  if (player.food < 1){ toast('Pick berries or harvest a crop first'); return; }
+  if (player.food < 1){ toast('Pick berries, harvest a crop, or fish first'); return; }
   player.food -= 1; player.hunger = Math.min(100, player.hunger + 24); toast('Ate'); hud();
 }
 function plant(){
@@ -434,6 +453,22 @@ function animate(){
   scene.fog.color.setHSL(0.55, 0.14 + up * 0.12, 0.16 + up * 0.46);
   if (playing){
     const nearFire = nearAnyFire();
+    if (fishing){
+      fishWait -= dt;
+      stick.x = 0; stick.z = 0;
+      keys.w = keys.a = keys.s = keys.d = 0;
+      if (fishWait <= 0){
+        fishing = false;
+        if (Math.random() > 0.28){
+          player.food += 2;
+          player.fish += 1;
+          toast('A quiet catch');
+        } else {
+          toast('The water stayed still');
+        }
+        hud();
+      }
+    }
     if (resting){
       if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 8);
       stick.x = 0; stick.z = 0;
@@ -475,6 +510,9 @@ function animate(){
       if (!foundMoss && Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6){
         foundMoss = true; toast('The Moss Seat. Soft stone, quiet ground.');
       }
+      if (!foundBend && atSlowBend(hero.position.x, hero.position.z)){
+        foundBend = true; toast('The Slow Bend. Water holds here a while.');
+      }
       if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 16);
       else player.warmth = Math.max(0, player.warmth - dt * (up < 0.12 ? 2.2 : 0.28));
       player.hunger = Math.max(0, player.hunger - dt * 0.55);
@@ -494,9 +532,18 @@ function animate(){
       }
     }
 
-    if (resting){
+    if (resting || fishing){
       camera.position.set(hero.position.x - Math.sin(yaw) * 5.6, hero.position.y + 2.15 + pitch, hero.position.z - Math.cos(yaw) * 5.6);
       camera.lookAt(hero.position.x, hero.position.y + 1.35, hero.position.z);
+    }
+    if (slowBend.fish){
+      const tFish = clock.elapsedTime;
+      for (const f of slowBend.fish){
+        const a = tFish * 0.35 + f.userData.phase;
+        const r = f.userData.radius;
+        f.position.set(slowBend.x + Math.cos(a) * r, WATER_Y + 0.08, slowBend.z + Math.sin(a) * r * 0.55);
+        f.rotation.y = -a + Math.PI / 2;
+      }
     }
 
     const it = nearest();
@@ -504,6 +551,7 @@ function animate(){
     const pr = document.getElementById('prompt');
     if (pr){
       if (resting) pr.textContent = 'Resting… light returns';
+      else if (fishing) pr.textContent = 'Waiting on the line…';
       else if (plot){
         if (plot.crop && plot.growth >= 1) pr.textContent = 'E  harvest ' + plot.crop.label;
         else if (plot.crop && !plot.watered) pr.textContent = 'E  water the soil';
@@ -512,6 +560,7 @@ function animate(){
       } else if (it && it.type === 'tree') pr.textContent = 'E  wood';
       else if (it && it.type === 'berry') pr.textContent = 'E  berries';
       else if (it && it.type === 'rock') pr.textContent = 'E  stone';
+      else if (atSlowBend(hero.position.x, hero.position.z)) pr.textContent = player.thirst < 72 ? 'E  drink · then fish' : 'E  fish the slow water';
       else if (riverDist(hero.position.x, hero.position.z) < 8) pr.textContent = 'E  drink';
       else if (nearFire){
         const elevNow = Math.sin(worldTime * Math.PI * 2);
@@ -522,7 +571,7 @@ function animate(){
       else if (Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6) pr.textContent = 'Moss seat — a place to pause';
       else pr.textContent = 'Hold left to walk · right to look';
     }
-    const pl = document.getElementById('place'); if (pl) pl.textContent = currentPlace(hero.position.x, hero.position.z);
+    const pl = document.getElementById('place'); if (pl) pl.textContent = atSlowBend(hero.position.x, hero.position.z) ? 'The Slow Bend' : currentPlace(hero.position.x, hero.position.z);
     const ck = document.getElementById('clock');
     if (ck) ck.textContent = elev > 0.3 ? 'Day' : elev > 0.05 ? 'Morning' : elev > -0.15 ? 'Dusk' : 'Night';
     if ((Math.floor(clock.elapsedTime * 2) % 4) === 0) hud();
