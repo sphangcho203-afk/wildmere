@@ -5,7 +5,7 @@ import {
   riverDist, heightAt,
   makeTree, treeKindAt, addBerryBush,
   makeHuman, makeRiverWater, currentPlace, makeStoneRing, makeMossSeat,
-  addDistantRidges
+  addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
@@ -74,6 +74,8 @@ scene.add(new THREE.Mesh(terrainGeo, new THREE.MeshStandardMaterial({ vertexColo
 scene.add(makeRiverWater(new THREE.MeshStandardMaterial({ color: 0x3d6e7a, roughness: 0.2, transparent: true, opacity: 0.72 })));
 
 addDistantRidges(scene);
+addGrassTufts(scene);
+const birds = addValleyBirds(scene);
 
 const interactives = [];
 const fires = [];
@@ -525,6 +527,7 @@ function animate(){
     if (ck) ck.textContent = elev > 0.3 ? 'Day' : elev > 0.05 ? 'Morning' : elev > -0.15 ? 'Dusk' : 'Night';
     if ((Math.floor(clock.elapsedTime * 2) % 4) === 0) hud();
   }
+  stepBirds(birds, clock.elapsedTime);
   renderer.render(scene, camera);
 }
 animate();
