@@ -25,7 +25,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 | Click | Enter the valley |
 | WASD | Walk |
 | Mouse / right pad | Look |
-| E | Gather wood / berries / stone · water soil · harvest crops · drink in stream |
+| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend |
 | Tab or Q | Cycle build piece |
 | F | Place selected piece (post, fire, cabin, soil bed) |
 | G | Plant a crop in a soil bed (needs 1 berry) |
@@ -35,7 +35,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 
 ## What is in the valley
 
-- A carved stream (Reedford Crossing) and a starting meadow (The Clearing)
+- A carved stream (Reedford Crossing), the Slow Bend, and a starting meadow (The Clearing)
 - High ground (High Spine) and thicker timber (The Quiet Pines)
 - The Old Ring and the Moss Seat — quiet named places
 - Trees, berry bushes, stone, grass tufts
@@ -43,6 +43,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - Day and night with a real sky model
 - Warmth near a campfire; rest by the fire through the night
 - Soil beds you place, water, and grow three crops (leaf greens, roots, grain)
+- Fishing at the Slow Bend — stand by the still water, drink if you need, then wait on a line
 - Local feel of a quiet piece of ground
 
 ## Project

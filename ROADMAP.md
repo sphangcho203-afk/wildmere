@@ -22,6 +22,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Farming plot: soil, water, three crops
 - [x] Distant ridge fade that feels like more land, not a wall
 - [x] Sleep / rest by fire advances time through the night
+- [x] Fishing at the slow bend of the stream
 
 ## Next
 
@@ -47,9 +48,12 @@ Rest (R) by a campfire at night. The remaining dark runs forward into morning ov
 
 Birds circle high over the valley in slow arcs; wings beat quietly. Grass tufts stand near the clearing and stream banks. The Moss Seat is placed east of the start — a low stone curve with a moss pad, named on the compass when you reach it.
 
+## Note (2026-08-28)
+
+The Slow Bend sits on the stream north of the clearing. Stones and a short plank mark the bank. Stand there and press E: drink if you are thirsty, then wait a few seconds with a line in the still water. A catch becomes food. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
+
 ## Later
 
 - [ ] A second region past High Spine (stone terrace, thin grass)
-- [ ] Fishing at the slow bend of the stream
 - [ ] A notebook / map you fill in by walking
 - [ ] Multiplayer is not a goal. One person and a piece of land is the goal.
