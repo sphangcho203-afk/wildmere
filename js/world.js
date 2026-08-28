@@ -213,6 +213,66 @@ export function currentPlace(x, z){
   return 'Open ground';
 }
 
+export function addGrassTufts(scene){
+  const mat = new THREE.MeshStandardMaterial({ color: 0x4a6a32, roughness: 0.95 });
+  const geo = new THREE.ConeGeometry(0.045, 0.3, 4);
+  for (let i = 0; i < 90; i++){
+    const a = Math.random() * 6.28;
+    const r = 4 + Math.random() * 38;
+    const x = 10 + Math.cos(a) * r;
+    const z = 22 + Math.sin(a) * r;
+    const y = heightAt(x, z);
+    if (y < WATER_Y + 0.45 || riverDist(x, z) < 5.5) continue;
+    const n = 3 + (i % 3);
+    for (let k = 0; k < n; k++){
+      const blade = new THREE.Mesh(geo, mat);
+      blade.position.set(x + (Math.random() - 0.5) * 0.34, y + 0.14, z + (Math.random() - 0.5) * 0.34);
+      blade.rotation.z = (Math.random() - 0.5) * 0.32;
+      blade.rotation.y = Math.random() * 6.28;
+      scene.add(blade);
+    }
+  }
+}
+
+export function addValleyBirds(scene){
+  const birds = [];
+  const wingMat = new THREE.MeshStandardMaterial({ color: 0x2c2a26, roughness: 0.75, side: THREE.DoubleSide });
+  const bodyMat = new THREE.MeshStandardMaterial({ color: 0x3a3834, roughness: 0.82 });
+  for (let i = 0; i < 7; i++){
+    const g = new THREE.Group();
+    const body = new THREE.Mesh(new THREE.ConeGeometry(0.055, 0.26, 5), bodyMat);
+    body.rotation.x = Math.PI / 2;
+    g.add(body);
+    const lw = new THREE.Mesh(new THREE.PlaneGeometry(0.36, 0.11), wingMat);
+    lw.position.set(-0.13, 0, 0);
+    const rw = lw.clone();
+    rw.position.set(0.13, 0, 0);
+    g.add(lw); g.add(rw);
+    g.userData.wings = [lw, rw];
+    g.userData.radius = 16 + i * 7;
+    g.userData.height = 15 + (i % 3) * 3.2;
+    g.userData.speed = 0.16 + (i % 4) * 0.035;
+    g.userData.phase = i * 0.85;
+    g.userData.cx = 8;
+    g.userData.cz = 18;
+    scene.add(g);
+    birds.push(g);
+  }
+  return birds;
+}
+
+export function stepBirds(birds, t){
+  for (const b of birds){
+    const u = b.userData;
+    const a = t * u.speed + u.phase;
+    b.position.set(u.cx + Math.cos(a) * u.radius, u.height, u.cz + Math.sin(a) * u.radius);
+    b.rotation.y = -a + Math.PI / 2;
+    const flap = Math.sin(t * 8.5 + u.phase) * 0.48;
+    u.wings[0].rotation.z = flap;
+    u.wings[1].rotation.z = -flap;
+  }
+}
+
 export function addDistantRidges(scene){
   const nearMat = new THREE.MeshStandardMaterial({ color: 0x5c6e48, roughness: 0.96, flatShading: true });
   const midMat = new THREE.MeshStandardMaterial({ color: 0x62725a, roughness: 0.97, flatShading: true });
