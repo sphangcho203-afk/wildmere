@@ -36,7 +36,8 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 ## What is in the valley
 
 - A carved stream (Reedford Crossing), the Slow Bend, and a starting meadow (The Clearing)
-- High ground (High Spine) and thicker timber (The Quiet Pines)
+- High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
+- Thicker timber (The Quiet Pines)
 - The Old Ring and the Moss Seat — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
@@ -46,11 +47,16 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - Fishing at the Slow Bend — stand by the still water, drink if you need, then wait on a line
 - Local feel of a quiet piece of ground
 
+Walk southwest from the clearing, up High Spine, to reach the terrace.
+
 ## Project
 
 | File | Role |
 | --- | --- |
-| `index.html` | The whole playable world (for now) |
+| `index.html` | Shell and HUD |
+| `js/game.js` | Play loop, gather, build, rest, farm, fish |
+| `js/world.js` | Ground, trees, places, birds, ridges |
+| `js/bend.js` | The Slow Bend |
 | `ROADMAP.md` | What gets built next |
 | `LICENSE` | MIT |
 
@@ -58,14 +64,17 @@ Graphics are generated in code on purpose. No block world, no downloaded charact
 
 ## Live play (GitHub Pages)
 
-Pages is not enabled on this repo yet. The owner can turn it on with:
+Pages is not enabled from this account (repository Settings cannot be flipped by the file API). The owner should turn it on with these clicks:
 
-1. Open the repo on GitHub → **Settings** → **Pages** (left sidebar under Code and automation).
-2. Under **Build and deployment** → **Source**, choose **Deploy from a branch**.
-3. Branch: **main**, folder: **/ (root)**.
-4. Save. After a minute the site will be at `https://sphangcho203-afk.github.io/wildmere/`.
+1. Open https://github.com/sphangcho203-afk/wildmere
+2. **Settings** (top tab)
+3. Left sidebar, under **Code and automation**, click **Pages**
+4. **Build and deployment** → **Source** → **Deploy from a branch**
+5. Branch: **main**
+6. Folder: **/ (root)**
+7. **Save**
 
-Add that URL to this README once it is live.
+After a minute or two the valley will be at `https://sphangcho203-afk.github.io/wildmere/`. Add that URL at the top of this README once it loads.
 
 ## License
 
