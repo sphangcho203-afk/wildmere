@@ -23,6 +23,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Distant ridge fade that feels like more land, not a wall
 - [x] Sleep / rest by fire advances time through the night
 - [x] Fishing at the slow bend of the stream
+- [x] A second region past High Spine (stone terrace, thin grass)
 
 ## Next
 
@@ -52,8 +53,11 @@ Birds circle high over the valley in slow arcs; wings beat quietly. Grass tufts 
 
 The Slow Bend sits on the stream north of the clearing. Stones and a short plank mark the bank. Stand there and press E: drink if you are thirsty, then wait a few seconds with a line in the still water. A catch becomes food. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
 
+## Note (2026-08-29)
+
+Southwest of High Spine the ground levels into the Stone Terrace: two pale shelves, a small cairn, thin grass, and loose rock you can gather. The compass names it when you arrive. Trees stay off the shelf so the sky stays open.
+
 ## Later
 
-- [ ] A second region past High Spine (stone terrace, thin grass)
 - [ ] A notebook / map you fill in by walking
 - [ ] Multiplayer is not a goal. One person and a piece of land is the goal.
