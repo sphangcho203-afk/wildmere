@@ -5,6 +5,7 @@ import {
   riverDist, heightAt,
   makeTree, treeKindAt, addBerryBush,
   makeHuman, makeRiverWater, currentPlace, makeStoneRing, makeMossSeat,
+  makeQuietWell, atQuietWell,
   addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
 import { atSlowBend, placeSlowBend } from './bend.js';
@@ -24,6 +25,7 @@ const blocker = document.getElementById('blocker');
 let playing = false;
 let foundRing = false;
 let foundMoss = false;
+let foundWell = false;
 function enterValley(e){
   if (e) e.preventDefault();
   playing = true;
@@ -119,6 +121,7 @@ hero.position.set(10, heightAt(10, 26), 26);
 scene.add(hero);
 makeStoneRing(scene, -18, 8);
 makeMossSeat(scene, 32, -14);
+makeQuietWell(scene);
 const slowBend = placeSlowBend(scene);
 let foundBend = false;
 
@@ -239,6 +242,12 @@ function gather(){
       toast('Soil bed — plant with G (needs a berry)');
       return;
     }
+  }
+  if (atQuietWell(hero.position.x, hero.position.z)){
+    player.thirst = Math.min(100, player.thirst + 34);
+    toast('Cool water from the old well');
+    hud();
+    return;
   }
   if (atSlowBend(hero.position.x, hero.position.z)){
     if (player.thirst < 72){
@@ -510,6 +519,9 @@ function animate(){
       if (!foundMoss && Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6){
         foundMoss = true; toast('The Moss Seat. Soft stone, quiet ground.');
       }
+      if (!foundWell && atQuietWell(hero.position.x, hero.position.z)){
+        foundWell = true; toast('The Quiet Well. Someone kept this water.');
+      }
       if (!foundBend && atSlowBend(hero.position.x, hero.position.z)){
         foundBend = true; toast('The Slow Bend. Water holds here a while.');
       }
@@ -560,6 +572,7 @@ function animate(){
       } else if (it && it.type === 'tree') pr.textContent = 'E  wood';
       else if (it && it.type === 'berry') pr.textContent = 'E  berries';
       else if (it && it.type === 'rock') pr.textContent = 'E  stone';
+      else if (atQuietWell(hero.position.x, hero.position.z)) pr.textContent = 'E  drink from the well';
       else if (atSlowBend(hero.position.x, hero.position.z)) pr.textContent = player.thirst < 72 ? 'E  drink · then fish' : 'E  fish the slow water';
       else if (riverDist(hero.position.x, hero.position.z) < 8) pr.textContent = 'E  drink';
       else if (nearFire){
