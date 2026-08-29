@@ -5,6 +5,7 @@ export const WATER_Y = 1.35;
 export const EYE = 1.67;
 export const SEED = 2041;
 export const SAVE_KEY = 'wildmere-v3';
+export const WELL = { x: -8, z: -22 };
 
 function fade(t){ return t * t * t * (t * (t * 6 - 15) + 10); }
 function lerp(a, b, t){ return a + (b - a) * t; }
@@ -193,6 +194,41 @@ export function makeMossSeat(scene, cx, cz){
   scene.add(pad);
   return { x: cx, z: cz, name: 'The Moss Seat' };
 }
+export function atQuietWell(x, z){
+  return Math.hypot(x - WELL.x, z - WELL.z) < 5.2;
+}
+export function makeQuietWell(scene, cx = WELL.x, cz = WELL.z){
+  const stone = new THREE.MeshStandardMaterial({ color: 0x5a564e, roughness: 0.96 });
+  const moss = new THREE.MeshStandardMaterial({ color: 0x3e4a32, roughness: 0.9 });
+  const wood = new THREE.MeshStandardMaterial({ color: 0x5c4634, roughness: 0.9 });
+  const water = new THREE.MeshStandardMaterial({ color: 0x2a3e42, roughness: 0.18, metalness: 0.08 });
+  const y = heightAt(cx, cz);
+  const group = new THREE.Group();
+  group.position.set(cx, y, cz);
+  const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 1.08, 0.55, 12), stone);
+  ring.position.y = 0.28;
+  ring.castShadow = true;
+  group.add(ring);
+  const inner = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.62, 0.2, 12), water);
+  inner.position.y = 0.22;
+  group.add(inner);
+  const pad = new THREE.Mesh(new THREE.CylinderGeometry(1.35, 1.45, 0.06, 12), moss);
+  pad.position.y = 0.03;
+  pad.receiveShadow = true;
+  group.add(pad);
+  const p1 = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.15, 0.08), wood);
+  p1.position.set(-0.7, 0.85, 0);
+  const p2 = p1.clone();
+  p2.position.x = 0.7;
+  const beam = new THREE.Mesh(new THREE.BoxGeometry(1.55, 0.07, 0.07), wood);
+  beam.position.set(0, 1.4, 0);
+  group.add(p1, p2, beam);
+  const bucket = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.1, 0.16, 8), wood);
+  bucket.position.set(0.55, 0.66, 0.35);
+  group.add(bucket);
+  scene.add(group);
+  return { x: cx, z: cz, name: 'The Quiet Well' };
+}
 export function makeRiverWater(waterMat){
   const group = new THREE.Group();
   const geo = new THREE.PlaneGeometry(16, 10);
@@ -204,6 +240,7 @@ export function makeRiverWater(waterMat){
   return group;
 }
 export function currentPlace(x, z){
+  if (atQuietWell(x, z)) return 'The Quiet Well';
   if (Math.hypot(x + 18, z - 8) < 8) return 'The Old Ring';
   if (Math.hypot(x - 32, z + 14) < 6) return 'The Moss Seat';
   if (Math.hypot(x - 4, z - 18) < 24) return 'The Clearing';
