@@ -55,3 +55,11 @@ export function heightAt(x, z){
   }
   return elev;
 }
+
+export { makeTree, treeKindAt, addBerryBush, makeHuman } from './trees.js';
+export {
+  makeRiverWater, currentPlace, makeStoneRing, makeMossSeat,
+  placeStoneTerrace, addGrassTufts, addValleyBirds, stepBirds,
+  makeQuietWell, atQuietWell
+} from './places.js';
+export { addDistantRidges } from './ridges.js';
