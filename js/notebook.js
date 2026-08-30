@@ -78,6 +78,15 @@ export const NOTES = [
     mapY: 32
   },
   {
+    id: 'pine',
+    name: 'The Listening Pine',
+    line: 'A taller pine and a wooden slat on a cord. The wind talks.',
+    x: 58,
+    z: -38,
+    mapX: 78,
+    mapY: 34
+  },
+  {
     id: 'terrace',
     name: 'The Stone Terrace',
     line: 'Pale shelves and a small cairn. The sky stays open.',
