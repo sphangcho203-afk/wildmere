@@ -69,3 +69,51 @@ canvas { display: block; }
   background: rgba(18,26,20,.55); color: #e8d5a3;
   font-size: 0.72rem; letter-spacing: 0.06em;
 }
+#notebook {
+  position: absolute; inset: 0; z-index: 12;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(8, 12, 10, 0.55);
+  pointer-events: auto;
+}
+#notebook[hidden] { display: none; }
+.nb-card {
+  width: min(420px, 92vw);
+  max-height: 86vh;
+  overflow: auto;
+  padding: 22px 24px 18px;
+  background: rgba(22, 28, 22, 0.92);
+  border: 1px solid rgba(232, 213, 163, 0.2);
+  border-radius: 6px;
+}
+.nb-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+.nb-head .sub {
+  font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: #9aaa8c;
+}
+.nb-head h2 {
+  flex: 1; font-size: 1rem; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--sun);
+}
+#nb-count { font-size: 0.7rem; letter-spacing: 0.12em; color: #c5d0b8; }
+#nb-map {
+  width: 100%; height: 168px;
+  background: rgba(10, 14, 11, 0.55);
+  border: 1px solid rgba(232, 213, 163, 0.12);
+  margin-bottom: 12px;
+}
+#nb-map .stream {
+  fill: none; stroke: #5b8fa0; stroke-width: 1.6; opacity: 0.7;
+}
+#nb-dots circle.known { fill: #e8d5a3; }
+#nb-dots circle.fog { fill: #3a4338; }
+#nb-list { list-style: none; }
+#nb-list li {
+  padding: 7px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+#nb-list li b {
+  display: block; font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--sun); font-weight: 600;
+}
+#nb-list li span { font-size: 0.8rem; color: #c9d0be; line-height: 1.4; }
+#nb-list li.fog b, #nb-list li.fog span { color: #6a7364; }
+.nb-hint { margin-top: 12px; font-size: 0.72rem; color: #9aaa8c; }

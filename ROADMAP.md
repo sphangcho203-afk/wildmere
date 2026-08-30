@@ -24,6 +24,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Sleep / rest by fire advances time through the night
 - [x] Fishing at the slow bend of the stream
 - [x] A second region past High Spine (stone terrace, thin grass)
+- [x] A notebook / map you fill in by walking
 
 ## Next
 
@@ -57,7 +58,10 @@ The Slow Bend sits on the stream north of the clearing. Stones and a short plank
 
 Southwest of High Spine the ground levels into the Stone Terrace: two pale shelves, a small cairn, thin grass, and loose rock you can gather. The compass names it when you arrive. Trees stay off the shelf so the sky stays open.
 
+## Note (2026-08-30)
+
+A field notebook (M) keeps a short line for each named place. The Clearing starts written. The rest fill in when you stand there. A small map marks known ground. Notes keep across visits in the same browser. Pages still needs the owner: Settings → Pages → Deploy from a branch → main / (root) → Save.
+
 ## Later
 
-- [ ] A notebook / map you fill in by walking
 - [ ] Multiplayer is not a goal. One person and a piece of land is the goal.

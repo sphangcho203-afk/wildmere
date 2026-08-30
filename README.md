@@ -30,6 +30,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 | F | Place selected piece (post, fire, cabin, soil bed) |
 | G | Plant a crop in a soil bed (needs 1 berry) |
 | R | Rest by a campfire (night: advances time to morning) |
+| M | Open or close the field notebook |
 | 1 | Eat |
 | Esc | Release mouse |
 
@@ -45,6 +46,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - Warmth near a campfire; rest by the fire through the night
 - Soil beds you place, water, and grow three crops (leaf greens, roots, grain)
 - Fishing at the Slow Bend — stand by the still water, drink if you need, then wait on a line
+- A field notebook that fills in as you walk named ground
 - Local feel of a quiet piece of ground
 
 Walk southwest from the clearing, up High Spine, to reach the terrace.
@@ -56,6 +58,7 @@ Walk southwest from the clearing, up High Spine, to reach the terrace.
 | `index.html` | Shell and HUD |
 | `js/game.js` | Play loop, gather, build, rest, farm, fish |
 | `js/world.js` | Ground, trees, places, birds, ridges |
+| `js/notebook.js` | Field notes that fill in by walking |
 | `js/bend.js` | The Slow Bend |
 | `ROADMAP.md` | What gets built next |
 | `LICENSE` | MIT |
