@@ -60,6 +60,7 @@ export { makeTree, treeKindAt, addBerryBush, makeHuman } from './trees.js';
 export {
   makeRiverWater, currentPlace, makeStoneRing, makeMossSeat,
   placeStoneTerrace, addGrassTufts, addValleyBirds, stepBirds,
-  makeQuietWell, atQuietWell
+  makeQuietWell, atQuietWell,
+  makeListeningPine, atListeningPine
 } from './places.js';
 export { addDistantRidges } from './ridges.js';
