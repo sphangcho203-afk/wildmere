@@ -14,7 +14,7 @@
       <p>Not a block world. Hills, a stream, timber, and enough room to decide what to do with a day. Gather. Plant. Build a little. Watch the light change.</p>
       <p class="hint">On a phone: left stick walks, right pad looks.</p>
       <button id="start-btn">Enter the valley</button>
-      <p class="hint" style="margin-top:16px">WASD · E gather / water / harvest / fish · F build · G plant · R rest by fire · 1 eat · Tab cycle build</p>
+      <p class="hint" style="margin-top:16px">WASD · E gather / water / harvest / fish · F build · G plant · R rest by fire · M notebook · 1 eat · Tab cycle build</p>
     </div>
   </div>
   <div id="hud">
@@ -37,7 +37,7 @@
     <div id="build-chip">Build: wooden post</div>
     <div id="controls-help">
       E gather / water / harvest / fish &nbsp; F place &nbsp; Tab cycle build &nbsp; G plant<br/>
-      R rest by fire &nbsp; 1 eat
+      R rest by fire &nbsp; M notebook &nbsp; 1 eat
     </div>
     <div id="meta"><div id="clock">Morning</div><div id="seedline">seed 2041</div></div>
     <div id="toast"></div>
@@ -49,8 +49,24 @@
         <button type="button" id="btn-f">F</button>
         <button type="button" id="btn-g">G</button>
         <button type="button" id="btn-r">R</button>
+        <button type="button" id="btn-m">M</button>
         <button type="button" id="btn-q">Tab</button>
       </div>
+    </div>
+  </div>
+  <div id="notebook" hidden>
+    <div class="nb-card">
+      <div class="nb-head">
+        <div class="sub">Walked ground</div>
+        <h2>Field notes</h2>
+        <div id="nb-count">1 / 9</div>
+      </div>
+      <svg id="nb-map" viewBox="0 0 96 88" aria-hidden="true">
+        <path class="stream" d="M48 4 C 56 18, 40 28, 50 40 S 42 58, 48 72 S 54 84, 46 90" />
+        <g id="nb-dots"></g>
+      </svg>
+      <ul id="nb-list"></ul>
+      <p class="nb-hint">Places write themselves when you stand there. M closes the book.</p>
     </div>
   </div>
   <script type="importmap">
