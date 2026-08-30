@@ -40,6 +40,43 @@ export function makeQuietWell(scene){
   return { x: WELL_X, z: WELL_Z, name: 'The Quiet Well' };
 }
 
+export const PINE_X = 58;
+export const PINE_Z = -38;
+export function atListeningPine(x, z){
+  return Math.hypot(x - PINE_X, z - PINE_Z) < 5.4;
+}
+export function makeListeningPine(scene){
+  const bark = new THREE.MeshStandardMaterial({ color: 0x4a3b30, roughness: 0.94 });
+  const needle = new THREE.MeshStandardMaterial({ color: 0x1c3a26, roughness: 0.9 });
+  const wood = new THREE.MeshStandardMaterial({ color: 0x6b5340, roughness: 0.88 });
+  const y = heightAt(PINE_X, PINE_Z);
+  const g = new THREE.Group();
+  g.name = 'listening-pine';
+  const trunkH = 8.4;
+  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.2, trunkH, 8), bark);
+  trunk.position.set(PINE_X, y + trunkH * 0.5, PINE_Z);
+  trunk.castShadow = true;
+  g.add(trunk);
+  for (let i = 0; i < 6; i++){
+    const t = i / 5;
+    const cone = new THREE.Mesh(new THREE.ConeGeometry(1.85 - t * 1.35, 1.45, 8), needle);
+    cone.position.set(PINE_X, y + trunkH * 0.38 + i * 0.92, PINE_Z);
+    cone.castShadow = true;
+    g.add(cone);
+  }
+  const token = new THREE.Group();
+  const cord = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, 0.42, 4), wood);
+  cord.position.y = -0.21;
+  token.add(cord);
+  const slat = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.22, 0.03), wood);
+  slat.position.y = -0.48;
+  token.add(slat);
+  token.position.set(PINE_X + 0.55, y + 4.15, PINE_Z + 0.12);
+  g.add(token);
+  scene.add(g);
+  return { x: PINE_X, z: PINE_Z, name: 'The Listening Pine', token };
+}
+
 export function makeStoneRing(scene, cx, cz){
   const stone = new THREE.MeshStandardMaterial({ color: 0x6a6660, roughness: 0.95 });
   const y = heightAt(cx, cz);
@@ -85,6 +122,7 @@ export function makeRiverWater(waterMat){
 export function currentPlace(x, z){
   if (atStoneTerrace(x, z)) return 'The Stone Terrace';
   if (atQuietWell(x, z)) return 'The Quiet Well';
+  if (atListeningPine(x, z)) return 'The Listening Pine';
   if (Math.hypot(x + 18, z - 8) < 8) return 'The Old Ring';
   if (Math.hypot(x - 32, z + 14) < 6) return 'The Moss Seat';
   if (Math.hypot(x - 4, z - 18) < 24) return 'The Clearing';

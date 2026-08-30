@@ -24,7 +24,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Sleep / rest by fire advances time through the night
 - [x] Fishing at the slow bend of the stream
 - [x] A second region past High Spine (stone terrace, thin grass)
-- [x] A notebook / map you fill in by walking
+- [x] The Listening Pine, a lone marked tree southeast of the clearing
 
 ## Next
 
@@ -60,8 +60,9 @@ Southwest of High Spine the ground levels into the Stone Terrace: two pale shelv
 
 ## Note (2026-08-30)
 
-A field notebook (M) keeps a short line for each named place. The Clearing starts written. The rest fill in when you stand there. A small map marks known ground. Notes keep across visits in the same browser. Pages still needs the owner: Settings → Pages → Deploy from a branch → main / (root) → Save.
+Southeast of the clearing a single taller pine stands with a small wooden slat on a cord. The compass names it The Listening Pine. The slat moves a little in the air. First visit only says that the wind in the needles is all it ever says.
 
 ## Later
 
+- [ ] A notebook / map you fill in by walking
 - [ ] Multiplayer is not a goal. One person and a piece of land is the goal.
