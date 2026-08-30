@@ -9,6 +9,7 @@ import {
   addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
 import { atSlowBend, placeSlowBend } from './bend.js';
+import { loadNotes, saveNotes, noteForPlace, renderNotebook } from './notebook.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
@@ -26,6 +27,8 @@ let playing = false;
 let foundRing = false;
 let foundMoss = false;
 let foundWell = false;
+const foundNotes = loadNotes();
+let notebookOpen = false;
 function enterValley(e){
   if (e) e.preventDefault();
   playing = true;
@@ -124,6 +127,7 @@ makeMossSeat(scene, 32, -14);
 makeQuietWell(scene);
 const slowBend = placeSlowBend(scene);
 let foundBend = false;
+renderNotebook(foundNotes);
 
 const player = { wood: 0, food: 0, stone: 0, fish: 0, health: 100, hunger: 100, thirst: 100, warmth: 74 };
 const keys = { w:0, a:0, s:0, d:0 };
@@ -152,6 +156,24 @@ function toast(msg){
   const el = document.getElementById('toast'); if (!el) return;
   el.textContent = msg; el.classList.add('show');
   clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove('show'), 1600);
+}
+function toggleNotebook(){
+  if (!playing) return;
+  notebookOpen = !notebookOpen;
+  const el = document.getElementById('notebook');
+  if (el) el.hidden = !notebookOpen;
+  if (notebookOpen){
+    renderNotebook(foundNotes);
+    stick.x = 0; stick.z = 0;
+  }
+}
+function rememberPlace(placeName){
+  const note = noteForPlace(placeName);
+  if (!note || foundNotes.has(note.id)) return;
+  foundNotes.add(note.id);
+  saveNotes(foundNotes);
+  renderNotebook(foundNotes);
+  toast('Wrote: ' + note.name);
 }
 function hud(){
   const set = (id, v) => {
@@ -218,7 +240,7 @@ function refreshPlotLook(p){
   }
 }
 function gather(){
-  if (!playing || resting) return;
+  if (!playing || resting || notebookOpen) return;
   if (fishing){ toast('Wait — the line is still'); return; }
   const plot = nearestPlot();
   if (plot){
@@ -277,12 +299,12 @@ function gather(){
   hud();
 }
 function eat(){
-  if (resting) return;
+  if (resting || notebookOpen) return;
   if (player.food < 1){ toast('Pick berries, harvest a crop, or fish first'); return; }
   player.food -= 1; player.hunger = Math.min(100, player.hunger + 24); toast('Ate'); hud();
 }
 function plant(){
-  if (!playing || resting) return;
+  if (!playing || resting || notebookOpen) return;
   const plot = nearestPlot();
   if (!plot){ toast('Stand by a soil bed to plant'); return; }
   if (plot.crop){ toast('Already planted — water or wait'); return; }
@@ -298,7 +320,7 @@ function plant(){
   hud();
 }
 function place(){
-  if (!playing || resting) return;
+  if (!playing || resting || notebookOpen) return;
   const spec = BUILDS[buildIndex];
   if (player.wood < spec.wood){ toast('Need ' + spec.wood + ' wood'); return; }
   player.wood -= spec.wood;
@@ -336,7 +358,7 @@ function nearAnyFire(){
   return fires.some(f => Math.hypot(f.x - hero.position.x, f.z - hero.position.z) < 4);
 }
 function startRest(){
-  if (!playing || resting) return;
+  if (!playing || resting || notebookOpen) return;
   if (!nearAnyFire()){
     toast('Rest needs a campfire nearby');
     return;
@@ -367,6 +389,8 @@ function finishRest(){
 }
 addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
+  if (k === 'm'){ e.preventDefault(); toggleNotebook(); return; }
+  if (notebookOpen) return;
   if (keys[k] !== undefined) keys[k] = 1;
   if (k === 'e') gather();
   if (k === 'f') place();
@@ -398,7 +422,7 @@ addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== 
   }
   function find(id, list){ for (let i = 0; i < list.length; i++) if (list[i].identifier === id) return list[i]; return null; }
   function onStart(e){
-    if (!playing) return;
+    if (!playing || notebookOpen) return;
     for (const t of e.changedTouches){
       const hit = document.elementFromPoint(t.clientX, t.clientY);
       if (hit && hit.closest && hit.closest('#touch-actions')) continue;
@@ -407,6 +431,7 @@ addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== 
     }
   }
   function onMove(e){
+    if (notebookOpen) return;
     if (walkId !== null){ const t = find(walkId, e.touches); if (t){ applyWalk(t); e.preventDefault(); } }
     if (lookId !== null){
       const t = find(lookId, e.touches);
@@ -431,8 +456,9 @@ addEventListener('keyup', e => { const k = e.key.toLowerCase(); if (keys[k] !== 
   const be = document.getElementById('btn-e'); if (be) be.addEventListener('click', gather);
   const bf = document.getElementById('btn-f'); if (bf) bf.addEventListener('click', place);
   const bg = document.getElementById('btn-g'); if (bg) bg.addEventListener('click', plant);
-  const bq = document.getElementById('btn-q'); if (bq) bq.addEventListener('click', () => { if (!resting){ buildIndex = (buildIndex + 1) % BUILDS.length; hud(); toast(BUILDS[buildIndex].label); } });
+  const bq = document.getElementById('btn-q'); if (bq) bq.addEventListener('click', () => { if (!resting && !notebookOpen){ buildIndex = (buildIndex + 1) % BUILDS.length; hud(); toast(BUILDS[buildIndex].label); } });
   const br = document.getElementById('btn-r'); if (br) br.addEventListener('click', startRest);
+  const bm = document.getElementById('btn-m'); if (bm) bm.addEventListener('click', toggleNotebook);
 })();
 
 const clock = new THREE.Clock();
@@ -478,7 +504,7 @@ function animate(){
         hud();
       }
     }
-    if (resting){
+    if (resting || notebookOpen){
       if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 8);
       stick.x = 0; stick.z = 0;
       keys.w = keys.a = keys.s = keys.d = 0;
@@ -544,7 +570,7 @@ function animate(){
       }
     }
 
-    if (resting || fishing){
+    if (resting || fishing || notebookOpen){
       camera.position.set(hero.position.x - Math.sin(yaw) * 5.6, hero.position.y + 2.15 + pitch, hero.position.z - Math.cos(yaw) * 5.6);
       camera.lookAt(hero.position.x, hero.position.y + 1.35, hero.position.z);
     }
@@ -560,9 +586,12 @@ function animate(){
 
     const it = nearest();
     const plot = nearestPlot();
+    const hereName = atSlowBend(hero.position.x, hero.position.z) ? 'The Slow Bend' : currentPlace(hero.position.x, hero.position.z);
+    rememberPlace(hereName);
     const pr = document.getElementById('prompt');
     if (pr){
-      if (resting) pr.textContent = 'Resting… light returns';
+      if (notebookOpen) pr.textContent = 'Field notes · M to close';
+      else if (resting) pr.textContent = 'Resting… light returns';
       else if (fishing) pr.textContent = 'Waiting on the line…';
       else if (plot){
         if (plot.crop && plot.growth >= 1) pr.textContent = 'E  harvest ' + plot.crop.label;
@@ -584,7 +613,7 @@ function animate(){
       else if (Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6) pr.textContent = 'Moss seat — a place to pause';
       else pr.textContent = 'Hold left to walk · right to look';
     }
-    const pl = document.getElementById('place'); if (pl) pl.textContent = atSlowBend(hero.position.x, hero.position.z) ? 'The Slow Bend' : currentPlace(hero.position.x, hero.position.z);
+    const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
     const ck = document.getElementById('clock');
     if (ck) ck.textContent = elev > 0.3 ? 'Day' : elev > 0.05 ? 'Morning' : elev > -0.15 ? 'Dusk' : 'Night';
     if ((Math.floor(clock.elapsedTime * 2) % 4) === 0) hud();
