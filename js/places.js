@@ -77,6 +77,48 @@ export function makeListeningPine(scene){
   return { x: PINE_X, z: PINE_Z, name: 'The Listening Pine', token };
 }
 
+export const HOLLOW_X = -36;
+export const HOLLOW_Z = 42;
+export function atWindHollow(x, z){
+  return Math.hypot(x - HOLLOW_X, z - HOLLOW_Z) < 5.2;
+}
+export function makeWindHollow(scene){
+  const stone = new THREE.MeshStandardMaterial({ color: 0x6a6660, roughness: 0.95, flatShading: true });
+  const pale = new THREE.MeshStandardMaterial({ color: 0x7a766c, roughness: 0.94, flatShading: true });
+  const wood = new THREE.MeshStandardMaterial({ color: 0x6b5340, roughness: 0.9 });
+  const cloth = new THREE.MeshStandardMaterial({
+    color: 0xc4b48a, roughness: 0.82, side: THREE.DoubleSide
+  });
+  const y = heightAt(HOLLOW_X, HOLLOW_Z);
+  const g = new THREE.Group();
+  g.name = 'wind-hollow';
+  const bowl = new THREE.Mesh(new THREE.CylinderGeometry(2.15, 2.55, 0.22, 10), stone);
+  bowl.position.set(HOLLOW_X, y + 0.04, HOLLOW_Z);
+  bowl.receiveShadow = true;
+  g.add(bowl);
+  for (let i = 0; i < 7; i++){
+    const a = i * 0.9;
+    const r = 1.55 + (i % 3) * 0.22;
+    const h = 0.34 + (i % 4) * 0.16;
+    const s = new THREE.Mesh(new THREE.BoxGeometry(0.42, h, 0.28), i % 2 ? pale : stone);
+    s.position.set(HOLLOW_X + Math.cos(a) * r, y + h * 0.48, HOLLOW_Z + Math.sin(a) * r);
+    s.rotation.y = a + 0.2;
+    s.castShadow = true;
+    g.add(s);
+  }
+  const post = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.05, 1.55, 6), wood);
+  post.position.set(HOLLOW_X + 0.35, y + 0.95, HOLLOW_Z - 0.2);
+  post.rotation.z = 0.18;
+  post.castShadow = true;
+  g.add(post);
+  const ribbon = new THREE.Mesh(new THREE.PlaneGeometry(0.12, 0.55), cloth);
+  ribbon.position.set(HOLLOW_X + 0.42, y + 1.55, HOLLOW_Z - 0.18);
+  ribbon.rotation.x = 0.12;
+  g.add(ribbon);
+  scene.add(g);
+  return { x: HOLLOW_X, z: HOLLOW_Z, name: 'The Wind Hollow', ribbon };
+}
+
 export function makeStoneRing(scene, cx, cz){
   const stone = new THREE.MeshStandardMaterial({ color: 0x6a6660, roughness: 0.95 });
   const y = heightAt(cx, cz);
@@ -123,6 +165,7 @@ export function currentPlace(x, z){
   if (atStoneTerrace(x, z)) return 'The Stone Terrace';
   if (atQuietWell(x, z)) return 'The Quiet Well';
   if (atListeningPine(x, z)) return 'The Listening Pine';
+  if (atWindHollow(x, z)) return 'The Wind Hollow';
   if (Math.hypot(x + 18, z - 8) < 8) return 'The Old Ring';
   if (Math.hypot(x - 32, z + 14) < 6) return 'The Moss Seat';
   if (Math.hypot(x - 4, z - 18) < 24) return 'The Clearing';
