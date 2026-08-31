@@ -62,6 +62,10 @@ Southwest of High Spine the ground levels into the Stone Terrace: two pale shelv
 
 Southeast of the clearing a single taller pine stands with a small wooden slat on a cord. The compass names it The Listening Pine. The slat moves a little in the air. First visit only says that the wind in the needles is all it ever says.
 
+## Note (2026-08-31)
+
+Passing rain actually falls now. Two short showers in a valley day dim the light and thicken the fog a little. Soil beds take the rain. Warmth slips faster if you stand out in it. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
+
 ## Later
 
 - [ ] A notebook / map you fill in by walking

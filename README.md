@@ -43,6 +43,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
+- Passing rain that dims the light and waters soil beds
 - Warmth near a campfire; rest by the fire through the night
 - Soil beds you place, water, and grow three crops (leaf greens, roots, grain)
 - Fishing at the Slow Bend — stand by the still water, drink if you need, then wait on a line
@@ -58,6 +59,7 @@ Walk southwest from the clearing, up High Spine, to reach the terrace.
 | `index.html` | Shell and HUD |
 | `js/game.js` | Play loop, gather, build, rest, farm, fish |
 | `js/world.js` | Ground, trees, places, birds, ridges |
+| `js/weather.js` | Passing rain |
 | `js/notebook.js` | Field notes that fill in by walking |
 | `js/bend.js` | The Slow Bend |
 | `ROADMAP.md` | What gets built next |

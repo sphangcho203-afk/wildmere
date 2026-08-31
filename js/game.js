@@ -7,11 +7,11 @@ import {
   makeHuman, makeRiverWater, currentPlace, makeStoneRing, makeMossSeat,
   makeQuietWell, atQuietWell,
   makeListeningPine, atListeningPine,
-  makeWindHollow, atWindHollow,
   addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
 import { atSlowBend, placeSlowBend } from './bend.js';
 import { loadNotes, saveNotes, noteForPlace, renderNotebook } from './notebook.js';
+import { makePassingRain, stepRain, rainWanted } from './weather.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
@@ -30,7 +30,6 @@ let foundRing = false;
 let foundMoss = false;
 let foundWell = false;
 let foundPine = false;
-let foundHollow = false;
 const foundNotes = loadNotes();
 let notebookOpen = false;
 function enterValley(e){
@@ -86,6 +85,8 @@ scene.add(makeRiverWater(new THREE.MeshStandardMaterial({ color: 0x3d6e7a, rough
 addDistantRidges(scene);
 addGrassTufts(scene);
 const birds = addValleyBirds(scene);
+const rain = makePassingRain(scene);
+let raining = false;
 
 const interactives = [];
 const fires = [];
@@ -105,7 +106,7 @@ for (let a = 0; a < 10; a++){
 for (let i = 0; i < 1200 && interactives.filter(t => t.type === 'tree').length < 110; i++){
   const x = (Math.random() - 0.5) * 380, z = (Math.random() - 0.5) * 380;
   const y = heightAt(x, z);
-  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7 || Math.hypot(x + 36, z - 42) < 7) continue;
+  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7) continue;
   addThing(makeTree(0.8 + Math.random() * 0.5, treeKindAt(x, z)), 'tree', x, y, z, 3);
 }
 for (let i = 0; i < 16; i++){
@@ -130,7 +131,6 @@ makeStoneRing(scene, -18, 8);
 makeMossSeat(scene, 32, -14);
 makeQuietWell(scene);
 const listeningPine = makeListeningPine(scene);
-const windHollow = makeWindHollow(scene);
 const slowBend = placeSlowBend(scene);
 let foundBend = false;
 renderNotebook(foundNotes);
@@ -492,6 +492,20 @@ function animate(){
   dir.intensity = 0.2 + up * 2; hemi.intensity = 0.2 + up * 0.55;
   renderer.toneMappingExposure = 0.38 + up * 0.42;
   scene.fog.color.setHSL(0.55, 0.14 + up * 0.12, 0.16 + up * 0.46);
+  const wantRain = rainWanted(worldTime);
+  if (wantRain !== raining){
+    raining = wantRain;
+    if (playing) toast(raining ? 'A light rain moves through' : 'The rain thins');
+  }
+  if (raining){
+    dir.intensity *= 0.62;
+    hemi.intensity *= 0.85;
+    renderer.toneMappingExposure *= 0.88;
+    scene.fog.density = 0.0072;
+    scene.fog.color.offsetHSL(0, -0.04, -0.06);
+  } else {
+    scene.fog.density = 0.0055;
+  }
   if (playing){
     const nearFire = nearAnyFire();
     if (fishing){
@@ -557,19 +571,20 @@ function animate(){
       if (!foundPine && atListeningPine(hero.position.x, hero.position.z)){
         foundPine = true; toast('The Listening Pine. Wind in the needles is all it ever says.');
       }
-      if (!foundHollow && atWindHollow(hero.position.x, hero.position.z)){
-        foundHollow = true; toast('The Wind Hollow. A bowl of stone that keeps the air moving.');
-      }
       if (!foundBend && atSlowBend(hero.position.x, hero.position.z)){
         foundBend = true; toast('The Slow Bend. Water holds here a while.');
       }
       if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 16);
-      else player.warmth = Math.max(0, player.warmth - dt * (up < 0.12 ? 2.2 : 0.28));
+      else player.warmth = Math.max(0, player.warmth - dt * ((up < 0.12 ? 2.2 : 0.28) + (raining ? 0.9 : 0)));
       player.hunger = Math.max(0, player.hunger - dt * 0.55);
       player.thirst = Math.max(0, player.thirst - dt * 0.7);
       if (player.hunger < 1 || player.thirst < 1 || player.warmth < 8) player.health = Math.max(0, player.health - dt * 2);
 
       for (const p of plots){
+        if (p.crop && raining && !p.watered){
+          p.watered = true;
+          refreshPlotLook(p);
+        }
         if (p.crop && p.watered && p.growth < 1){
           const rate = 0.018 + up * 0.028;
           const prev = p.growth;
@@ -589,10 +604,6 @@ function animate(){
     if (listeningPine && listeningPine.token){
       listeningPine.token.rotation.z = Math.sin(clock.elapsedTime * 1.15) * 0.18;
       listeningPine.token.rotation.x = Math.sin(clock.elapsedTime * 0.7) * 0.06;
-    }
-    if (windHollow && windHollow.ribbon){
-      windHollow.ribbon.rotation.y = Math.sin(clock.elapsedTime * 1.8) * 0.45;
-      windHollow.ribbon.rotation.z = 0.15 + Math.sin(clock.elapsedTime * 2.4) * 0.22;
     }
     if (slowBend.fish){
       const tFish = clock.elapsedTime;
@@ -630,7 +641,6 @@ function animate(){
         else pr.textContent = 'Warm by the fire · R rest';
       }
       else if (atListeningPine(hero.position.x, hero.position.z)) pr.textContent = 'Listening Pine — stand and hear the needles';
-      else if (atWindHollow(hero.position.x, hero.position.z)) pr.textContent = 'Wind Hollow — the cloth keeps moving';
       else if (Math.hypot(hero.position.x + 18, hero.position.z - 8) < 8) pr.textContent = 'Old stone ring';
       else if (Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6) pr.textContent = 'Moss seat — a place to pause';
       else pr.textContent = 'Hold left to walk · right to look';
@@ -641,6 +651,7 @@ function animate(){
     if ((Math.floor(clock.elapsedTime * 2) % 4) === 0) hud();
   }
   stepBirds(birds, clock.elapsedTime);
+  stepRain(rain, camera, dt, raining);
   renderer.render(scene, camera);
 }
 animate();
