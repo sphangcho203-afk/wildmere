@@ -1,5 +1,5 @@
 import { TERRACE_X, TERRACE_Z } from './world.js';
-import { WELL_X, WELL_Z } from './places.js';
+import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z } from './places.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -94,6 +94,15 @@ export const NOTES = [
     z: TERRACE_Z,
     mapX: 22,
     mapY: 18
+  },
+  {
+    id: 'hollow',
+    name: 'The Wind Hollow',
+    line: 'A stone bowl and a strip of cloth. The air keeps moving.',
+    x: HOLLOW_X,
+    z: HOLLOW_Z,
+    mapX: 28,
+    mapY: 68
   }
 ];
 
