@@ -79,7 +79,6 @@ export function makeListeningPine(scene){
 
 export const HOLLOW_X = -36;
 export const HOLLOW_Z = 42;
-let hollowRibbon = null;
 export function atWindHollow(x, z){
   return Math.hypot(x - HOLLOW_X, z - HOLLOW_Z) < 5.2;
 }
@@ -117,7 +116,6 @@ export function makeWindHollow(scene){
   ribbon.position.set(HOLLOW_X + 0.42, y + 1.55, HOLLOW_Z - 0.18);
   ribbon.rotation.x = 0.12;
   g.add(ribbon);
-  hollowRibbon = ribbon;
   scene.add(g);
   return { x: HOLLOW_X, z: HOLLOW_Z, name: 'The Wind Hollow', ribbon };
 }
@@ -250,7 +248,6 @@ export function addGrassTufts(scene){
     }
   }
   placeStoneTerrace(scene);
-  makeWindHollow(scene);
 }
 
 export function addValleyBirds(scene){
@@ -281,10 +278,6 @@ export function addValleyBirds(scene){
 }
 
 export function stepBirds(birds, t){
-  if (hollowRibbon){
-    hollowRibbon.rotation.z = Math.sin(t * 2.2) * 0.28;
-    hollowRibbon.rotation.y = Math.sin(t * 1.1) * 0.12;
-  }
   for (const b of birds){
     const u = b.userData;
     const a = t * u.speed + u.phase;
