@@ -7,6 +7,7 @@ import {
   makeHuman, makeRiverWater, currentPlace, makeStoneRing, makeMossSeat,
   makeQuietWell, atQuietWell,
   makeListeningPine, atListeningPine,
+  makeWindHollow, atWindHollow,
   addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
 import { atSlowBend, placeSlowBend } from './bend.js';
@@ -30,6 +31,7 @@ let foundRing = false;
 let foundMoss = false;
 let foundWell = false;
 let foundPine = false;
+let foundHollow = false;
 const foundNotes = loadNotes();
 let notebookOpen = false;
 function enterValley(e){
@@ -106,7 +108,7 @@ for (let a = 0; a < 10; a++){
 for (let i = 0; i < 1200 && interactives.filter(t => t.type === 'tree').length < 110; i++){
   const x = (Math.random() - 0.5) * 380, z = (Math.random() - 0.5) * 380;
   const y = heightAt(x, z);
-  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7) continue;
+  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7 || Math.hypot(x + 36, z - 42) < 7) continue;
   addThing(makeTree(0.8 + Math.random() * 0.5, treeKindAt(x, z)), 'tree', x, y, z, 3);
 }
 for (let i = 0; i < 16; i++){
@@ -131,6 +133,7 @@ makeStoneRing(scene, -18, 8);
 makeMossSeat(scene, 32, -14);
 makeQuietWell(scene);
 const listeningPine = makeListeningPine(scene);
+const windHollow = makeWindHollow(scene);
 const slowBend = placeSlowBend(scene);
 let foundBend = false;
 renderNotebook(foundNotes);
@@ -571,6 +574,9 @@ function animate(){
       if (!foundPine && atListeningPine(hero.position.x, hero.position.z)){
         foundPine = true; toast('The Listening Pine. Wind in the needles is all it ever says.');
       }
+      if (!foundHollow && atWindHollow(hero.position.x, hero.position.z)){
+        foundHollow = true; toast('The Wind Hollow. A bowl of stone. The cloth keeps moving.');
+      }
       if (!foundBend && atSlowBend(hero.position.x, hero.position.z)){
         foundBend = true; toast('The Slow Bend. Water holds here a while.');
       }
@@ -604,6 +610,11 @@ function animate(){
     if (listeningPine && listeningPine.token){
       listeningPine.token.rotation.z = Math.sin(clock.elapsedTime * 1.15) * 0.18;
       listeningPine.token.rotation.x = Math.sin(clock.elapsedTime * 0.7) * 0.06;
+    }
+    if (windHollow && windHollow.ribbon){
+      const wr = raining ? 1.7 : 1;
+      windHollow.ribbon.rotation.z = Math.sin(clock.elapsedTime * 2.1 * wr) * 0.28 * wr;
+      windHollow.ribbon.rotation.y = Math.sin(clock.elapsedTime * 1.4) * 0.16;
     }
     if (slowBend.fish){
       const tFish = clock.elapsedTime;
@@ -640,6 +651,7 @@ function animate(){
         if (elevNow <= 0.05) pr.textContent = 'R  rest through the night';
         else pr.textContent = 'Warm by the fire · R rest';
       }
+      else if (atWindHollow(hero.position.x, hero.position.z)) pr.textContent = 'Wind Hollow — the cloth finds the air';
       else if (atListeningPine(hero.position.x, hero.position.z)) pr.textContent = 'Listening Pine — stand and hear the needles';
       else if (Math.hypot(hero.position.x + 18, hero.position.z - 8) < 8) pr.textContent = 'Old stone ring';
       else if (Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6) pr.textContent = 'Moss seat — a place to pause';
