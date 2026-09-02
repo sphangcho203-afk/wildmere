@@ -39,7 +39,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - A carved stream (Reedford Crossing), the Slow Bend, and a starting meadow (The Clearing)
 - High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
 - Thicker timber (The Quiet Pines)
-- The Old Ring, the Moss Seat, and the Wind Hollow — quiet named places
+- The Old Ring, the Moss Seat, the Wind Hollow, and the Reed Step — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
@@ -52,6 +52,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 
 Walk southwest from the clearing, up High Spine, to reach the terrace.
 Walk northwest from the clearing to the Wind Hollow — a low stone bowl and a scrap of cloth that moves.
+Walk south along the stream from the clearing to the Reed Step — stones set in the shallow water.
 
 ## Project
 
