@@ -26,6 +26,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] A second region past High Spine (stone terrace, thin grass)
 - [x] The Listening Pine, a lone marked tree southeast of the clearing
 - [x] The Wind Hollow, a stone bowl and moving cloth northwest of the clearing
+- [x] The Shade Slab, a leaning stone and wooden cup southwest of the clearing
 
 ## Next
 
@@ -70,6 +71,10 @@ Passing rain actually falls now. Two short showers in a valley day dim the light
 ## Note (2026-09-01)
 
 Northwest of the clearing a shallow stone bowl sits with a lean post and a scrap of cloth. The compass names it The Wind Hollow. The cloth moves in the air. First visit only says that the cloth keeps the air. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
+
+## Note (2026-09-02)
+
+Southwest of the clearing a single stone leans over a moss pad. Someone left a small wooden cup. The compass names it The Shade Slab. First visit only says the south side stays cool. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
 
 ## Later
 

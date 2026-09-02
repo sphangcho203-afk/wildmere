@@ -1,5 +1,5 @@
 import { TERRACE_X, TERRACE_Z } from './world.js';
-import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z } from './places.js';
+import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z, SLAB_X, SLAB_Z } from './places.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -103,6 +103,15 @@ export const NOTES = [
     z: HOLLOW_Z,
     mapX: 28,
     mapY: 68
+  },
+  {
+    id: 'slab',
+    name: 'The Shade Slab',
+    line: 'A leaning stone and a small wooden cup. Cool on the south side.',
+    x: SLAB_X,
+    z: SLAB_Z,
+    mapX: 42,
+    mapY: 36
   }
 ];
 
