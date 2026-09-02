@@ -62,6 +62,7 @@ export {
   placeStoneTerrace, addGrassTufts, addValleyBirds, stepBirds,
   makeQuietWell, atQuietWell,
   makeListeningPine, atListeningPine,
-  makeWindHollow, atWindHollow
+  makeWindHollow, atWindHollow,
+  makeShadeSlab, atShadeSlab
 } from './places.js';
 export { addDistantRidges } from './ridges.js';
