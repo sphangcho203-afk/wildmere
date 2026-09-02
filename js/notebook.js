@@ -1,5 +1,5 @@
 import { TERRACE_X, TERRACE_Z } from './world.js';
-import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z, SLAB_X, SLAB_Z } from './places.js';
+import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z, STEP_X, STEP_Z } from './places.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -105,13 +105,13 @@ export const NOTES = [
     mapY: 68
   },
   {
-    id: 'slab',
-    name: 'The Shade Slab',
-    line: 'A leaning stone and a small wooden cup. Cool on the south side.',
-    x: SLAB_X,
-    z: SLAB_Z,
-    mapX: 42,
-    mapY: 36
+    id: 'step',
+    name: 'The Reed Step',
+    line: 'Flat stones and tall reeds. The stream is shallow here.',
+    x: STEP_X,
+    z: STEP_Z,
+    mapX: 47,
+    mapY: 38
   }
 ];
 
@@ -153,7 +153,7 @@ export function renderNotebook(found){
     list.innerHTML = NOTES.map(n => {
       const known = found.has(n.id);
       return '<li class="' + (known ? 'known' : 'fog') + '"><b>' +
-        (known ? n.name : '—') + '</b><span>' +
+        (known ? n.name : '\u2014') + '</b><span>' +
         (known ? n.line : 'Not walked yet') + '</span></li>';
     }).join('');
   }
