@@ -120,6 +120,49 @@ export function makeWindHollow(scene){
   return { x: HOLLOW_X, z: HOLLOW_Z, name: 'The Wind Hollow', ribbon };
 }
 
+export const STEP_X = -0.75;
+export const STEP_Z = -22;
+export function atReedStep(x, z){
+  return Math.hypot(x - STEP_X, z - STEP_Z) < 6.2;
+}
+export function makeReedStep(scene){
+  const stone = new THREE.MeshStandardMaterial({ color: 0x6a6660, roughness: 0.95, flatShading: true });
+  const pale = new THREE.MeshStandardMaterial({ color: 0x7a766c, roughness: 0.94, flatShading: true });
+  const reedM = new THREE.MeshStandardMaterial({ color: 0x4a5e32, roughness: 0.92 });
+  const tipM = new THREE.MeshStandardMaterial({ color: 0x6b5a32, roughness: 0.88 });
+  const g = new THREE.Group();
+  g.name = 'reed-step';
+  const reeds = [];
+  for (let i = 0; i < 5; i++){
+    const t = (i - 2) / 2;
+    const sx = STEP_X + t * 1.35;
+    const sz = STEP_Z + (i % 2 === 0 ? 0.18 : -0.16);
+    const s = new THREE.Mesh(new THREE.CylinderGeometry(0.38 + (i % 3) * 0.06, 0.46, 0.22, 8), i % 2 ? pale : stone);
+    s.position.set(sx, WATER_Y + 0.08, sz);
+    s.rotation.y = i * 0.4;
+    s.receiveShadow = true;
+    s.castShadow = true;
+    g.add(s);
+  }
+  for (let i = 0; i < 22; i++){
+    const side = i < 11 ? -1 : 1;
+    const a = (i % 11) * 0.38 - 1.8;
+    const rx = STEP_X + side * (3.1 + (i % 4) * 0.22) + Math.sin(a) * 0.4;
+    const rz = STEP_Z + Math.cos(a) * 2.4;
+    const h = 0.85 + (i % 5) * 0.18;
+    const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.028, h, 4), reedM);
+    stem.position.set(rx, WATER_Y + h * 0.45, rz);
+    stem.rotation.z = side * 0.08;
+    g.add(stem);
+    const tip = new THREE.Mesh(new THREE.ConeGeometry(0.035, 0.16, 4), tipM);
+    tip.position.set(rx + side * 0.04, WATER_Y + h * 0.9, rz);
+    g.add(tip);
+    reeds.push(stem);
+  }
+  scene.add(g);
+  return { x: STEP_X, z: STEP_Z, name: 'The Reed Step', reeds };
+}
+
 export function makeStoneRing(scene, cx, cz){
   const stone = new THREE.MeshStandardMaterial({ color: 0x6a6660, roughness: 0.95 });
   const y = heightAt(cx, cz);
@@ -167,6 +210,7 @@ export function currentPlace(x, z){
   if (atQuietWell(x, z)) return 'The Quiet Well';
   if (atListeningPine(x, z)) return 'The Listening Pine';
   if (atWindHollow(x, z)) return 'The Wind Hollow';
+  if (atReedStep(x, z)) return 'The Reed Step';
   if (Math.hypot(x + 18, z - 8) < 8) return 'The Old Ring';
   if (Math.hypot(x - 32, z + 14) < 6) return 'The Moss Seat';
   if (Math.hypot(x - 4, z - 18) < 24) return 'The Clearing';
