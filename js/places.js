@@ -163,6 +163,47 @@ export function makeReedStep(scene){
   return { x: STEP_X, z: STEP_Z, name: 'The Reed Step', reeds };
 }
 
+export const CAIRN_X = -52;
+export const CAIRN_Z = 16;
+export function atLowCairn(x, z){
+  return Math.hypot(x - CAIRN_X, z - CAIRN_Z) < 5.4;
+}
+export function makeLowCairn(scene){
+  const stone = new THREE.MeshStandardMaterial({ color: 0x6a6660, roughness: 0.95, flatShading: true });
+  const pale = new THREE.MeshStandardMaterial({ color: 0x7a766c, roughness: 0.94, flatShading: true });
+  const lichen = new THREE.MeshStandardMaterial({ color: 0x5a6248, roughness: 0.92, flatShading: true });
+  const y = heightAt(CAIRN_X, CAIRN_Z);
+  const g = new THREE.Group();
+  g.name = 'low-cairn';
+  const sizes = [0.42, 0.34, 0.26, 0.18, 0.12];
+  let stack = 0;
+  for (let i = 0; i < sizes.length; i++){
+    const s = sizes[i];
+    const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(s, 0), i % 2 ? pale : stone);
+    stack += s * 0.72;
+    rock.position.set(CAIRN_X + (i % 2 ? 0.04 : -0.03), y + stack, CAIRN_Z + (i % 3 ? 0.02 : -0.04));
+    rock.rotation.set(i * 0.21, i * 0.47, 0.08);
+    rock.castShadow = true;
+    g.add(rock);
+  }
+  const pad = new THREE.Mesh(new THREE.CylinderGeometry(1.35, 1.5, 0.08, 10), lichen);
+  pad.position.set(CAIRN_X, y + 0.02, CAIRN_Z);
+  pad.receiveShadow = true;
+  g.add(pad);
+  for (let i = 0; i < 5; i++){
+    const a = i * 1.26;
+    const r = 1.05 + (i % 2) * 0.18;
+    const h = 0.16 + (i % 3) * 0.08;
+    const s = new THREE.Mesh(new THREE.BoxGeometry(0.28, h, 0.2), i % 2 ? pale : stone);
+    s.position.set(CAIRN_X + Math.cos(a) * r, y + h * 0.48, CAIRN_Z + Math.sin(a) * r);
+    s.rotation.y = a;
+    s.castShadow = true;
+    g.add(s);
+  }
+  scene.add(g);
+  return { x: CAIRN_X, z: CAIRN_Z, name: 'The Low Cairn' };
+}
+
 export function makeStoneRing(scene, cx, cz){
   const stone = new THREE.MeshStandardMaterial({ color: 0x6a6660, roughness: 0.95 });
   const y = heightAt(cx, cz);
@@ -211,6 +252,7 @@ export function currentPlace(x, z){
   if (atListeningPine(x, z)) return 'The Listening Pine';
   if (atWindHollow(x, z)) return 'The Wind Hollow';
   if (atReedStep(x, z)) return 'The Reed Step';
+  if (atLowCairn(x, z)) return 'The Low Cairn';
   if (Math.hypot(x + 18, z - 8) < 8) return 'The Old Ring';
   if (Math.hypot(x - 32, z + 14) < 6) return 'The Moss Seat';
   if (Math.hypot(x - 4, z - 18) < 24) return 'The Clearing';
