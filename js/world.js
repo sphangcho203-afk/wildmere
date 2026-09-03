@@ -63,6 +63,7 @@ export {
   makeQuietWell, atQuietWell,
   makeListeningPine, atListeningPine,
   makeWindHollow, atWindHollow,
-  makeReedStep, atReedStep
+  makeReedStep, atReedStep,
+  makeLowCairn, atLowCairn
 } from './places.js';
 export { addDistantRidges } from './ridges.js';

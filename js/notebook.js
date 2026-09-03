@@ -1,5 +1,5 @@
 import { TERRACE_X, TERRACE_Z } from './world.js';
-import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z, STEP_X, STEP_Z } from './places.js';
+import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z, STEP_X, STEP_Z, CAIRN_X, CAIRN_Z } from './places.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -112,6 +112,15 @@ export const NOTES = [
     z: STEP_Z,
     mapX: 47,
     mapY: 38
+  },
+  {
+    id: 'cairn',
+    name: 'The Low Cairn',
+    line: 'Five stones stacked by a path someone used to walk.',
+    x: CAIRN_X,
+    z: CAIRN_Z,
+    mapX: 24,
+    mapY: 56
   }
 ];
 
