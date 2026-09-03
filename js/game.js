@@ -9,6 +9,7 @@ import {
   makeListeningPine, atListeningPine,
   makeWindHollow, atWindHollow,
   makeReedStep, atReedStep,
+  makeLowCairn, atLowCairn,
   addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
 import { atSlowBend, placeSlowBend } from './bend.js';
@@ -34,6 +35,7 @@ let foundWell = false;
 let foundPine = false;
 let foundHollow = false;
 let foundStep = false;
+let foundCairn = false;
 const foundNotes = loadNotes();
 let notebookOpen = false;
 function enterValley(e){
@@ -110,7 +112,7 @@ for (let a = 0; a < 10; a++){
 for (let i = 0; i < 1200 && interactives.filter(t => t.type === 'tree').length < 110; i++){
   const x = (Math.random() - 0.5) * 380, z = (Math.random() - 0.5) * 380;
   const y = heightAt(x, z);
-  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7 || Math.hypot(x + 36, z - 42) < 7 || Math.hypot(x + 0.75, z + 22) < 8) continue;
+  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7 || Math.hypot(x + 36, z - 42) < 7 || Math.hypot(x + 0.75, z + 22) < 8 || Math.hypot(x + 52, z - 16) < 8) continue;
   addThing(makeTree(0.8 + Math.random() * 0.5, treeKindAt(x, z)), 'tree', x, y, z, 3);
 }
 for (let i = 0; i < 16; i++){
@@ -137,6 +139,7 @@ makeQuietWell(scene);
 const listeningPine = makeListeningPine(scene);
 const windHollow = makeWindHollow(scene);
 const reedStep = makeReedStep(scene);
+const lowCairn = makeLowCairn(scene);
 const slowBend = placeSlowBend(scene);
 let foundBend = false;
 renderNotebook(foundNotes);
@@ -583,6 +586,9 @@ function animate(){
       if (!foundStep && atReedStep(hero.position.x, hero.position.z)){
         foundStep = true; toast('The Reed Step. Shallow stones. The stream is easy here.');
       }
+      if (!foundCairn && atLowCairn(hero.position.x, hero.position.z)){
+        foundCairn = true; toast('The Low Cairn. Someone stacked these so a walker would not miss the turn.');
+      }
       if (!foundBend && atSlowBend(hero.position.x, hero.position.z)){
         foundBend = true; toast('The Slow Bend. Water holds here a while.');
       }
@@ -665,6 +671,7 @@ function animate(){
       }
       else if (atWindHollow(hero.position.x, hero.position.z)) pr.textContent = 'Wind Hollow — the cloth finds the air';
       else if (atReedStep(hero.position.x, hero.position.z)) pr.textContent = 'Reed Step — shallow crossing';
+      else if (atLowCairn(hero.position.x, hero.position.z)) pr.textContent = 'Low Cairn — a quiet stack of stone';
       else if (atListeningPine(hero.position.x, hero.position.z)) pr.textContent = 'Listening Pine — stand and hear the needles';
       else if (Math.hypot(hero.position.x + 18, hero.position.z - 8) < 8) pr.textContent = 'Old stone ring';
       else if (Math.hypot(hero.position.x - 32, hero.position.z + 14) < 6) pr.textContent = 'Moss seat — a place to pause';
