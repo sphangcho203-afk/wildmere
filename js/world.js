@@ -66,5 +66,5 @@ export {
   makeReedStep, atReedStep,
   makeLowCairn, atLowCairn
 } from './places.js';
-export { makeShadePool, atShadePool } from './shade.js';
+export { makeShadePool, atShadePool } from './pool.js';
 export { addDistantRidges } from './ridges.js';
