@@ -27,6 +27,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Listening Pine, a lone marked tree southeast of the clearing
 - [x] The Wind Hollow, a stone bowl and moving cloth northwest of the clearing
 - [x] The Reed Step, stones and reeds on the shallow stream south of the clearing
+- [x] The Shade Pool, still water under a fallen log north of the clearing
 
 ## Next
 
@@ -75,6 +76,10 @@ Northwest of the clearing a shallow stone bowl sits with a lean post and a scrap
 ## Note (2026-09-02)
 
 South of the clearing the stream shallows. Five flat stones sit in a line with reeds on both banks. The compass names it The Reed Step. First visit only says that the water is thin here. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
+
+## Note (2026-09-04)
+
+North of the clearing a moss rim and still water sit under a fallen log. The compass names it The Shade Pool. Drink with E. First visit only says that the water does not run; it only holds the sky. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
 
 ## Later
 
