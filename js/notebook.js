@@ -1,5 +1,6 @@
 import { TERRACE_X, TERRACE_Z } from './world.js';
-import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z, STEP_X, STEP_Z, CAIRN_X, CAIRN_Z, GATE_X, GATE_Z } from './places.js';
+import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z, STEP_X, STEP_Z, CAIRN_X, CAIRN_Z } from './places.js';
+import { GATE_X, GATE_Z } from './gate.js';
 import { POOL_X, POOL_Z } from './shade.js';
 import { slowBendCenter } from './bend.js';
 
