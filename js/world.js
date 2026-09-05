@@ -67,4 +67,5 @@ export {
   makeLowCairn, atLowCairn
 } from './places.js';
 export { makeShadePool, atShadePool } from './shade.js';
+export { makeSplitOak, atSplitOak } from './oak.js';
 export { addDistantRidges } from './ridges.js';
