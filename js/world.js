@@ -64,7 +64,8 @@ export {
   makeListeningPine, atListeningPine,
   makeWindHollow, atWindHollow,
   makeReedStep, atReedStep,
-  makeLowCairn, atLowCairn
+  makeLowCairn, atLowCairn,
+  makeStillGate, atStillGate
 } from './places.js';
 export { makeShadePool, atShadePool } from './shade.js';
 export { makeSplitOak, atSplitOak } from './oak.js';
