@@ -39,7 +39,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - A carved stream (Reedford Crossing), the Slow Bend, and a starting meadow (The Clearing)
 - High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
 - Thicker timber (The Quiet Pines)
-- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, and the Shade Pool — quiet named places
+- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, and the Split Oak — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
@@ -54,6 +54,7 @@ Walk southwest from the clearing, up High Spine, to reach the terrace.
 Walk northwest from the clearing to the Wind Hollow — a low stone bowl and a scrap of cloth that moves.
 Walk south along the stream from the clearing to the Reed Step — stones set in the shallow water.
 Walk north from the clearing to the Shade Pool — still water, a fallen log, and a few reeds. Drink there if you need.
+Walk east past the Quiet Well to the Split Oak — two trunks from one base and a low bench in the moss.
 
 ## Project
 
@@ -63,6 +64,7 @@ Walk north from the clearing to the Shade Pool — still water, a fallen log, an
 | `js/game.js` | Play loop, gather, build, rest, farm, fish |
 | `js/world.js` | Ground, trees, places, birds, ridges |
 | `js/shade.js` | The Shade Pool |
+| `js/oak.js` | The Split Oak |
 | `js/weather.js` | Passing rain |
 | `js/notebook.js` | Field notes that fill in by walking |
 | `js/bend.js` | The Slow Bend |

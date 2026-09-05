@@ -1,7 +1,7 @@
 import { TERRACE_X, TERRACE_Z } from './world.js';
 import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z, STEP_X, STEP_Z, CAIRN_X, CAIRN_Z } from './places.js';
-import { GATE_X, GATE_Z } from './gate.js';
 import { POOL_X, POOL_Z } from './shade.js';
+import { OAK_X, OAK_Z } from './oak.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -134,13 +134,13 @@ export const NOTES = [
     mapY: 76
   },
   {
-    id: 'gate',
-    name: 'The Still Gate',
-    line: 'Two posts and a fallen lintel. The path used to mean something here.',
-    x: GATE_X,
-    z: GATE_Z,
-    mapX: 64,
-    mapY: 70
+    id: 'oak',
+    name: 'The Split Oak',
+    line: 'Two trunks from one base. A low bench in the moss.',
+    x: OAK_X,
+    z: OAK_Z,
+    mapX: 84,
+    mapY: 60
   }
 ];
 

@@ -28,6 +28,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Wind Hollow, a stone bowl and moving cloth northwest of the clearing
 - [x] The Reed Step, stones and reeds on the shallow stream south of the clearing
 - [x] The Shade Pool, still water under a fallen log north of the clearing
+- [x] The Split Oak, two trunks and a low bench east of the well
 
 ## Next
 
@@ -80,6 +81,10 @@ South of the clearing the stream shallows. Five flat stones sit in a line with r
 ## Note (2026-09-04)
 
 North of the clearing a moss rim and still water sit under a fallen log. The compass names it The Shade Pool. Drink with E. First visit only says that the water does not run; it only holds the sky. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
+
+## Note (2026-09-05)
+
+East of the Quiet Well a tree opened into two trunks and kept growing. A moss pad and a low bench sit under it. The compass names it The Split Oak. First visit only says that the trunk opened years ago and kept growing. Leaves move a little in the air. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
 
 ## Later
 
