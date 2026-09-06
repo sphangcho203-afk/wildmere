@@ -69,4 +69,5 @@ export {
 export { makeShadePool, atShadePool } from './shade.js';
 export { makeSplitOak, atSplitOak } from './oak.js';
 export { makeStillGate, atStillGate } from './gate.js';
+export { makeWashRock, atWashRock } from './wash.js';
 export { addDistantRidges } from './ridges.js';
