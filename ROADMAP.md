@@ -9,11 +9,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Hunger, thirst, strength
 - [x] Posts, walls, lean-to, campfire
 - [x] Plant and grow
-- [x] Deer
-- [x] Fireflies, fire warmth, rest
-- [x] Hand axe
 - [x] Named places + compass
-- [x] Save / load
 - [x] Leaf trees with branches, pines on high ground
 - [x] Cabin kit
 - [x] Passing rain
@@ -29,64 +25,21 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Reed Step, stones and reeds on the shallow stream south of the clearing
 - [x] The Shade Pool, still water under a fallen log north of the clearing
 - [x] The Split Oak, two trunks and a low bench east of the well
+- [x] The Still Gate, two posts and a fallen lintel north of the bend
+- [x] The Wash Rock, a flat stream stone with a paddle, bucket, and drying cloth
 
 ## Next
 
 - [ ] GitHub Pages live play URL
 
-## Note (2026-08-23)
-
-Sleep by a fire at night no longer snaps the clock. Time runs forward through the remaining dark into morning over a few seconds of real time while you stay by the coals.
-
-## Note (2026-08-24)
-
-Soil beds can be placed (cycle build to soil bed, F). Plant with a berry (G). Water with E. Three crops — leaf greens, roots, grain — grow through the day when watered. Harvest when ready.
-
-## Note (2026-08-25)
-
-Distant ridges sit past the walkable ground in three soft rings. Nearer hills stay green; farther ones cool and dissolve into fog so the horizon reads as more land, not a hard wall. Fog density eased a little and camera far plane extended to match.
-
-## Note (2026-08-26)
-
-Rest (R) by a campfire at night. The remaining dark runs forward into morning over about four and a half real seconds. You stay by the coals; warmth and strength recover a little. Daytime rest is a short sit only. Phone has an R button.
-
-## Note (2026-08-27)
-
-Birds circle high over the valley in slow arcs; wings beat quietly. Grass tufts stand near the clearing and stream banks. The Moss Seat is placed east of the start — a low stone curve with a moss pad, named on the compass when you reach it.
-
-## Note (2026-08-28)
-
-The Slow Bend sits on the stream north of the clearing. Stones and a short plank mark the bank. Stand there and press E: drink if you are thirsty, then wait a few seconds with a line in the still water. A catch becomes food. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
-
-## Note (2026-08-29)
-
-Southwest of High Spine the ground levels into the Stone Terrace: two pale shelves, a small cairn, thin grass, and loose rock you can gather. The compass names it when you arrive. Trees stay off the shelf so the sky stays open.
-
-## Note (2026-08-30)
-
-Southeast of the clearing a single taller pine stands with a small wooden slat on a cord. The compass names it The Listening Pine. The slat moves a little in the air. First visit only says that the wind in the needles is all it ever says.
-
-## Note (2026-08-31)
-
-Passing rain actually falls now. Two short showers in a valley day dim the light and thicken the fog a little. Soil beds take the rain. Warmth slips faster if you stand out in it. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
-
-## Note (2026-09-01)
-
-Northwest of the clearing a shallow stone bowl sits with a lean post and a scrap of cloth. The compass names it The Wind Hollow. The cloth moves in the air. First visit only says that the cloth keeps the air. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
-
-## Note (2026-09-02)
-
-South of the clearing the stream shallows. Five flat stones sit in a line with reeds on both banks. The compass names it The Reed Step. First visit only says that the water is thin here. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
-
-## Note (2026-09-04)
-
-North of the clearing a moss rim and still water sit under a fallen log. The compass names it The Shade Pool. Drink with E. First visit only says that the water does not run; it only holds the sky. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
-
 ## Note (2026-09-05)
 
-East of the Quiet Well a tree opened into two trunks and kept growing. A moss pad and a low bench sit under it. The compass names it The Split Oak. First visit only says that the trunk opened years ago and kept growing. Leaves move a little in the air. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
+East of the Quiet Well a tree opened into two trunks and kept growing. A moss pad and a low bench sit under it. The compass names it The Split Oak. First visit only says that the trunk opened years ago and kept growing. Leaves move a little in the air.
+
+## Note (2026-09-06)
+
+Restored the phone-first play loop after game.js had been cut down. Wired The Still Gate that was already on disk. West of the clearing, on the stream bank, The Wash Rock is a flat stone with a paddle, a small bucket, and two cloths on a post. The cloths move in the air. Compass, first-visit line, and notebook all write it. Trees stay off the stone. Phone walk / look pads unchanged. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
 
 ## Later
 
-- [ ] A notebook / map you fill in by walking
 - [ ] Multiplayer is not a goal. One person and a piece of land is the goal.
