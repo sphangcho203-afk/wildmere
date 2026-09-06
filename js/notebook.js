@@ -2,6 +2,8 @@ import { TERRACE_X, TERRACE_Z } from './world.js';
 import { WELL_X, WELL_Z, HOLLOW_X, HOLLOW_Z, STEP_X, STEP_Z, CAIRN_X, CAIRN_Z } from './places.js';
 import { POOL_X, POOL_Z } from './shade.js';
 import { OAK_X, OAK_Z } from './oak.js';
+import { GATE_X, GATE_Z } from './gate.js';
+import { WASH_X, WASH_Z } from './wash.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -141,6 +143,24 @@ export const NOTES = [
     z: OAK_Z,
     mapX: 84,
     mapY: 60
+  },
+  {
+    id: 'gate',
+    name: 'The Still Gate',
+    line: 'Two weathered posts. The lintel fell and stayed where it fell.',
+    x: GATE_X,
+    z: GATE_Z,
+    mapX: 64,
+    mapY: 80
+  },
+  {
+    id: 'wash',
+    name: 'The Wash Rock',
+    line: 'A flat stone by the stream. A paddle, a bucket, cloth on a post.',
+    x: WASH_X,
+    z: WASH_Z,
+    mapX: 36,
+    mapY: 62
   }
 ];
 
