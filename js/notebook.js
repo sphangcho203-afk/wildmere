@@ -4,6 +4,7 @@ import { POOL_X, POOL_Z } from './shade.js';
 import { OAK_X, OAK_Z } from './oak.js';
 import { GATE_X, GATE_Z } from './gate.js';
 import { WASH_X, WASH_Z } from './wash.js';
+import { LARK_X, LARK_Z } from './lark.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -161,6 +162,15 @@ export const NOTES = [
     z: WASH_Z,
     mapX: 36,
     mapY: 62
+  },
+  {
+    id: 'lark',
+    name: 'The Lark Post',
+    line: 'A thin post and three slats. The air taps them when it wants.',
+    x: LARK_X,
+    z: LARK_Z,
+    mapX: 44,
+    mapY: 28
   }
 ];
 
