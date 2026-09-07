@@ -36,7 +36,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 
 ## Note (2026-09-08)
 
-Northeast of the clearing, The Fern Stair is three low stone steps in moss with ferns that move in the air. Compass, first-visit line, and notebook all write it. Trees stay off the pad. The Still Gate is moved north of the Slow Bend so it no longer sits on the Shade Pool. Phone walk / look pads unchanged. No pointer lock.
+Northeast of the clearing, The Fern Stair is three low stone steps in moss with ferns that move in the air. Compass, first-visit line, and notebook all write it. Trees stay off the pad. Phone walk / look pads unchanged. No pointer lock. Play loop lives in js/loop.js so the valley keeps a full walk / look / gather / farm / fish day instead of a stub.
 
 ## Later
 
