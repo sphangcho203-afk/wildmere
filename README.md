@@ -39,7 +39,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - A carved stream (Reedford Crossing), the Slow Bend, and a starting meadow (The Clearing)
 - High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
 - Thicker timber (The Quiet Pines)
-- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, and the Wash Rock — quiet named places
+- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, and the Lark Post — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
@@ -56,6 +56,7 @@ Walk north from the clearing to the Shade Pool — still water, a fallen log, an
 Walk east past the Quiet Well to the Split Oak — two trunks from one base and a low bench in the moss.
 Walk a little north of the Slow Bend to the Still Gate — two posts and a fallen lintel in the grass.
 Walk west of the clearing, toward the stream, to the Wash Rock — a flat stone, a paddle, a bucket, and cloth on a post.
+Walk south of the clearing to the Lark Post — a thin post, three slats, and a stump. The slats tap when the air moves.
 
 ## Project
 
@@ -68,6 +69,7 @@ Walk west of the clearing, toward the stream, to the Wash Rock — a flat stone,
 | `js/oak.js` | The Split Oak |
 | `js/gate.js` | The Still Gate |
 | `js/wash.js` | The Wash Rock |
+| `js/lark.js` | The Lark Post |
 | `js/weather.js` | Passing rain |
 | `js/notebook.js` | Field notes that fill in by walking |
 | `js/bend.js` | The Slow Bend |
