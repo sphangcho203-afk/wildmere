@@ -5,6 +5,7 @@ import { OAK_X, OAK_Z } from './oak.js';
 import { GATE_X, GATE_Z } from './gate.js';
 import { WASH_X, WASH_Z } from './wash.js';
 import { LARK_X, LARK_Z } from './lark.js';
+import { FERN_X, FERN_Z } from './fern.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -171,6 +172,15 @@ export const NOTES = [
     z: LARK_Z,
     mapX: 44,
     mapY: 28
+  },
+  {
+    id: 'fern',
+    name: 'The Fern Lean',
+    line: 'A trunk came down and stayed. Ferns keep the shade moving.',
+    x: FERN_X,
+    z: FERN_Z,
+    mapX: 34,
+    mapY: 36
   }
 ];
 
