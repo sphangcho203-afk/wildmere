@@ -175,12 +175,12 @@ export const NOTES = [
   },
   {
     id: 'fern',
-    name: 'The Fern Lean',
-    line: 'A trunk came down and stayed. Ferns keep the shade moving.',
+    name: 'The Fern Stair',
+    line: 'Three low steps in the moss. Ferns keep the shade moving.',
     x: FERN_X,
     z: FERN_Z,
-    mapX: 34,
-    mapY: 36
+    mapX: 76,
+    mapY: 64
   }
 ];
 
