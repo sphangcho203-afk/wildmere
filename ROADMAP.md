@@ -27,6 +27,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Split Oak, two trunks and a low bench east of the well
 - [x] The Still Gate, two posts and a fallen lintel north of the bend
 - [x] The Wash Rock, a flat stream stone with a paddle, bucket, and drying cloth
+- [x] The Lark Post, a thin post and three slats south of the clearing
 
 ## Next
 
@@ -39,6 +40,10 @@ East of the Quiet Well a tree opened into two trunks and kept growing. A moss pa
 ## Note (2026-09-06)
 
 Restored the phone-first play loop after game.js had been cut down. Wired The Still Gate that was already on disk. West of the clearing, on the stream bank, The Wash Rock is a flat stone with a paddle, a small bucket, and two cloths on a post. The cloths move in the air. Compass, first-visit line, and notebook all write it. Trees stay off the stone. Phone walk / look pads unchanged. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
+
+## Note (2026-09-07)
+
+Restored the full phone-first play loop again after game.js had been reduced to imports. South of the clearing, The Lark Post is a thin weathered post, three hanging slats, and a stump. The slats move in the air. Compass, first-visit line, and notebook all write it. Trees stay off the moss pad. Still Gate and Wash Rock stay wired. Phone walk / look pads unchanged. No pointer lock.
 
 ## Later
 
