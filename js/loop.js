@@ -21,6 +21,7 @@ import {
 import { atSlowBend, placeSlowBend } from './bend.js';
 import { loadNotes, saveNotes, noteForPlace, renderNotebook } from './notebook.js';
 import { makePassingRain, stepRain, rainWanted } from './weather.js';
+import { bootTick } from './boot-tick.js';
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
@@ -161,3 +162,10 @@ const fernStair = makeFernStair(scene);
 const slowBend = placeSlowBend(scene);
 let foundBend = false;
 renderNotebook(foundNotes);
+
+bootTick({
+  scene, camera, renderer, hero, birds, rain,
+  fernStair, larkPost, skyU, sun, dir, hemi,
+  WATER_Y, foundNotes,
+  getPlaying: () => playing
+});
