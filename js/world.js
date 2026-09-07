@@ -71,5 +71,5 @@ export { makeSplitOak, atSplitOak } from './oak.js';
 export { makeStillGate, atStillGate } from './gate.js';
 export { makeWashRock, atWashRock } from './wash.js';
 export { makeLarkPost, atLarkPost } from './lark.js';
-export { makeFernLean, atFernLean } from './fern.js';
+export { makeFernStair, atFernStair } from './fern.js';
 export { addDistantRidges } from './ridges.js';
