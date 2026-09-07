@@ -28,22 +28,15 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Still Gate, two posts and a fallen lintel north of the bend
 - [x] The Wash Rock, a flat stream stone with a paddle, bucket, and drying cloth
 - [x] The Lark Post, a thin post and three slats south of the clearing
+- [x] The Fern Stair, three low moss steps and moving fronds northeast of the clearing
 
 ## Next
 
 - [ ] GitHub Pages live play URL
 
-## Note (2026-09-05)
+## Note (2026-09-08)
 
-East of the Quiet Well a tree opened into two trunks and kept growing. A moss pad and a low bench sit under it. The compass names it The Split Oak. First visit only says that the trunk opened years ago and kept growing. Leaves move a little in the air.
-
-## Note (2026-09-06)
-
-Restored the phone-first play loop after game.js had been cut down. Wired The Still Gate that was already on disk. West of the clearing, on the stream bank, The Wash Rock is a flat stone with a paddle, a small bucket, and two cloths on a post. The cloths move in the air. Compass, first-visit line, and notebook all write it. Trees stay off the stone. Phone walk / look pads unchanged. Pages is still owner-only — Settings → Pages → Deploy from a branch → main / (root).
-
-## Note (2026-09-07)
-
-Restored the full phone-first play loop again after game.js had been reduced to imports. South of the clearing, The Lark Post is a thin weathered post, three hanging slats, and a stump. The slats move in the air. Compass, first-visit line, and notebook all write it. Trees stay off the moss pad. Still Gate and Wash Rock stay wired. Phone walk / look pads unchanged. No pointer lock.
+Northeast of the clearing, The Fern Stair is three low stone steps in moss with ferns that move in the air. Compass, first-visit line, and notebook all write it. Trees stay off the pad. The Still Gate is moved north of the Slow Bend so it no longer sits on the Shade Pool. Phone walk / look pads unchanged. No pointer lock.
 
 ## Later
 

@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import { heightAt } from './world.js';
 
-export const GATE_X = 24;
-export const GATE_Z = 56;
+export const GATE_X = 8;
+export const GATE_Z = 72;
 
 export function atStillGate(x, z){
   return Math.hypot(x - GATE_X, z - GATE_Z) < 5.6;
