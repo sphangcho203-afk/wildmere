@@ -6,6 +6,7 @@ import { GATE_X, GATE_Z } from './gate.js';
 import { WASH_X, WASH_Z } from './wash.js';
 import { LARK_X, LARK_Z } from './lark.js';
 import { FERN_X, FERN_Z } from './fern.js';
+import { BELL_X, BELL_Z } from './bell.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -181,6 +182,15 @@ export const NOTES = [
     z: FERN_Z,
     mapX: 76,
     mapY: 64
+  },
+  {
+    id: 'bell',
+    name: 'The Evening Bell',
+    line: 'Two posts and a small bronze. The air moves it just enough.',
+    x: BELL_X,
+    z: BELL_Z,
+    mapX: 34,
+    mapY: 36
   }
 ];
 
