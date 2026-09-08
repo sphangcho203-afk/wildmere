@@ -16,6 +16,7 @@ import {
   makeWashRock, atWashRock,
   makeLarkPost, atLarkPost,
   makeFernStair, atFernStair,
+  makeEveningBell, atEveningBell,
   addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
 import { atSlowBend, placeSlowBend } from './bend.js';
@@ -36,19 +37,6 @@ scene.fog = new THREE.FogExp2(0x9bb3c0, 0.0055);
 const camera = new THREE.PerspectiveCamera(62, innerWidth / innerHeight, 0.12, 1100);
 const blocker = document.getElementById('blocker');
 let playing = false;
-let foundRing = false;
-let foundMoss = false;
-let foundWell = false;
-let foundPine = false;
-let foundHollow = false;
-let foundStep = false;
-let foundCairn = false;
-let foundPool = false;
-let foundOak = false;
-let foundGate = false;
-let foundWash = false;
-let foundLark = false;
-let foundFern = false;
 const foundNotes = loadNotes();
 let notebookOpen = false;
 function enterValley(e){
@@ -105,7 +93,6 @@ addDistantRidges(scene);
 addGrassTufts(scene);
 const birds = addValleyBirds(scene);
 const rain = makePassingRain(scene);
-let raining = false;
 
 const interactives = [];
 const fires = [];
@@ -125,7 +112,7 @@ for (let a = 0; a < 10; a++){
 for (let i = 0; i < 1200 && interactives.filter(t => t.type === 'tree').length < 110; i++){
   const x = (Math.random() - 0.5) * 380, z = (Math.random() - 0.5) * 380;
   const y = heightAt(x, z);
-  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7 || Math.hypot(x + 36, z - 42) < 7 || Math.hypot(x + 0.75, z + 22) < 8 || Math.hypot(x + 52, z - 16) < 8 || Math.hypot(x - 24, z - 56) < 8 || Math.hypot(x + 22, z - 28) < 7 || Math.hypot(x + 8, z + 48) < 7 || Math.hypot(x - 52, z - 38) < 7) continue;
+  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7 || Math.hypot(x + 36, z - 42) < 7 || Math.hypot(x + 0.75, z + 22) < 8 || Math.hypot(x + 52, z - 16) < 8 || Math.hypot(x - 24, z - 56) < 8 || Math.hypot(x + 22, z - 28) < 7 || Math.hypot(x + 8, z + 48) < 7 || Math.hypot(x - 52, z - 38) < 7 || Math.hypot(x + 28, z + 44) < 7) continue;
   addThing(makeTree(0.8 + Math.random() * 0.5, treeKindAt(x, z)), 'tree', x, y, z, 3);
 }
 for (let i = 0; i < 16; i++){
@@ -159,13 +146,19 @@ const stillGate = makeStillGate(scene);
 const washRock = makeWashRock(scene);
 const larkPost = makeLarkPost(scene);
 const fernStair = makeFernStair(scene);
+const eveningBell = makeEveningBell(scene);
 const slowBend = placeSlowBend(scene);
-let foundBend = false;
 renderNotebook(foundNotes);
+
+const player = { wood: 0, food: 0, stone: 0, fish: 0, health: 100, hunger: 100, thirst: 100, warmth: 74 };
 
 bootTick({
   scene, camera, renderer, hero, birds, rain,
-  fernStair, larkPost, skyU, sun, dir, hemi,
-  WATER_Y, foundNotes,
-  getPlaying: () => playing
+  fernStair, larkPost, eveningBell, washRock, windHollow,
+  skyU, sun, dir, hemi,
+  WATER_Y, foundNotes, interactives, fires, plots, player,
+  atQuietWell, atShadePool, atSlowBend, atEveningBell,
+  getPlaying: () => playing,
+  setNotebookOpen: (v) => { notebookOpen = v; },
+  getNotebookOpen: () => notebookOpen
 });
