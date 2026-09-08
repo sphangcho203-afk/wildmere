@@ -29,6 +29,8 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Wash Rock, a flat stream stone with a paddle, bucket, and drying cloth
 - [x] The Lark Post, a thin post and three slats south of the clearing
 - [x] The Fern Stair, three low moss steps and moving fronds northeast of the clearing
+- [x] The Evening Bell, two posts and a small bronze southwest toward High Spine
+- [x] Walk / idle on the person (hair stays on)
 
 ## Next
 
@@ -36,7 +38,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 
 ## Note (2026-09-08)
 
-Northeast of the clearing, The Fern Stair is three low stone steps in moss with ferns that move in the air. Compass, first-visit line, and notebook all write it. Trees stay off the pad. Phone walk / look pads unchanged. No pointer lock. Play loop lives in js/loop.js so the valley keeps a full walk / look / gather / farm / fish day instead of a stub.
+Southwest of the clearing, on the way toward High Spine, The Evening Bell is two weathered posts, a small bronze that moves in the air, and a low bench in the moss. Compass, first-visit line, and notebook all write it. Trees stay off the pad. Gather / plant / fish / rest / notebook buttons are wired again on the phone layer. Walk and idle show on the person. No pointer lock.
 
 ## Later
 

@@ -39,7 +39,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - A carved stream (Reedford Crossing), the Slow Bend, and a starting meadow (The Clearing)
 - High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
 - Thicker timber (The Quiet Pines)
-- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, and the Fern Stair — quiet named places
+- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, and the Evening Bell — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
@@ -58,6 +58,7 @@ Walk a little north of the Slow Bend to the Still Gate — two posts and a falle
 Walk west of the clearing, toward the stream, to the Wash Rock — a flat stone, a paddle, a bucket, and cloth on a post.
 Walk south of the clearing to the Lark Post — a thin post, three slats, and a stump. The slats tap when the air moves.
 Walk northeast of the clearing to the Fern Stair — three low moss steps and fronds that move in the air.
+Walk southwest of the clearing toward High Spine to the Evening Bell — two posts, a small bronze, and a bench in the moss.
 
 ## Project
 
@@ -67,8 +68,10 @@ Walk northeast of the clearing to the Fern Stair — three low moss steps and fr
 | `js/game.js` | Entry |
 | `js/loop.js` | Valley spawn, landmarks, enterValley |
 | `js/tick.js` | Walk / look / sky / rain tick |
+| `js/boot-tick.js` | Phone pads, gather, farm, fish, rest |
 | `js/world.js` | Ground, trees, places, birds, ridges |
 | `js/fern.js` | The Fern Stair |
+| `js/bell.js` | The Evening Bell |
 | `js/shade.js` | The Shade Pool |
 | `js/oak.js` | The Split Oak |
 | `js/gate.js` | The Still Gate |
