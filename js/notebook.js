@@ -7,6 +7,7 @@ import { WASH_X, WASH_Z } from './wash.js';
 import { LARK_X, LARK_Z } from './lark.js';
 import { FERN_X, FERN_Z } from './fern.js';
 import { BELL_X, BELL_Z } from './bell.js';
+import { ROWAN_X, ROWAN_Z } from './rowan.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -191,6 +192,15 @@ export const NOTES = [
     z: BELL_Z,
     mapX: 34,
     mapY: 36
+  },
+  {
+    id: 'rowan',
+    name: 'The Rowan Lean',
+    line: 'A thin tree tips toward a stone seat. Red clusters hang in the leaves.',
+    x: ROWAN_X,
+    z: ROWAN_Z,
+    mapX: 66,
+    mapY: 52
   }
 ];
 

@@ -31,10 +31,15 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Fern Stair, three low moss steps and moving fronds northeast of the clearing
 - [x] The Evening Bell, two posts and a small bronze southwest toward High Spine
 - [x] Walk / idle on the person (hair stays on)
+- [x] The Rowan Lean, a tipped tree and stone seat east of the clearing
 
 ## Next
 
 - [ ] GitHub Pages live play URL
+
+## Note (2026-09-09)
+
+East of the clearing, The Rowan Lean is a thin tree that tips toward a pale stone seat. Red clusters hang in the leaves. Compass, first-visit line, and notebook all write it. Stand there and press E for a few tart berries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-08)
 

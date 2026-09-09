@@ -25,7 +25,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 | Click | Enter the valley |
 | WASD | Walk |
 | Mouse / right pad | Look |
-| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend |
+| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries |
 | Tab or Q | Cycle build piece |
 | F | Place selected piece (post, fire, cabin, soil bed) |
 | G | Plant a crop in a soil bed (needs 1 berry) |
@@ -39,7 +39,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - A carved stream (Reedford Crossing), the Slow Bend, and a starting meadow (The Clearing)
 - High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
 - Thicker timber (The Quiet Pines)
-- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, and the Evening Bell — quiet named places
+- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, the Evening Bell, and the Rowan Lean — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
@@ -59,6 +59,7 @@ Walk west of the clearing, toward the stream, to the Wash Rock — a flat stone,
 Walk south of the clearing to the Lark Post — a thin post, three slats, and a stump. The slats tap when the air moves.
 Walk northeast of the clearing to the Fern Stair — three low moss steps and fronds that move in the air.
 Walk southwest of the clearing toward High Spine to the Evening Bell — two posts, a small bronze, and a bench in the moss.
+Walk a short way east of the clearing to the Rowan Lean — a thin tree that tips toward a stone seat. Red clusters hang. Press E for a few berries.
 
 ## Project
 
@@ -72,6 +73,7 @@ Walk southwest of the clearing toward High Spine to the Evening Bell — two pos
 | `js/world.js` | Ground, trees, places, birds, ridges |
 | `js/fern.js` | The Fern Stair |
 | `js/bell.js` | The Evening Bell |
+| `js/rowan.js` | The Rowan Lean |
 | `js/shade.js` | The Shade Pool |
 | `js/oak.js` | The Split Oak |
 | `js/gate.js` | The Still Gate |
