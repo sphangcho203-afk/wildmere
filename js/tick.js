@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -87,10 +87,15 @@ export function startTick(ctx){
         ctx.foundBell = true;
         ctx.toast('The Evening Bell. Two posts, a small bronze, a bench in the moss.');
       }
+      if (atRowanLean && !ctx.foundRowan && atRowanLean(hero.position.x, hero.position.z)){
+        ctx.foundRowan = true;
+        ctx.toast('The Rowan Lean. A thin tree tips toward a stone seat. Red clusters hang.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
       else if (atLarkPost(hero.position.x, hero.position.z)) hereName = 'The Lark Post';
+      else if (atRowanLean && atRowanLean(hero.position.x, hero.position.z)) hereName = 'The Rowan Lean';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -125,6 +130,13 @@ export function startTick(ctx){
     if (windHollow && windHollow.ribbon){
       const wr = ctx.raining ? 1.6 : 1;
       windHollow.ribbon.rotation.y = Math.sin(clock.elapsedTime * 2.1 * wr) * 0.35 * wr;
+    }
+    if (rowanLean && rowanLean.clusters){
+      const wr = ctx.raining ? 1.3 : 1;
+      for (let i = 0; i < rowanLean.clusters.length; i++){
+        const c = rowanLean.clusters[i];
+        c.position.y += Math.sin(clock.elapsedTime * 1.6 * wr + i) * 0.0008 * wr;
+      }
     }
     stepBirds(birds, clock.elapsedTime);
     stepRain(rain, camera, dt, ctx.raining);

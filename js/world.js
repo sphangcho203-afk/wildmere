@@ -73,4 +73,5 @@ export { makeWashRock, atWashRock } from './wash.js';
 export { makeLarkPost, atLarkPost } from './lark.js';
 export { makeFernStair, atFernStair } from './fern.js';
 export { makeEveningBell, atEveningBell } from './bell.js';
+export { makeRowanLean, atRowanLean } from './rowan.js';
 export { addDistantRidges } from './ridges.js';

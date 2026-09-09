@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
-import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, riverDist } from './world.js';
+import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -40,6 +40,7 @@ export function bootTick(parts){
     atFernStair,
     atLarkPost,
     atEveningBell,
+    atRowanLean,
     currentPlace,
     stepBirds,
     stepRain,
@@ -52,6 +53,7 @@ export function bootTick(parts){
     raining: false,
     foundFern: false,
     foundBell: false,
+    foundRowan: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -179,6 +181,12 @@ export function bootTick(parts){
     }
     if (atEveningBell(hero.position.x, hero.position.z)){
       ctx.toast('The bronze is warm from the last sun.');
+      return;
+    }
+    if (atRowanLean(hero.position.x, hero.position.z)){
+      player.food = Math.min(player.food + 1, 24);
+      ctx.toast('A few rowan berries. Tart, but they keep.');
+      hud();
       return;
     }
     if (parts.atSlowBend && parts.atSlowBend(hero.position.x, hero.position.z)){
