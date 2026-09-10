@@ -18,6 +18,7 @@ import {
   makeFernStair, atFernStair,
   makeEveningBell, atEveningBell,
   makeRowanLean, atRowanLean,
+  makeWillowDip, atWillowDip,
   addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
 import { atSlowBend, placeSlowBend } from './bend.js';
@@ -113,7 +114,7 @@ for (let a = 0; a < 10; a++){
 for (let i = 0; i < 1200 && interactives.filter(t => t.type === 'tree').length < 110; i++){
   const x = (Math.random() - 0.5) * 380, z = (Math.random() - 0.5) * 380;
   const y = heightAt(x, z);
-  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7 || Math.hypot(x + 36, z - 42) < 7 || Math.hypot(x + 0.75, z + 22) < 8 || Math.hypot(x + 52, z - 16) < 8 || Math.hypot(x - 24, z - 56) < 8 || Math.hypot(x + 22, z - 28) < 7 || Math.hypot(x + 8, z + 48) < 7 || Math.hypot(x - 52, z - 38) < 7 || Math.hypot(x + 28, z + 44) < 7 || Math.hypot(x - 38, z - 22) < 7) continue;
+  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7 || Math.hypot(x + 36, z - 42) < 7 || Math.hypot(x + 0.75, z + 22) < 8 || Math.hypot(x + 52, z - 16) < 8 || Math.hypot(x - 24, z - 56) < 8 || Math.hypot(x + 22, z - 28) < 7 || Math.hypot(x + 8, z + 48) < 7 || Math.hypot(x - 52, z - 38) < 7 || Math.hypot(x + 28, z + 44) < 7 || Math.hypot(x - 38, z - 22) < 7 || Math.hypot(x - 24, z + 32) < 8) continue;
   addThing(makeTree(0.8 + Math.random() * 0.5, treeKindAt(x, z)), 'tree', x, y, z, 3);
 }
 for (let i = 0; i < 16; i++){
@@ -149,6 +150,7 @@ const larkPost = makeLarkPost(scene);
 const fernStair = makeFernStair(scene);
 const eveningBell = makeEveningBell(scene);
 const rowanLean = makeRowanLean(scene);
+const willowDip = makeWillowDip(scene);
 const slowBend = placeSlowBend(scene);
 renderNotebook(foundNotes);
 
@@ -156,10 +158,10 @@ const player = { wood: 0, food: 0, stone: 0, fish: 0, health: 100, hunger: 100, 
 
 bootTick({
   scene, camera, renderer, hero, birds, rain,
-  fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean,
+  fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip,
   skyU, sun, dir, hemi,
   WATER_Y, foundNotes, interactives, fires, plots, player,
-  atQuietWell, atShadePool, atSlowBend, atEveningBell, atRowanLean,
+  atQuietWell, atShadePool, atSlowBend, atEveningBell, atRowanLean, atWillowDip,
   getPlaying: () => playing,
   setNotebookOpen: (v) => { notebookOpen = v; },
   getNotebookOpen: () => notebookOpen
