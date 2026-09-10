@@ -8,6 +8,7 @@ import { LARK_X, LARK_Z } from './lark.js';
 import { FERN_X, FERN_Z } from './fern.js';
 import { BELL_X, BELL_Z } from './bell.js';
 import { ROWAN_X, ROWAN_Z } from './rowan.js';
+import { WILLOW_X, WILLOW_Z } from './willow.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -201,6 +202,15 @@ export const NOTES = [
     z: ROWAN_Z,
     mapX: 66,
     mapY: 52
+  },
+  {
+    id: 'willow',
+    name: 'The Willow Dip',
+    line: 'Long strands hang over a small pool at the roots. The air keeps them moving.',
+    x: WILLOW_X,
+    z: WILLOW_Z,
+    mapX: 60,
+    mapY: 36
   }
 ];
 
