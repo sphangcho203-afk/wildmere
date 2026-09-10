@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -91,11 +91,16 @@ export function startTick(ctx){
         ctx.foundRowan = true;
         ctx.toast('The Rowan Lean. A thin tree tips toward a stone seat. Red clusters hang.');
       }
+      if (atWillowDip && !ctx.foundWillow && atWillowDip(hero.position.x, hero.position.z)){
+        ctx.foundWillow = true;
+        ctx.toast('The Willow Dip. Long strands hang over a small pool at the roots.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
       else if (atLarkPost(hero.position.x, hero.position.z)) hereName = 'The Lark Post';
       else if (atRowanLean && atRowanLean(hero.position.x, hero.position.z)) hereName = 'The Rowan Lean';
+      else if (atWillowDip && atWillowDip(hero.position.x, hero.position.z)) hereName = 'The Willow Dip';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -136,6 +141,13 @@ export function startTick(ctx){
       for (let i = 0; i < rowanLean.clusters.length; i++){
         const c = rowanLean.clusters[i];
         c.position.y += Math.sin(clock.elapsedTime * 1.6 * wr + i) * 0.0008 * wr;
+      }
+    }
+    if (willowDip && willowDip.strands){
+      const wr = ctx.raining ? 1.6 : 1;
+      for (let i = 0; i < willowDip.strands.length; i++){
+        willowDip.strands[i].rotation.z = Math.sin(clock.elapsedTime * 1.7 * wr + i * 0.4) * 0.16 * wr;
+        willowDip.strands[i].rotation.x = Math.sin(clock.elapsedTime * 1.1 * wr + i * 0.2) * 0.05 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);
