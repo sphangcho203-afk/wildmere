@@ -32,10 +32,15 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Evening Bell, two posts and a small bronze southwest toward High Spine
 - [x] Walk / idle on the person (hair stays on)
 - [x] The Rowan Lean, a tipped tree and stone seat east of the clearing
+- [x] The Willow Dip, hanging strands and a root pool southeast of the clearing
 
 ## Next
 
 - [ ] GitHub Pages live play URL
+
+## Note (2026-09-10)
+
+Southeast of the clearing, The Willow Dip is a leaning willow, long strands that move in the air, a small pool at the roots, and a low stone seat. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-09)
 
