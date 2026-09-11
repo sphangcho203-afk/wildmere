@@ -75,4 +75,5 @@ export { makeFernStair, atFernStair } from './fern.js';
 export { makeEveningBell, atEveningBell } from './bell.js';
 export { makeRowanLean, atRowanLean } from './rowan.js';
 export { makeWillowDip, atWillowDip } from './willow.js';
+export { makeHoneyStone, atHoneyStone } from './honey.js';
 export { addDistantRidges } from './ridges.js';
