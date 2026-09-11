@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -95,12 +95,17 @@ export function startTick(ctx){
         ctx.foundWillow = true;
         ctx.toast('The Willow Dip. Long strands hang over a small pool at the roots.');
       }
+      if (atHoneyStone && !ctx.foundHoney && atHoneyStone(hero.position.x, hero.position.z)){
+        ctx.foundHoney = true;
+        ctx.toast('The Honey Stone. A warm slab, a wooden bowl, gold drops on a post.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
       else if (atLarkPost(hero.position.x, hero.position.z)) hereName = 'The Lark Post';
       else if (atRowanLean && atRowanLean(hero.position.x, hero.position.z)) hereName = 'The Rowan Lean';
       else if (atWillowDip && atWillowDip(hero.position.x, hero.position.z)) hereName = 'The Willow Dip';
+      else if (atHoneyStone && atHoneyStone(hero.position.x, hero.position.z)) hereName = 'The Honey Stone';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -148,6 +153,24 @@ export function startTick(ctx){
       for (let i = 0; i < willowDip.strands.length; i++){
         willowDip.strands[i].rotation.z = Math.sin(clock.elapsedTime * 1.7 * wr + i * 0.4) * 0.16 * wr;
         willowDip.strands[i].rotation.x = Math.sin(clock.elapsedTime * 1.1 * wr + i * 0.2) * 0.05 * wr;
+      }
+    }
+    if (honeyStone && honeyStone.flecks){
+      const wr = ctx.raining ? 0.6 : 1;
+      const hx = honeyStone.x, hz = honeyStone.z, hy = honeyStone.y || 0;
+      for (let i = 0; i < honeyStone.flecks.length; i++){
+        const f = honeyStone.flecks[i];
+        const a = clock.elapsedTime * 1.35 * wr + f.userData.phase;
+        f.position.set(
+          hx + Math.cos(a) * f.userData.radius,
+          hy + f.userData.lift + Math.sin(a * 1.7) * 0.08,
+          hz + Math.sin(a) * f.userData.radius
+        );
+      }
+    }
+    if (honeyStone && honeyStone.drops){
+      for (let i = 0; i < honeyStone.drops.length; i++){
+        honeyStone.drops[i].position.y += Math.sin(clock.elapsedTime * 2.2 + i) * 0.0006;
       }
     }
     stepBirds(birds, clock.elapsedTime);

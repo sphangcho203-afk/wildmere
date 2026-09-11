@@ -19,6 +19,7 @@ import {
   makeEveningBell, atEveningBell,
   makeRowanLean, atRowanLean,
   makeWillowDip, atWillowDip,
+  makeHoneyStone, atHoneyStone,
   addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
 import { atSlowBend, placeSlowBend } from './bend.js';
@@ -151,6 +152,7 @@ const fernStair = makeFernStair(scene);
 const eveningBell = makeEveningBell(scene);
 const rowanLean = makeRowanLean(scene);
 const willowDip = makeWillowDip(scene);
+const honeyStone = makeHoneyStone(scene);
 const slowBend = placeSlowBend(scene);
 renderNotebook(foundNotes);
 
@@ -158,10 +160,10 @@ const player = { wood: 0, food: 0, stone: 0, fish: 0, health: 100, hunger: 100, 
 
 bootTick({
   scene, camera, renderer, hero, birds, rain,
-  fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip,
+  fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone,
   skyU, sun, dir, hemi,
   WATER_Y, foundNotes, interactives, fires, plots, player,
-  atQuietWell, atShadePool, atSlowBend, atEveningBell, atRowanLean, atWillowDip,
+  atQuietWell, atShadePool, atSlowBend, atEveningBell, atRowanLean, atWillowDip, atHoneyStone,
   getPlaying: () => playing,
   setNotebookOpen: (v) => { notebookOpen = v; },
   getNotebookOpen: () => notebookOpen
