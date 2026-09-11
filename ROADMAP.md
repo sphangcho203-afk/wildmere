@@ -33,10 +33,15 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Walk / idle on the person (hair stays on)
 - [x] The Rowan Lean, a tipped tree and stone seat east of the clearing
 - [x] The Willow Dip, hanging strands and a root pool southeast of the clearing
+- [x] The Honey Stone, a warm slab and wooden bowl west of the clearing
 
 ## Next
 
 - [ ] GitHub Pages live play URL
+
+## Note (2026-09-11)
+
+West of the clearing, The Honey Stone is a sun-warmed slab, a small wooden bowl of amber, gold drops on a thin post, and a few flecks that drift in the air. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-10)
 

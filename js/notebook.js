@@ -9,6 +9,7 @@ import { FERN_X, FERN_Z } from './fern.js';
 import { BELL_X, BELL_Z } from './bell.js';
 import { ROWAN_X, ROWAN_Z } from './rowan.js';
 import { WILLOW_X, WILLOW_Z } from './willow.js';
+import { HONEY_X, HONEY_Z } from './honey.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -211,6 +212,15 @@ export const NOTES = [
     z: WILLOW_Z,
     mapX: 60,
     mapY: 36
+  },
+  {
+    id: 'honey',
+    name: 'The Honey Stone',
+    line: 'A warm slab and a wooden bowl. Gold drops hang from a thin post.',
+    x: HONEY_X,
+    z: HONEY_Z,
+    mapX: 34,
+    mapY: 64
   }
 ];
 
