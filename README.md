@@ -25,7 +25,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 | Click | Enter the valley |
 | WASD | Walk |
 | Mouse / right pad | Look |
-| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries · sip the willow pool · sip the honey bowl |
+| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries · sip the willow pool · sip the honey bowl · pick thistle seeds |
 | Tab or Q | Cycle build piece |
 | F | Place selected piece (post, fire, cabin, soil bed) |
 | G | Plant a crop in a soil bed (needs 1 berry) |
@@ -39,7 +39,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - A carved stream (Reedford Crossing), the Slow Bend, and a starting meadow (The Clearing)
 - High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
 - Thicker timber (The Quiet Pines)
-- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, the Evening Bell, the Rowan Lean, the Willow Dip, and the Honey Stone — quiet named places
+- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, the Evening Bell, the Rowan Lean, the Willow Dip, the Honey Stone, and the Thistle Seat — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
@@ -62,6 +62,7 @@ Walk southwest of the clearing toward High Spine to the Evening Bell — two pos
 Walk a short way east of the clearing to the Rowan Lean — a thin tree that tips toward a stone seat. Red clusters hang. Press E for a few berries.
 Walk southeast of the clearing to the Willow Dip — a leaning willow, hanging strands, and a small pool at the roots. Press E for a sip.
 Walk west-northwest of the clearing to the Honey Stone — a warm slab, a wooden bowl, gold drops on a post. Press E for a sip.
+Walk north-northeast of the clearing to the Thistle Seat — a low bench in the moss and purple heads that nod. Press E for a few seeds.
 
 ## Project
 
@@ -78,6 +79,7 @@ Walk west-northwest of the clearing to the Honey Stone — a warm slab, a wooden
 | `js/rowan.js` | The Rowan Lean |
 | `js/willow.js` | The Willow Dip |
 | `js/honey.js` | The Honey Stone |
+| `js/thistle.js` | The Thistle Seat |
 | `js/shade.js` | The Shade Pool |
 | `js/oak.js` | The Split Oak |
 | `js/gate.js` | The Still Gate |
