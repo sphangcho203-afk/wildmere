@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -99,6 +99,10 @@ export function startTick(ctx){
         ctx.foundHoney = true;
         ctx.toast('The Honey Stone. A warm slab, a wooden bowl, gold drops on a post.');
       }
+      if (atThistleSeat && !ctx.foundThistle && atThistleSeat(hero.position.x, hero.position.z)){
+        ctx.foundThistle = true;
+        ctx.toast('The Thistle Seat. A low bench in the moss. Purple heads nod in the air.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -106,6 +110,7 @@ export function startTick(ctx){
       else if (atRowanLean && atRowanLean(hero.position.x, hero.position.z)) hereName = 'The Rowan Lean';
       else if (atWillowDip && atWillowDip(hero.position.x, hero.position.z)) hereName = 'The Willow Dip';
       else if (atHoneyStone && atHoneyStone(hero.position.x, hero.position.z)) hereName = 'The Honey Stone';
+      else if (atThistleSeat && atThistleSeat(hero.position.x, hero.position.z)) hereName = 'The Thistle Seat';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -171,6 +176,14 @@ export function startTick(ctx){
     if (honeyStone && honeyStone.drops){
       for (let i = 0; i < honeyStone.drops.length; i++){
         honeyStone.drops[i].position.y += Math.sin(clock.elapsedTime * 2.2 + i) * 0.0006;
+      }
+    }
+    if (thistleSeat && thistleSeat.heads){
+      const wr = ctx.raining ? 1.5 : 1;
+      for (let i = 0; i < thistleSeat.heads.length; i++){
+        const h = thistleSeat.heads[i];
+        h.position.y = h.userData.baseY + Math.sin(clock.elapsedTime * 1.8 * wr + h.userData.phase) * 0.025 * wr;
+        h.rotation.z = Math.sin(clock.elapsedTime * 1.4 * wr + i) * 0.12 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);
