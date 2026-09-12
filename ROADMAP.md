@@ -34,6 +34,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Rowan Lean, a tipped tree and stone seat east of the clearing
 - [x] The Willow Dip, hanging strands and a root pool southeast of the clearing
 - [x] The Honey Stone, a warm slab and wooden bowl west of the clearing
+- [x] The Thistle Seat, a moss bench and nodding heads north-northeast of the clearing
+
+## Note (2026-09-12)
+
+North-northeast of the clearing, The Thistle Seat is a low wooden bench in the moss, purple heads that nod in the air, and a fallen stem. Compass, first-visit line, and notebook all write it. Stand there and press E for a few dry seeds. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Next
 
