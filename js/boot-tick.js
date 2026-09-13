@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
-import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, riverDist } from './world.js';
+import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -44,6 +44,7 @@ export function bootTick(parts){
     atWillowDip,
     atHoneyStone,
     atThistleSeat,
+    atCloverPad,
     currentPlace,
     stepBirds,
     stepRain,
@@ -60,6 +61,7 @@ export function bootTick(parts){
     foundWillow: false,
     foundHoney: false,
     foundThistle: false,
+    foundClover: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -211,6 +213,12 @@ export function bootTick(parts){
     if (atThistleSeat(hero.position.x, hero.position.z)){
       player.food = Math.min(player.food + 1, 24);
       ctx.toast('A dry thistle head. A few seeds in the palm.');
+      hud();
+      return;
+    }
+    if (atCloverPad(hero.position.x, hero.position.z)){
+      player.thirst = Math.min(100, player.thirst + 18);
+      ctx.toast('Rainwater in the tin cup. Cool and a little grassy.');
       hud();
       return;
     }
