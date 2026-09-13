@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -103,6 +103,10 @@ export function startTick(ctx){
         ctx.foundThistle = true;
         ctx.toast('The Thistle Seat. A low bench in the moss. Purple heads nod in the air.');
       }
+      if (atCloverPad && !ctx.foundClover && atCloverPad(hero.position.x, hero.position.z)){
+        ctx.foundClover = true;
+        ctx.toast('The Clover Pad. A round of moss, a low stool, rainwater in a tin cup.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -111,6 +115,7 @@ export function startTick(ctx){
       else if (atWillowDip && atWillowDip(hero.position.x, hero.position.z)) hereName = 'The Willow Dip';
       else if (atHoneyStone && atHoneyStone(hero.position.x, hero.position.z)) hereName = 'The Honey Stone';
       else if (atThistleSeat && atThistleSeat(hero.position.x, hero.position.z)) hereName = 'The Thistle Seat';
+      else if (atCloverPad && atCloverPad(hero.position.x, hero.position.z)) hereName = 'The Clover Pad';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -184,6 +189,14 @@ export function startTick(ctx){
         const h = thistleSeat.heads[i];
         h.position.y = h.userData.baseY + Math.sin(clock.elapsedTime * 1.8 * wr + h.userData.phase) * 0.025 * wr;
         h.rotation.z = Math.sin(clock.elapsedTime * 1.4 * wr + i) * 0.12 * wr;
+      }
+    }
+    if (cloverPad && cloverPad.leaves){
+      const wr = ctx.raining ? 1.4 : 1;
+      for (let i = 0; i < cloverPad.leaves.length; i++){
+        const leaf = cloverPad.leaves[i];
+        leaf.rotation.z = Math.sin(clock.elapsedTime * 1.3 * wr + leaf.userData.phase) * 0.08 * wr;
+        leaf.position.y = leaf.userData.baseY + Math.sin(clock.elapsedTime * 1.6 * wr + i) * 0.006 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);
