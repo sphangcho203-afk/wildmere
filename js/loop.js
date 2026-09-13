@@ -160,7 +160,7 @@ const cloverPad = makeCloverPad(scene);
 const slowBend = placeSlowBend(scene);
 renderNotebook(foundNotes);
 
-const player = { wood: 0, food: 0, stone: 0, fish: 0, health: 100, hunger: 100, thirst: 100, warmth: 74 };
+const player = { wood: 0, food: 0, stone: 0, fish: 0, axe: false, health: 100, hunger: 100, thirst: 100, warmth: 74 };
 
 bootTick({
   scene, camera, renderer, hero, birds, rain,

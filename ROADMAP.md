@@ -41,6 +41,10 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 
 East of the clearing, The Clover Pad is a round of moss, small leaves that lift in the air, a low wooden stool, and a tin cup of rainwater. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
+## Note (2026-09-14)
+
+Notebook now only accepts known place ids from localStorage, and the field book is drawn with DOM nodes instead of innerHTML. The HUD axe line works: 3 wood and 2 stone, stand in the open, press E. Trees then give more wood. Phone pads and no pointer lock stay as they are.
+
 ## Next
 
 - [ ] GitHub Pages live play URL
