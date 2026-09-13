@@ -53,11 +53,16 @@ bendDot();
 
 export function loadNotes(){
   const found = new Set(['clearing']);
+  const allowed = new Set(NOTES.map(n => n.id));
   try {
     const raw = localStorage.getItem(SAVE_NOTES);
     if (raw){
       const list = JSON.parse(raw);
-      if (Array.isArray(list)) list.forEach(id => found.add(id));
+      if (Array.isArray(list)){
+        for (const id of list){
+          if (typeof id === 'string' && allowed.has(id)) found.add(id);
+        }
+      }
     }
   } catch (e) {}
   return found;
@@ -77,21 +82,38 @@ export function renderNotebook(found){
   const list = document.getElementById('nb-list');
   const count = document.getElementById('nb-count');
   const dots = document.getElementById('nb-dots');
-  if (count) count.textContent = found.size + ' / ' + NOTES.length;
+  const walked = NOTES.filter(n => found.has(n.id)).length;
+  if (count) count.textContent = walked + ' / ' + NOTES.length;
   if (list){
-    list.innerHTML = NOTES.map(n => {
+    list.replaceChildren();
+    for (const n of NOTES){
       const known = found.has(n.id);
-      return '<li class="' + (known ? 'known' : 'fog') + '"><b>' +
-        (known ? n.name : '\u2014') + '</b><span>' +
-        (known ? n.line : 'Not walked yet') + '</span></li>';
-    }).join('');
+      const li = document.createElement('li');
+      li.className = known ? 'known' : 'fog';
+      const b = document.createElement('b');
+      b.textContent = known ? n.name : '\u2014';
+      const span = document.createElement('span');
+      span.textContent = known ? n.line : 'Not walked yet';
+      li.append(b, span);
+      list.append(li);
+    }
   }
   if (dots){
-    dots.innerHTML = NOTES.map(n => {
+    dots.replaceChildren();
+    const svgNS = 'http://www.w3.org/2000/svg';
+    for (const n of NOTES){
       const known = found.has(n.id);
-      return '<circle class="' + (known ? 'known' : 'fog') + '" cx="' +
-        n.mapX + '" cy="' + n.mapY + '" r="' + (known ? '3.2' : '2') +
-        '"><title>' + (known ? n.name : '') + '</title></circle>';
-    }).join('');
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('class', known ? 'known' : 'fog');
+      circle.setAttribute('cx', String(n.mapX));
+      circle.setAttribute('cy', String(n.mapY));
+      circle.setAttribute('r', known ? '3.2' : '2');
+      if (known){
+        const title = document.createElementNS(svgNS, 'title');
+        title.textContent = n.name;
+        circle.append(title);
+      }
+      dots.append(circle);
+    }
   }
 }
