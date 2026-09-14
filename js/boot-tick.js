@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
-import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, riverDist } from './world.js';
+import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -45,6 +45,7 @@ export function bootTick(parts){
     atHoneyStone,
     atThistleSeat,
     atCloverPad,
+    atDaisyRing,
     currentPlace,
     stepBirds,
     stepRain,
@@ -62,6 +63,7 @@ export function bootTick(parts){
     foundHoney: false,
     foundThistle: false,
     foundClover: false,
+    foundDaisy: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -220,6 +222,12 @@ export function bootTick(parts){
     if (atCloverPad(hero.position.x, hero.position.z)){
       player.thirst = Math.min(100, player.thirst + 18);
       ctx.toast('Rainwater in the tin cup. Cool and a little grassy.');
+      hud();
+      return;
+    }
+    if (atDaisyRing(hero.position.x, hero.position.z)){
+      player.food = Math.min(player.food + 1, 24);
+      ctx.toast('A few daisy heads. Light, and they keep.');
       hud();
       return;
     }
