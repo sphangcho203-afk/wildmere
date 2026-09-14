@@ -12,6 +12,7 @@ import { WILLOW_X, WILLOW_Z } from './willow.js';
 import { HONEY_X, HONEY_Z } from './honey.js';
 import { THISTLE_X, THISTLE_Z } from './thistle.js';
 import { CLOVER_X, CLOVER_Z } from './clover.js';
+import { DAISY_X, DAISY_Z } from './daisy.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -41,7 +42,8 @@ export const NOTES = [
   { id: 'willow', name: 'The Willow Dip', line: 'Long strands hang over a small pool at the roots. The air keeps them moving.', x: WILLOW_X, z: WILLOW_Z, mapX: 60, mapY: 36 },
   { id: 'honey', name: 'The Honey Stone', line: 'A warm slab and a wooden bowl. Gold drops hang from a thin post.', x: HONEY_X, z: HONEY_Z, mapX: 34, mapY: 64 },
   { id: 'thistle', name: 'The Thistle Seat', line: 'A low bench in the moss. Purple heads nod when the air moves.', x: THISTLE_X, z: THISTLE_Z, mapX: 58, mapY: 74 },
-  { id: 'clover', name: 'The Clover Pad', line: 'A round of moss and small leaves. A stool and a tin cup wait in the grass.', x: CLOVER_X, z: CLOVER_Z, mapX: 70, mapY: 62 }
+  { id: 'clover', name: 'The Clover Pad', line: 'A round of moss and small leaves. A stool and a tin cup wait in the grass.', x: CLOVER_X, z: CLOVER_Z, mapX: 70, mapY: 62 },
+  { id: 'daisy', name: 'The Daisy Ring', line: 'White heads in a small circle. A low bench sits in the moss.', x: DAISY_X, z: DAISY_Z, mapX: 50, mapY: 40 }
 ];
 
 function bendDot(){
