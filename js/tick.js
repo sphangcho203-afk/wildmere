@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -107,6 +107,10 @@ export function startTick(ctx){
         ctx.foundClover = true;
         ctx.toast('The Clover Pad. A round of moss, a low stool, rainwater in a tin cup.');
       }
+      if (atDaisyRing && !ctx.foundDaisy && atDaisyRing(hero.position.x, hero.position.z)){
+        ctx.foundDaisy = true;
+        ctx.toast('The Daisy Ring. White heads in a small circle. A bench in the moss.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -116,6 +120,7 @@ export function startTick(ctx){
       else if (atHoneyStone && atHoneyStone(hero.position.x, hero.position.z)) hereName = 'The Honey Stone';
       else if (atThistleSeat && atThistleSeat(hero.position.x, hero.position.z)) hereName = 'The Thistle Seat';
       else if (atCloverPad && atCloverPad(hero.position.x, hero.position.z)) hereName = 'The Clover Pad';
+      else if (atDaisyRing && atDaisyRing(hero.position.x, hero.position.z)) hereName = 'The Daisy Ring';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -197,6 +202,14 @@ export function startTick(ctx){
         const leaf = cloverPad.leaves[i];
         leaf.rotation.z = Math.sin(clock.elapsedTime * 1.3 * wr + leaf.userData.phase) * 0.08 * wr;
         leaf.position.y = leaf.userData.baseY + Math.sin(clock.elapsedTime * 1.6 * wr + i) * 0.006 * wr;
+      }
+    }
+    if (daisyRing && daisyRing.heads){
+      const wr = ctx.raining ? 1.4 : 1;
+      for (let i = 0; i < daisyRing.heads.length; i++){
+        const head = daisyRing.heads[i];
+        head.rotation.z = Math.sin(clock.elapsedTime * 1.25 * wr + head.userData.phase) * 0.1 * wr;
+        head.position.y = head.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + i) * 0.008 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);
