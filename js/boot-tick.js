@@ -96,6 +96,7 @@ export function bootTick(parts){
     const f = document.getElementById('food-n'); if (f) f.textContent = player.food;
     const s = document.getElementById('stone-n'); if (s) s.textContent = player.stone;
     const fi = document.getElementById('fish-n'); if (fi) fi.textContent = player.fish;
+    const ax = document.getElementById('axe-n'); if (ax) ax.textContent = player.axe ? 'yes' : 'no';
     const chip = document.getElementById('build-chip');
     if (chip) chip.textContent = 'Build: ' + BUILDS[buildIndex].label;
   }
@@ -233,14 +234,38 @@ export function bootTick(parts){
       player.thirst = Math.min(100, player.thirst + 28); ctx.toast('Drank from the stream'); hud(); return;
     }
     const it = nearest();
-    if (!it){ ctx.toast('Walk to a tree, bush, stone, or soil bed'); return; }
+    if (!it){
+      if (!player.axe && player.wood >= 3 && player.stone >= 2){
+        player.wood -= 3;
+        player.stone -= 2;
+        player.axe = true;
+        ctx.toast('Bound a small axe. Trees come down cleaner.');
+        hud();
+        return;
+      }
+      if (!player.axe){
+        ctx.toast('Walk to a tree, bush, or stone. An axe needs 3 wood and 2 stone.');
+        return;
+      }
+      ctx.toast('Walk to a tree, bush, stone, or soil bed');
+      return;
+    }
     if (it.type === 'tree'){
-      player.wood += 2; it.hp -= 1; it.mesh.scale.multiplyScalar(0.88);
-      if (it.hp <= 0) it.mesh.visible = false; ctx.toast('+2 wood');
+      if (player.axe){
+        player.wood += 3; it.hp -= 2; it.mesh.scale.multiplyScalar(0.72);
+        ctx.toast('+3 wood');
+      } else {
+        player.wood += 2; it.hp -= 1; it.mesh.scale.multiplyScalar(0.88);
+        ctx.toast('+2 wood');
+      }
+      if (it.hp <= 0) it.mesh.visible = false;
     } else if (it.type === 'berry'){
       player.food += 2; it.mesh.visible = false; ctx.toast('+2 berries');
     } else if (it.type === 'rock'){
       player.stone += 1; it.hp -= 1; if (it.hp <= 0) it.mesh.visible = false; ctx.toast('+1 stone');
+      if (!player.axe && player.wood >= 3 && player.stone >= 2){
+        ctx.toast('Stone in hand. Stand clear and press E to bind an axe.');
+      }
     }
     hud();
   }
