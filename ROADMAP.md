@@ -37,6 +37,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Thistle Seat, a moss bench and nodding heads north-northeast of the clearing
 - [x] The Clover Pad, a moss round, low stool, and tin cup east of the clearing
 - [x] The Daisy Ring, a circle of white heads and a low bench south of the clearing
+- [x] The Rush Nest, a fan of pale rushes and a stone dish east of the clearing
+
+## Note (2026-09-15)
+
+East-southeast of the clearing, toward the Quiet Well, The Rush Nest is a moss pad, a fan of pale rushes that lean in the air, a low wooden bench, and a small stone dish of rainwater. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-14)
 
