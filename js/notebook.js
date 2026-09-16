@@ -14,6 +14,7 @@ import { THISTLE_X, THISTLE_Z } from './thistle.js';
 import { CLOVER_X, CLOVER_Z } from './clover.js';
 import { DAISY_X, DAISY_Z } from './daisy.js';
 import { RUSH_X, RUSH_Z } from './rush.js';
+import { BIRCH_X, BIRCH_Z } from './birch.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -45,7 +46,8 @@ export const NOTES = [
   { id: 'thistle', name: 'The Thistle Seat', line: 'A low bench in the moss. Purple heads nod when the air moves.', x: THISTLE_X, z: THISTLE_Z, mapX: 58, mapY: 74 },
   { id: 'clover', name: 'The Clover Pad', line: 'A round of moss and small leaves. A stool and a tin cup wait in the grass.', x: CLOVER_X, z: CLOVER_Z, mapX: 70, mapY: 62 },
   { id: 'daisy', name: 'The Daisy Ring', line: 'White heads in a small circle. A low bench sits in the moss.', x: DAISY_X, z: DAISY_Z, mapX: 50, mapY: 40 },
-  { id: 'rush', name: 'The Rush Nest', line: 'A fan of pale rushes and a stone dish. The air moves the stems.', x: RUSH_X, z: RUSH_Z, mapX: 62, mapY: 50 }
+  { id: 'rush', name: 'The Rush Nest', line: 'A fan of pale rushes and a stone dish. The air moves the stems.', x: RUSH_X, z: RUSH_Z, mapX: 62, mapY: 50 },
+  { id: 'birch', name: 'The Birch Shelf', line: 'A pale trunk leans over a stone shelf. Thin peels lift when the air moves.', x: BIRCH_X, z: BIRCH_Z, mapX: 40, mapY: 44 }
 ];
 
 function bendDot(){
