@@ -38,6 +38,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Clover Pad, a moss round, low stool, and tin cup east of the clearing
 - [x] The Daisy Ring, a circle of white heads and a low bench south of the clearing
 - [x] The Rush Nest, a fan of pale rushes and a stone dish east of the clearing
+- [x] The Birch Shelf, a pale trunk, stone shelf, and lifting peels west-southwest of the clearing
+
+## Note (2026-09-16)
+
+West-southwest of the clearing, toward the Old Ring, The Birch Shelf is a moss pad, a pale leaning trunk, a low stone shelf, a wooden seat, and thin bark peels that lift in the air. Compass, first-visit line, and notebook all write it. Stand there and press E for a curl of bark. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-15)
 
