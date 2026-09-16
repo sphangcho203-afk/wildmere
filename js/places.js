@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { WATER_Y, heightAt, fbm, riverDist, atStoneTerrace, TERRACE_X, TERRACE_Z } from './world.js';
 import { atDaisyRing } from './daisy.js';
 import { atRushNest } from './rush.js';
+import { atBirchShelf } from './birch.js';
 
 function hash2(ix, iy){
   const SEED = 2041;
@@ -249,6 +250,7 @@ export function makeRiverWater(waterMat){
   return group;
 }
 export function currentPlace(x, z){
+  if (atBirchShelf(x, z)) return 'The Birch Shelf';
   if (atRushNest(x, z)) return 'The Rush Nest';
   if (atDaisyRing(x, z)) return 'The Daisy Ring';
   if (atStoneTerrace(x, z)) return 'The Stone Terrace';
