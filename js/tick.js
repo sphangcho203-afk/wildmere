@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -115,6 +115,10 @@ export function startTick(ctx){
         ctx.foundRush = true;
         ctx.toast('The Rush Nest. Pale rushes in a fan. A stone dish holds rain.');
       }
+      if (atBirchShelf && !ctx.foundBirch && atBirchShelf(hero.position.x, hero.position.z)){
+        ctx.foundBirch = true;
+        ctx.toast('The Birch Shelf. Pale bark, a stone shelf, peels that lift in the air.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -126,6 +130,7 @@ export function startTick(ctx){
       else if (atCloverPad && atCloverPad(hero.position.x, hero.position.z)) hereName = 'The Clover Pad';
       else if (atDaisyRing && atDaisyRing(hero.position.x, hero.position.z)) hereName = 'The Daisy Ring';
       else if (atRushNest && atRushNest(hero.position.x, hero.position.z)) hereName = 'The Rush Nest';
+      else if (atBirchShelf && atBirchShelf(hero.position.x, hero.position.z)) hereName = 'The Birch Shelf';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -222,6 +227,14 @@ export function startTick(ctx){
       for (let i = 0; i < rushNest.reeds.length; i++){
         const reed = rushNest.reeds[i];
         reed.rotation.z = Math.sin(clock.elapsedTime * 1.45 * wr + reed.userData.phase) * 0.14 * wr;
+      }
+    }
+    if (birchShelf && birchShelf.peels){
+      const wr = ctx.raining ? 1.5 : 1;
+      for (let i = 0; i < birchShelf.peels.length; i++){
+        const peel = birchShelf.peels[i];
+        peel.rotation.z = Math.sin(clock.elapsedTime * 1.55 * wr + peel.userData.phase) * 0.18 * wr;
+        peel.rotation.x = Math.sin(clock.elapsedTime * 1.1 * wr + i) * 0.06 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);
