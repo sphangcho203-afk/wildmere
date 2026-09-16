@@ -25,7 +25,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 | Click | Enter the valley |
 | WASD | Walk |
 | Mouse / right pad | Look |
-| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries · sip the willow pool · sip the honey bowl · pick thistle seeds · sip the clover cup · pick daisy heads · sip the rush dish |
+| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries · sip the willow pool · sip the honey bowl · pick thistle seeds · sip the clover cup · pick daisy heads · sip the rush dish · pick birch bark |
 | Tab or Q | Cycle build piece |
 | F | Place selected piece (post, fire, cabin, soil bed) |
 | G | Plant a crop in a soil bed (needs 1 berry) |
@@ -39,7 +39,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - A carved stream (Reedford Crossing), the Slow Bend, and a starting meadow (The Clearing)
 - High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
 - Thicker timber (The Quiet Pines)
-- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, the Evening Bell, the Rowan Lean, the Willow Dip, the Honey Stone, the Thistle Seat, the Clover Pad, the Daisy Ring, and the Rush Nest — quiet named places
+- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, the Evening Bell, the Rowan Lean, the Willow Dip, the Honey Stone, the Thistle Seat, the Clover Pad, the Daisy Ring, the Rush Nest, and the Birch Shelf — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
@@ -66,6 +66,7 @@ Walk north-northeast of the clearing to the Thistle Seat — a low bench in the 
 Walk east-northeast of the clearing to the Clover Pad — a moss round, small leaves, a low stool, and a tin cup. Press E for a sip.
 Walk south of the clearing, toward the Reed Step, to the Daisy Ring — white heads in a small circle and a low bench in the moss. Press E for a few daisy heads.
 Walk east-southeast of the clearing, toward the Quiet Well, to the Rush Nest — a fan of pale rushes, a low bench, and a stone dish. Press E for a sip.
+Walk west-southwest of the clearing, toward the Old Ring, to the Birch Shelf — a pale leaning trunk, a stone shelf, and thin peels that lift. Press E for a curl of bark.
 
 ## Project
 
@@ -86,6 +87,7 @@ Walk east-southeast of the clearing, toward the Quiet Well, to the Rush Nest —
 | `js/clover.js` | The Clover Pad |
 | `js/daisy.js` | The Daisy Ring |
 | `js/rush.js` | The Rush Nest |
+| `js/birch.js` | The Birch Shelf |
 | `js/shade.js` | The Shade Pool |
 | `js/oak.js` | The Split Oak |
 | `js/gate.js` | The Still Gate |
