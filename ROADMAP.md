@@ -39,6 +39,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Daisy Ring, a circle of white heads and a low bench south of the clearing
 - [x] The Rush Nest, a fan of pale rushes and a stone dish east of the clearing
 - [x] The Birch Shelf, a pale trunk, stone shelf, and lifting peels west-southwest of the clearing
+- [x] The Alder Nook, a dark trunk, hanging catkins, and a rain bowl north of the clearing
+
+## Note (2026-09-17)
+
+North of the clearing, toward the Slow Bend, The Alder Nook is a moss pad, a dark leaning trunk, hanging catkins that move in the air, a low wooden seat, and a small stone bowl of rain. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-16)
 

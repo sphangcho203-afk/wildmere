@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -119,6 +119,10 @@ export function startTick(ctx){
         ctx.foundBirch = true;
         ctx.toast('The Birch Shelf. Pale bark, a stone shelf, peels that lift in the air.');
       }
+      if (atAlderNook && !ctx.foundAlder && atAlderNook(hero.position.x, hero.position.z)){
+        ctx.foundAlder = true;
+        ctx.toast('The Alder Nook. A dark trunk, hanging catkins, rain in a stone bowl.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -131,6 +135,7 @@ export function startTick(ctx){
       else if (atDaisyRing && atDaisyRing(hero.position.x, hero.position.z)) hereName = 'The Daisy Ring';
       else if (atRushNest && atRushNest(hero.position.x, hero.position.z)) hereName = 'The Rush Nest';
       else if (atBirchShelf && atBirchShelf(hero.position.x, hero.position.z)) hereName = 'The Birch Shelf';
+      else if (atAlderNook && atAlderNook(hero.position.x, hero.position.z)) hereName = 'The Alder Nook';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -235,6 +240,13 @@ export function startTick(ctx){
         const peel = birchShelf.peels[i];
         peel.rotation.z = Math.sin(clock.elapsedTime * 1.55 * wr + peel.userData.phase) * 0.18 * wr;
         peel.rotation.x = Math.sin(clock.elapsedTime * 1.1 * wr + i) * 0.06 * wr;
+      }
+    }
+    if (alderNook && alderNook.catkins){
+      const wr = ctx.raining ? 1.5 : 1;
+      for (let i = 0; i < alderNook.catkins.length; i++){
+        const c = alderNook.catkins[i];
+        c.rotation.z = Math.sin(clock.elapsedTime * 1.5 * wr + c.userData.phase) * 0.16 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);
