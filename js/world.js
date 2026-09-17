@@ -81,4 +81,5 @@ export { makeCloverPad, atCloverPad } from './clover.js';
 export { makeDaisyRing, atDaisyRing } from './daisy.js';
 export { makeRushNest, atRushNest } from './rush.js';
 export { makeBirchShelf, atBirchShelf } from './birch.js';
+export { makeAlderNook, atAlderNook } from './alder.js';
 export { addDistantRidges } from './ridges.js';
