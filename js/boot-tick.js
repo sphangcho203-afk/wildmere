@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
-import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, riverDist } from './world.js';
+import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -49,6 +49,7 @@ export function bootTick(parts){
     atRushNest,
     atBirchShelf,
     atAlderNook,
+    atHazelRest,
     currentPlace,
     stepBirds,
     stepRain,
@@ -70,6 +71,7 @@ export function bootTick(parts){
     foundRush: false,
     foundBirch: false,
     foundAlder: false,
+    foundHazel: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -252,6 +254,12 @@ export function bootTick(parts){
     if (atAlderNook(hero.position.x, hero.position.z)){
       player.thirst = Math.min(100, player.thirst + 16);
       ctx.toast('A sip from the stone bowl. Cool, with a taste of leaf.');
+      hud();
+      return;
+    }
+    if (atHazelRest(hero.position.x, hero.position.z)){
+      player.food = Math.min(player.food + 1, 24);
+      ctx.toast('A few hazel nuts. Small, and they keep.');
       hud();
       return;
     }
