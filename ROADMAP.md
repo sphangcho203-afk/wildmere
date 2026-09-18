@@ -40,6 +40,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Rush Nest, a fan of pale rushes and a stone dish east of the clearing
 - [x] The Birch Shelf, a pale trunk, stone shelf, and lifting peels west-southwest of the clearing
 - [x] The Alder Nook, a dark trunk, hanging catkins, and a rain bowl north of the clearing
+- [x] The Hazel Rest, a small tree, moss seat, and hanging nuts southeast of the clearing
+
+## Note (2026-09-18)
+
+Southeast of the clearing, toward the Quiet Well, The Hazel Rest is a moss pad, a small leaning hazel, hanging nuts that lift in the air, and a low wooden seat. Compass, first-visit line, and notebook all write it. Stand there and press E for a few nuts. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-17)
 
