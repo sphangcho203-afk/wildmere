@@ -25,7 +25,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 | Click | Enter the valley |
 | WASD | Walk |
 | Mouse / right pad | Look |
-| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries · sip the willow pool · sip the honey bowl · pick thistle seeds · sip the clover cup · pick daisy heads · sip the rush dish · pick birch bark · sip the alder bowl |
+| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries · sip the willow pool · sip the honey bowl · pick thistle seeds · sip the clover cup · pick daisy heads · sip the rush dish · pick birch bark · sip the alder bowl · pick hazel nuts |
 | Tab or Q | Cycle build piece |
 | F | Place selected piece (post, fire, cabin, soil bed) |
 | G | Plant a crop in a soil bed (needs 1 berry) |
@@ -39,7 +39,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - A carved stream (Reedford Crossing), the Slow Bend, and a starting meadow (The Clearing)
 - High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
 - Thicker timber (The Quiet Pines)
-- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, the Evening Bell, the Rowan Lean, the Willow Dip, the Honey Stone, the Thistle Seat, the Clover Pad, the Daisy Ring, the Rush Nest, the Birch Shelf, and the Alder Nook — quiet named places
+- The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, the Evening Bell, the Rowan Lean, the Willow Dip, the Honey Stone, the Thistle Seat, the Clover Pad, the Daisy Ring, the Rush Nest, the Birch Shelf, the Alder Nook, and the Hazel Rest — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
@@ -68,6 +68,7 @@ Walk south of the clearing, toward the Reed Step, to the Daisy Ring — white he
 Walk east-southeast of the clearing, toward the Quiet Well, to the Rush Nest — a fan of pale rushes, a low bench, and a stone dish. Press E for a sip.
 Walk west-southwest of the clearing, toward the Old Ring, to the Birch Shelf — a pale leaning trunk, a stone shelf, and thin peels that lift. Press E for a curl of bark.
 Walk a short way north of the clearing, toward the Slow Bend, to the Alder Nook — a dark trunk, hanging catkins, a low seat, and a stone bowl of rain. Press E for a sip.
+Walk southeast of the clearing, toward the Quiet Well, to the Hazel Rest — a small leaning tree, hanging nuts, and a low seat in the moss. Press E for a few nuts.
 
 ## Project
 
@@ -90,6 +91,7 @@ Walk a short way north of the clearing, toward the Slow Bend, to the Alder Nook 
 | `js/rush.js` | The Rush Nest |
 | `js/birch.js` | The Birch Shelf |
 | `js/alder.js` | The Alder Nook |
+| `js/hazel.js` | The Hazel Rest |
 | `js/shade.js` | The Shade Pool |
 | `js/oak.js` | The Split Oak |
 | `js/gate.js` | The Still Gate |
@@ -112,7 +114,7 @@ Pages is not enabled from this account (repository Settings cannot be flipped by
 3. Left sidebar, under **Code and automation**, click **Pages**
 4. **Build and deployment** → **Source** → **Deploy from a branch**
 5. Branch: **main**
-6. Folder: **/ (root)**
+6. Folder: ** / (root)**
 7. **Save**
 
 After a minute or two the valley will be at `https://sphangcho203-afk.github.io/wildmere/`.
