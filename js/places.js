@@ -4,6 +4,7 @@ import { atDaisyRing } from './daisy.js';
 import { atRushNest } from './rush.js';
 import { atBirchShelf } from './birch.js';
 import { atAlderNook } from './alder.js';
+import { atHazelRest } from './hazel.js';
 
 function hash2(ix, iy){
   const SEED = 2041;
@@ -251,6 +252,7 @@ export function makeRiverWater(waterMat){
   return group;
 }
 export function currentPlace(x, z){
+  if (atHazelRest(x, z)) return 'The Hazel Rest';
   if (atAlderNook(x, z)) return 'The Alder Nook';
   if (atBirchShelf(x, z)) return 'The Birch Shelf';
   if (atRushNest(x, z)) return 'The Rush Nest';
