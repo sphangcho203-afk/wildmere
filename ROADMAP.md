@@ -41,6 +41,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Birch Shelf, a pale trunk, stone shelf, and lifting peels west-southwest of the clearing
 - [x] The Alder Nook, a dark trunk, hanging catkins, and a rain bowl north of the clearing
 - [x] The Hazel Rest, a small tree, moss seat, and hanging nuts southeast of the clearing
+- [x] The Maple Sill, warm leaves, a stone sill, and spinning seeds east of the clearing
+
+## Note (2026-09-19)
+
+East of the clearing, The Maple Sill is a moss pad, a leaning maple with warm leaves, thin seeds that spin in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few seeds. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-18)
 
