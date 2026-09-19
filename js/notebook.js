@@ -17,6 +17,7 @@ import { RUSH_X, RUSH_Z } from './rush.js';
 import { BIRCH_X, BIRCH_Z } from './birch.js';
 import { ALDER_X, ALDER_Z } from './alder.js';
 import { HAZEL_X, HAZEL_Z } from './hazel.js';
+import { MAPLE_X, MAPLE_Z } from './maple.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -51,7 +52,8 @@ export const NOTES = [
   { id: 'rush', name: 'The Rush Nest', line: 'A fan of pale rushes and a stone dish. The air moves the stems.', x: RUSH_X, z: RUSH_Z, mapX: 62, mapY: 50 },
   { id: 'birch', name: 'The Birch Shelf', line: 'A pale trunk leans over a stone shelf. Thin peels lift when the air moves.', x: BIRCH_X, z: BIRCH_Z, mapX: 40, mapY: 44 },
   { id: 'alder', name: 'The Alder Nook', line: 'A dark trunk and hanging catkins. A stone bowl keeps rain by a low seat.', x: ALDER_X, z: ALDER_Z, mapX: 51, mapY: 66 },
-  { id: 'hazel', name: 'The Hazel Rest', line: 'A small hazel leans over a moss seat. Round nuts hang in the leaves.', x: HAZEL_X, z: HAZEL_Z, mapX: 58, mapY: 48 }
+  { id: 'hazel', name: 'The Hazel Rest', line: 'A small hazel leans over a moss seat. Round nuts hang in the leaves.', x: HAZEL_X, z: HAZEL_Z, mapX: 58, mapY: 48 },
+  { id: 'maple', name: 'The Maple Sill', line: 'Warm leaves and a stone sill. Thin seeds spin when the air moves.', x: MAPLE_X, z: MAPLE_Z, mapX: 56, mapY: 54 }
 ];
 
 function bendDot(){
