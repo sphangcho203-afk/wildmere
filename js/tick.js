@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -127,6 +127,10 @@ export function startTick(ctx){
         ctx.foundHazel = true;
         ctx.toast('The Hazel Rest. A small tree, a moss seat, nuts in the leaves.');
       }
+      if (atMapleSill && !ctx.foundMaple && atMapleSill(hero.position.x, hero.position.z)){
+        ctx.foundMaple = true;
+        ctx.toast('The Maple Sill. Warm leaves, a stone sill, seeds that spin in the air.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -141,6 +145,7 @@ export function startTick(ctx){
       else if (atBirchShelf && atBirchShelf(hero.position.x, hero.position.z)) hereName = 'The Birch Shelf';
       else if (atAlderNook && atAlderNook(hero.position.x, hero.position.z)) hereName = 'The Alder Nook';
       else if (atHazelRest && atHazelRest(hero.position.x, hero.position.z)) hereName = 'The Hazel Rest';
+      else if (atMapleSill && atMapleSill(hero.position.x, hero.position.z)) hereName = 'The Maple Sill';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -259,6 +264,14 @@ export function startTick(ctx){
       for (let i = 0; i < hazelRest.nuts.length; i++){
         const n = hazelRest.nuts[i];
         n.position.y = n.userData.baseY + Math.sin(clock.elapsedTime * 1.6 * wr + n.userData.phase) * 0.012 * wr;
+      }
+    }
+    if (mapleSill && mapleSill.seeds){
+      const wr = ctx.raining ? 1.5 : 1;
+      for (let i = 0; i < mapleSill.seeds.length; i++){
+        const s = mapleSill.seeds[i];
+        s.rotation.z = Math.sin(clock.elapsedTime * 1.8 * wr + s.userData.phase) * 0.22 * wr;
+        s.position.y = s.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + i) * 0.01 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);
