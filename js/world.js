@@ -83,4 +83,5 @@ export { makeRushNest, atRushNest } from './rush.js';
 export { makeBirchShelf, atBirchShelf } from './birch.js';
 export { makeAlderNook, atAlderNook } from './alder.js';
 export { makeHazelRest, atHazelRest } from './hazel.js';
+export { makeMapleSill, atMapleSill } from './maple.js';
 export { addDistantRidges } from './ridges.js';
