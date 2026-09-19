@@ -5,6 +5,7 @@ import { atRushNest } from './rush.js';
 import { atBirchShelf } from './birch.js';
 import { atAlderNook } from './alder.js';
 import { atHazelRest } from './hazel.js';
+import { atMapleSill } from './maple.js';
 
 function hash2(ix, iy){
   const SEED = 2041;
@@ -252,6 +253,7 @@ export function makeRiverWater(waterMat){
   return group;
 }
 export function currentPlace(x, z){
+  if (atMapleSill(x, z)) return 'The Maple Sill';
   if (atHazelRest(x, z)) return 'The Hazel Rest';
   if (atAlderNook(x, z)) return 'The Alder Nook';
   if (atBirchShelf(x, z)) return 'The Birch Shelf';
@@ -329,7 +331,7 @@ export function addGrassTufts(scene){
   const geo = new THREE.ConeGeometry(0.045, 0.3, 4);
   for (let i = 0; i < 90; i++){
     const a = Math.random() * 6.28;
-    const r = 4 + Math.random() * 38;
+  const r = 4 + Math.random() * 38;
     const x = 10 + Math.cos(a) * r;
     const z = 22 + Math.sin(a) * r;
     const y = heightAt(x, z);
