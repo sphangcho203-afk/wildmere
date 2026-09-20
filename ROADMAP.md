@@ -42,6 +42,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Alder Nook, a dark trunk, hanging catkins, and a rain bowl north of the clearing
 - [x] The Hazel Rest, a small tree, moss seat, and hanging nuts southeast of the clearing
 - [x] The Maple Sill, warm leaves, a stone sill, and spinning seeds east of the clearing
+- [x] The Aspen Lean, a pale trunk, flickering leaves, and a moss seat southeast of the clearing
+
+## Note (2026-09-20)
+
+Southeast of the clearing, toward the Moss Seat, The Aspen Lean is a moss pad, a pale leaning trunk with dark marks, small leaves that flicker in the air, a low wooden seat, and a stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few leaves. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-19)
 
