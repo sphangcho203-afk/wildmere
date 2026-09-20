@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -131,6 +131,10 @@ export function startTick(ctx){
         ctx.foundMaple = true;
         ctx.toast('The Maple Sill. Warm leaves, a stone sill, seeds that spin in the air.');
       }
+      if (atAspenLean && !ctx.foundAspen && atAspenLean(hero.position.x, hero.position.z)){
+        ctx.foundAspen = true;
+        ctx.toast('The Aspen Lean. A pale trunk, flickering leaves, a seat in the moss.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -146,6 +150,7 @@ export function startTick(ctx){
       else if (atAlderNook && atAlderNook(hero.position.x, hero.position.z)) hereName = 'The Alder Nook';
       else if (atHazelRest && atHazelRest(hero.position.x, hero.position.z)) hereName = 'The Hazel Rest';
       else if (atMapleSill && atMapleSill(hero.position.x, hero.position.z)) hereName = 'The Maple Sill';
+      else if (atAspenLean && atAspenLean(hero.position.x, hero.position.z)) hereName = 'The Aspen Lean';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -272,6 +277,14 @@ export function startTick(ctx){
         const s = mapleSill.seeds[i];
         s.rotation.z = Math.sin(clock.elapsedTime * 1.8 * wr + s.userData.phase) * 0.22 * wr;
         s.position.y = s.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + i) * 0.01 * wr;
+      }
+    }
+    if (aspenLean && aspenLean.leaves){
+      const wr = ctx.raining ? 1.6 : 1;
+      for (let i = 0; i < aspenLean.leaves.length; i++){
+        const leaf = aspenLean.leaves[i];
+        leaf.rotation.z = Math.sin(clock.elapsedTime * 2.2 * wr + leaf.userData.phase) * 0.28 * wr;
+        leaf.position.y = leaf.userData.baseY + Math.sin(clock.elapsedTime * 1.7 * wr + i) * 0.012 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);
