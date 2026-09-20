@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
-import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, riverDist } from './world.js';
+import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -51,6 +51,7 @@ export function bootTick(parts){
     atAlderNook,
     atHazelRest,
     atMapleSill,
+    atAspenLean,
     currentPlace,
     stepBirds,
     stepRain,
@@ -74,6 +75,7 @@ export function bootTick(parts){
     foundAlder: false,
     foundHazel: false,
     foundMaple: false,
+    foundAspen: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -268,6 +270,12 @@ export function bootTick(parts){
     if (atMapleSill(hero.position.x, hero.position.z)){
       player.food = Math.min(player.food + 1, 24);
       ctx.toast('A few maple seeds. Light, and they keep.');
+      hud();
+      return;
+    }
+    if (atAspenLean(hero.position.x, hero.position.z)){
+      player.food = Math.min(player.food + 1, 24);
+      ctx.toast('A few aspen leaves. Thin, and they keep.');
       hud();
       return;
     }
