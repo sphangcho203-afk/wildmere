@@ -85,4 +85,5 @@ export { makeAlderNook, atAlderNook } from './alder.js';
 export { makeHazelRest, atHazelRest } from './hazel.js';
 export { makeMapleSill, atMapleSill } from './maple.js';
 export { makeAspenLean, atAspenLean } from './aspen.js';
+export { makeCedarBowl, atCedarBowl } from './cedar.js';
 export { addDistantRidges } from './ridges.js';

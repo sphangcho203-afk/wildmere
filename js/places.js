@@ -7,6 +7,7 @@ import { atAlderNook } from './alder.js';
 import { atHazelRest } from './hazel.js';
 import { atMapleSill } from './maple.js';
 import { atAspenLean } from './aspen.js';
+import { atCedarBowl } from './cedar.js';
 
 function hash2(ix, iy){
   const SEED = 2041;
@@ -254,6 +255,7 @@ export function makeRiverWater(waterMat){
   return group;
 }
 export function currentPlace(x, z){
+  if (atCedarBowl(x, z)) return 'The Cedar Bowl';
   if (atAspenLean(x, z)) return 'The Aspen Lean';
   if (atMapleSill(x, z)) return 'The Maple Sill';
   if (atHazelRest(x, z)) return 'The Hazel Rest';
