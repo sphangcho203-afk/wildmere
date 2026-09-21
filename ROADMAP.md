@@ -43,6 +43,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Hazel Rest, a small tree, moss seat, and hanging nuts southeast of the clearing
 - [x] The Maple Sill, warm leaves, a stone sill, and spinning seeds east of the clearing
 - [x] The Aspen Lean, a pale trunk, flickering leaves, and a moss seat southeast of the clearing
+- [x] The Cedar Bowl, a dark cedar, small cones, and a rain bowl west of the clearing
+
+## Note (2026-09-21)
+
+West of the clearing, toward the Old Ring, The Cedar Bowl is a moss pad, a dark leaning cedar, small cones that lift in the air, a low wooden seat, and a stone bowl of rain. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-20)
 
