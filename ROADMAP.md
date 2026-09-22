@@ -44,6 +44,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Maple Sill, warm leaves, a stone sill, and spinning seeds east of the clearing
 - [x] The Aspen Lean, a pale trunk, flickering leaves, and a moss seat southeast of the clearing
 - [x] The Cedar Bowl, a dark cedar, small cones, and a rain bowl west of the clearing
+- [x] The Spruce Cup, a thin spruce, loose needles, and a wooden cup north of the clearing
+
+## Note (2026-09-22)
+
+North of the clearing, toward the Slow Bend, The Spruce Cup is a moss pad, a thin spruce, loose needles that lift in the air, a low wooden seat, and a wooden cup of rain. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Named-place compass also lists the older quiet spots that were only living in the walk overlay. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-21)
 
