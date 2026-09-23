@@ -31,6 +31,7 @@ import {
   makeAspenLean, atAspenLean,
   makeCedarBowl, atCedarBowl,
   makeSpruceCup, atSpruceCup,
+  makeYewSill, atYewSill,
   addDistantRidges, addGrassTufts, addValleyBirds, stepBirds
 } from './world.js';
 import { atSlowBend, placeSlowBend } from './bend.js';
@@ -126,7 +127,7 @@ for (let a = 0; a < 10; a++){
 for (let i = 0; i < 1200 && interactives.filter(t => t.type === 'tree').length < 110; i++){
   const x = (Math.random() - 0.5) * 380, z = (Math.random() - 0.5) * 380;
   const y = heightAt(x, z);
-  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7 || Math.hypot(x + 36, z - 42) < 7 || Math.hypot(x + 0.75, z + 22) < 8 || Math.hypot(x + 52, z - 16) < 8 || Math.hypot(x - 24, z - 56) < 8 || Math.hypot(x + 22, z - 28) < 7 || Math.hypot(x + 8, z + 48) < 7 || Math.hypot(x - 52, z - 38) < 7 || Math.hypot(x + 28, z + 44) < 7 || Math.hypot(x - 38, z - 22) < 7 || Math.hypot(x - 24, z + 32) < 8 || Math.hypot(x - 22, z - 54) < 8 || Math.hypot(x - 38, z - 36) < 7 || Math.hypot(x - 4, z + 6) < 7 || Math.hypot(x - 24, z - 4) < 7 || Math.hypot(x + 14, z + 6) < 7 || Math.hypot(x - 8, z - 38) < 7 || Math.hypot(x - 22, z - 8) < 7 || Math.hypot(x - 18, z - 18) < 7 || Math.hypot(x - 24, z + 8) < 7 || Math.hypot(x + 6, z - 20) < 7 || Math.hypot(x - 4, z - 38) < 7) continue;
+  if (y < WATER_Y + 0.8 || riverDist(x, z) < 8 || Math.hypot(x - 10, z - 26) < 9 || Math.hypot(x - 58, z + 38) < 7 || Math.hypot(x + 36, z - 42) < 7 || Math.hypot(x + 0.75, z + 22) < 8 || Math.hypot(x + 52, z - 16) < 8 || Math.hypot(x - 24, z - 56) < 8 || Math.hypot(x + 22, z - 28) < 7 || Math.hypot(x + 8, z + 48) < 7 || Math.hypot(x - 52, z - 38) < 7 || Math.hypot(x + 28, z + 44) < 7 || Math.hypot(x - 38, z - 22) < 7 || Math.hypot(x - 24, z + 32) < 8 || Math.hypot(x - 22, z - 54) < 8 || Math.hypot(x - 38, z - 36) < 7 || Math.hypot(x - 4, z + 6) < 7 || Math.hypot(x - 24, z - 4) < 7 || Math.hypot(x + 14, z + 6) < 7 || Math.hypot(x - 8, z - 38) < 7 || Math.hypot(x - 22, z - 8) < 7 || Math.hypot(x - 18, z - 18) < 7 || Math.hypot(x - 24, z + 8) < 7 || Math.hypot(x + 6, z - 20) < 7 || Math.hypot(x - 4, z - 38) < 7 || Math.hypot(x + 28, z + 8) < 7) continue;
   addThing(makeTree(0.8 + Math.random() * 0.5, treeKindAt(x, z)), 'tree', x, y, z, 3);
 }
 for (let i = 0; i < 16; i++){
@@ -175,6 +176,7 @@ const mapleSill = makeMapleSill(scene);
 const aspenLean = makeAspenLean(scene);
 const cedarBowl = makeCedarBowl(scene);
 const spruceCup = makeSpruceCup(scene);
+const yewSill = makeYewSill(scene);
 const slowBend = placeSlowBend(scene);
 renderNotebook(foundNotes);
 
@@ -182,10 +184,10 @@ const player = { wood: 0, food: 0, stone: 0, fish: 0, axe: false, health: 100, h
 
 bootTick({
   scene, camera, renderer, hero, birds, rain,
-  fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup,
+  fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill,
   skyU, sun, dir, hemi,
   WATER_Y, foundNotes, interactives, fires, plots, player,
-  atQuietWell, atShadePool, atSlowBend, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup,
+  atQuietWell, atShadePool, atSlowBend, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill,
   getPlaying: () => playing,
   setNotebookOpen: (v) => { notebookOpen = v; },
   getNotebookOpen: () => notebookOpen
