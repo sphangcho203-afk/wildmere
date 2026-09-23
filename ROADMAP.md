@@ -50,3 +50,15 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 ## Note (2026-09-23)
 
 West-southwest of the clearing, toward the Old Ring, The Yew Sill is a moss pad, a dark leaning yew, small red berries that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few berries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
+
+## Note (2026-09-22)
+
+North of the clearing, toward the Slow Bend, The Spruce Cup is a moss pad, a thin spruce, loose needles that lift in the air, a low wooden seat, and a wooden cup of rain. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Named-place compass also lists the older quiet spots that were only living in the walk overlay. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
+
+## Next
+
+- [ ] GitHub Pages live play URL
+
+## Later
+
+- [ ] Multiplayer is not a goal. One person and a piece of land is the goal.
