@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
-import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, riverDist } from './world.js';
+import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -54,6 +54,8 @@ export function bootTick(parts){
     atAspenLean,
     atCedarBowl,
     atSpruceCup,
+    atYewSill,
+    atElmDish,
     currentPlace,
     stepBirds,
     stepRain,
@@ -80,6 +82,8 @@ export function bootTick(parts){
     foundAspen: false,
     foundCedar: false,
     foundSpruce: false,
+    foundYew: false,
+    foundElm: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -292,6 +296,18 @@ export function bootTick(parts){
     if (atSpruceCup(hero.position.x, hero.position.z)){
       player.thirst = Math.min(100, player.thirst + 16);
       ctx.toast('A sip from the spruce cup. Cool, with a taste of needle.');
+      hud();
+      return;
+    }
+    if (atYewSill(hero.position.x, hero.position.z)){
+      player.food = Math.min(player.food + 1, 24);
+      ctx.toast('A few yew berries. Small, and they keep.');
+      hud();
+      return;
+    }
+    if (atElmDish(hero.position.x, hero.position.z)){
+      player.thirst = Math.min(100, player.thirst + 16);
+      ctx.toast('A sip from the elm dish. Cool, with a taste of leaf.');
       hud();
       return;
     }
