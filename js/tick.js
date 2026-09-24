@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -143,6 +143,14 @@ export function startTick(ctx){
         ctx.foundSpruce = true;
         ctx.toast('The Spruce Cup. A thin spruce, loose needles, rain in a wooden cup.');
       }
+      if (atYewSill && !ctx.foundYew && atYewSill(hero.position.x, hero.position.z)){
+        ctx.foundYew = true;
+        ctx.toast('The Yew Sill. A dark yew, small berries, a pale stone sill.');
+      }
+      if (atElmDish && !ctx.foundElm && atElmDish(hero.position.x, hero.position.z)){
+        ctx.foundElm = true;
+        ctx.toast('The Elm Dish. A leaning elm, small leaves, rain in a stone dish.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -161,6 +169,8 @@ export function startTick(ctx){
       else if (atAspenLean && atAspenLean(hero.position.x, hero.position.z)) hereName = 'The Aspen Lean';
       else if (atCedarBowl && atCedarBowl(hero.position.x, hero.position.z)) hereName = 'The Cedar Bowl';
       else if (atSpruceCup && atSpruceCup(hero.position.x, hero.position.z)) hereName = 'The Spruce Cup';
+      else if (atYewSill && atYewSill(hero.position.x, hero.position.z)) hereName = 'The Yew Sill';
+      else if (atElmDish && atElmDish(hero.position.x, hero.position.z)) hereName = 'The Elm Dish';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -311,6 +321,21 @@ export function startTick(ctx){
         const n = spruceCup.needles[i];
         n.rotation.z = Math.sin(clock.elapsedTime * 1.7 * wr + n.userData.phase) * 0.16 * wr;
         n.position.y = n.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + i) * 0.01 * wr;
+      }
+    }
+    if (yewSill && yewSill.berries){
+      const wr = ctx.raining ? 1.4 : 1;
+      for (let i = 0; i < yewSill.berries.length; i++){
+        const b = yewSill.berries[i];
+        b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.6 * wr + b.userData.phase) * 0.012 * wr;
+      }
+    }
+    if (elmDish && elmDish.leaves){
+      const wr = ctx.raining ? 1.5 : 1;
+      for (let i = 0; i < elmDish.leaves.length; i++){
+        const leaf = elmDish.leaves[i];
+        leaf.rotation.z = Math.sin(clock.elapsedTime * 1.8 * wr + leaf.userData.phase) * 0.16 * wr;
+        leaf.position.y = leaf.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + i) * 0.01 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);
