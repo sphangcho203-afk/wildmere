@@ -46,6 +46,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Cedar Bowl, a dark cedar, small cones, and a rain bowl west of the clearing
 - [x] The Spruce Cup, a thin spruce, loose needles, and a wooden cup north of the clearing
 - [x] The Yew Sill, a dark yew, small berries, and a pale stone sill west-southwest of the clearing
+- [x] The Elm Dish, a leaning elm, small leaves, and a stone dish of rain west-north of the clearing
+
+## Note (2026-09-24)
+
+West-north of the clearing, toward the stream, The Elm Dish is a moss pad, a leaning elm, small leaves that lift in the air, a low wooden seat, and a stone dish of rain. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. The Yew Sill now also gathers, writes a first-visit line, and lifts its berries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-23)
 
