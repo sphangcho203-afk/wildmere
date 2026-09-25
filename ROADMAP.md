@@ -47,6 +47,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Spruce Cup, a thin spruce, loose needles, and a wooden cup north of the clearing
 - [x] The Yew Sill, a dark yew, small berries, and a pale stone sill west-southwest of the clearing
 - [x] The Elm Dish, a leaning elm, small leaves, and a stone dish of rain west-north of the clearing
+- [x] The Beech Ledge, a smooth beech, small hulls, and a pale stone ledge east of the clearing
+
+## Note (2026-09-25)
+
+East of the clearing, toward the Quiet Well, The Beech Ledge is a moss pad, a smooth leaning beech, small hulls that lift in the air, a low wooden seat, and a pale stone ledge. Compass, first-visit line, and notebook all write it. Stand there and press E for a few hulls. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-24)
 

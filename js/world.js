@@ -89,4 +89,5 @@ export { makeCedarBowl, atCedarBowl } from './cedar.js';
 export { makeSpruceCup, atSpruceCup } from './spruce.js';
 export { makeYewSill, atYewSill } from './yew.js';
 export { makeElmDish, atElmDish } from './elm.js';
+export { makeBeechLedge, atBeechLedge } from './beech.js';
 export { addDistantRidges } from './ridges.js';
