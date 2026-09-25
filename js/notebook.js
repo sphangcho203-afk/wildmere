@@ -23,6 +23,7 @@ import { CEDAR_X, CEDAR_Z } from './cedar.js';
 import { SPRUCE_X, SPRUCE_Z } from './spruce.js';
 import { YEW_X, YEW_Z } from './yew.js';
 import { ELM_X, ELM_Z } from './elm.js';
+import { BEECH_X, BEECH_Z } from './beech.js';
 import { slowBendCenter } from './bend.js';
 
 const SAVE_NOTES = 'wildmere-notes-v1';
@@ -63,7 +64,8 @@ export const NOTES = [
   { id: 'cedar', name: 'The Cedar Bowl', line: 'A dark cedar and a stone bowl of rain. Small cones lift when the air moves.', x: CEDAR_X, z: CEDAR_Z, mapX: 42, mapY: 56 },
   { id: 'spruce', name: 'The Spruce Cup', line: 'A thin spruce and a wooden cup of rain. Loose needles lift when the air moves.', x: SPRUCE_X, z: SPRUCE_Z, mapX: 48, mapY: 66 },
   { id: 'yew', name: 'The Yew Sill', line: 'A dark yew and a pale stone sill. Small red berries lift when the air moves.', x: YEW_X, z: YEW_Z, mapX: 36, mapY: 46 },
-  { id: 'elm', name: 'The Elm Dish', line: 'A leaning elm and a stone dish of rain. Small leaves lift when the air moves.', x: ELM_X, z: ELM_Z, mapX: 42, mapY: 60 }
+  { id: 'elm', name: 'The Elm Dish', line: 'A leaning elm and a stone dish of rain. Small leaves lift when the air moves.', x: ELM_X, z: ELM_Z, mapX: 42, mapY: 60 },
+  { id: 'beech', name: 'The Beech Ledge', line: 'A smooth beech and a pale stone ledge. Small hulls lift when the air moves.', x: BEECH_X, z: BEECH_Z, mapX: 72, mapY: 58 }
 ];
 
 function bendDot(){
