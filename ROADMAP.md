@@ -48,6 +48,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Yew Sill, a dark yew, small berries, and a pale stone sill west-southwest of the clearing
 - [x] The Elm Dish, a leaning elm, small leaves, and a stone dish of rain west-north of the clearing
 - [x] The Beech Ledge, a smooth beech, small hulls, and a pale stone ledge east of the clearing
+- [x] The Linden Seat, a round linden, gold blooms, and a pale stone sill north of the clearing
+
+## Note (2026-09-27)
+
+North of the clearing, toward the Slow Bend, The Linden Seat is a moss pad, a round linden, gold blooms that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. The Beech Ledge now also gathers and lifts its hulls. `places.js` again holds the stream, birds, grass, named-ground compass, and older quiet spots so the play loop can import them. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-25)
 
