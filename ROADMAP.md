@@ -49,6 +49,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Elm Dish, a leaning elm, small leaves, and a stone dish of rain west-north of the clearing
 - [x] The Beech Ledge, a smooth beech, small hulls, and a pale stone ledge east of the clearing
 - [x] The Linden Seat, a round linden, gold blooms, and a pale stone sill north of the clearing
+- [x] Field notebook that fills from walked ground
+
+## Note (2026-09-28)
+
+The field notebook module was only imports, so M opened an empty book and first-visit notes never saved. `notebook.js` is whole again: allowlisted ids, sanitized localStorage, textContent rendering, and a map of walked ground. The Beech Ledge and The Linden Seat now gather on E, write a first-visit line, lift their hulls and blooms, and land in the book. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-27)
 
