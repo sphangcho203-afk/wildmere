@@ -91,4 +91,5 @@ export { makeYewSill, atYewSill } from './yew.js';
 export { makeElmDish, atElmDish } from './elm.js';
 export { makeBeechLedge, atBeechLedge } from './beech.js';
 export { makeLindenSeat, atLindenSeat } from './linden.js';
+export { makePoplarRest, atPoplarRest } from './poplar.js';
 export { addDistantRidges } from './ridges.js';
