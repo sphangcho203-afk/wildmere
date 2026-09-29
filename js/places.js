@@ -13,6 +13,7 @@ import { atYewSill } from './yew.js';
 import { atElmDish } from './elm.js';
 import { atBeechLedge } from './beech.js';
 import { atLindenSeat } from './linden.js';
+import { atPoplarRest } from './poplar.js';
 
 function hash2(ix, iy){
   const SEED = 2041;
@@ -260,6 +261,7 @@ export function makeRiverWater(waterMat){
   return group;
 }
 export function currentPlace(x, z){
+  if (atPoplarRest(x, z)) return 'The Poplar Rest';
   if (atLindenSeat(x, z)) return 'The Linden Seat';
   if (atBeechLedge(x, z)) return 'The Beech Ledge';
   if (atElmDish(x, z)) return 'The Elm Dish';
