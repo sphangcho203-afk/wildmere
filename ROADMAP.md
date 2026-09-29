@@ -50,6 +50,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Beech Ledge, a smooth beech, small hulls, and a pale stone ledge east of the clearing
 - [x] The Linden Seat, a round linden, gold blooms, and a pale stone sill north of the clearing
 - [x] Field notebook that fills from walked ground
+- [x] The Poplar Rest, a pale trunk, lifting leaves, and a rain dish east of the clearing
+
+## Note (2026-09-29)
+
+East of the clearing, toward the Quiet Well, The Poplar Rest is a moss pad, a pale leaning poplar, leaves that lift in the air, a low wooden seat, and a stone dish of rain. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-28)
 
