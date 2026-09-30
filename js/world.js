@@ -92,4 +92,5 @@ export { makeElmDish, atElmDish } from './elm.js';
 export { makeBeechLedge, atBeechLedge } from './beech.js';
 export { makeLindenSeat, atLindenSeat } from './linden.js';
 export { makePoplarRest, atPoplarRest } from './poplar.js';
+export { makeAshLedge, atAshLedge } from './ash.js';
 export { addDistantRidges } from './ridges.js';

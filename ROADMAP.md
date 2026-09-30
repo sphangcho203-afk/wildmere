@@ -51,6 +51,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Linden Seat, a round linden, gold blooms, and a pale stone sill north of the clearing
 - [x] Field notebook that fills from walked ground
 - [x] The Poplar Rest, a pale trunk, lifting leaves, and a rain dish east of the clearing
+- [x] The Ash Ledge, a dark ash, lifting keys, and a pale stone ledge north-northwest of the clearing
+
+## Note (2026-09-30)
+
+North-northwest of the clearing, toward the Slow Bend, The Ash Ledge is a moss pad, a dark leaning ash, thin keys that lift in the air, a low wooden seat, and a pale stone ledge. Compass, first-visit line, and notebook all write it. Stand there and press E for a few keys. The Poplar Rest now also gathers on E and lifts its leaves. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-29)
 
