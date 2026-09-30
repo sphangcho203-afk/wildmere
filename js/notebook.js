@@ -26,6 +26,7 @@ import { ELM_X, ELM_Z } from './elm.js';
 import { BEECH_X, BEECH_Z } from './beech.js';
 import { LINDEN_X, LINDEN_Z } from './linden.js';
 import { POPLAR_X, POPLAR_Z } from './poplar.js';
+import { ASH_X, ASH_Z } from './ash.js';
 import { slowBendCenter } from './bend.js';
 
 const NOTES_KEY = 'wildmere-notes-v1';
@@ -68,6 +69,7 @@ const NOTES = [
   { id: 'beech-ledge', name: 'The Beech Ledge', x: BEECH_X, z: BEECH_Z, line: 'A smooth beech, small hulls, a pale stone ledge.' },
   { id: 'linden-seat', name: 'The Linden Seat', x: LINDEN_X, z: LINDEN_Z, line: 'A round linden, gold blooms, a pale stone sill.' },
   { id: 'poplar-rest', name: 'The Poplar Rest', x: POPLAR_X, z: POPLAR_Z, line: 'A pale trunk, lifting leaves, rain in a stone dish.' },
+  { id: 'ash-ledge', name: 'The Ash Ledge', x: ASH_X, z: ASH_Z, line: 'A dark ash, thin keys that lift, a pale stone ledge.' },
   { id: 'stone-terrace', name: 'The Stone Terrace', x: TERRACE_X, z: TERRACE_Z, line: 'A high shelf of rock and thin grass past High Spine.' },
   { id: 'slow-bend', name: 'The Slow Bend', x: 0, z: 48, line: 'Still water and a short plank. Fish if you can wait.' }
 ];
