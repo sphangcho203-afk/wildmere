@@ -52,6 +52,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Field notebook that fills from walked ground
 - [x] The Poplar Rest, a pale trunk, lifting leaves, and a rain dish east of the clearing
 - [x] The Ash Ledge, a dark ash, lifting keys, and a pale stone ledge north-northwest of the clearing
+- [x] The Holly Rest, a dark holly, small berries, and a pale stone sill west of the clearing
+
+## Note (2026-10-01)
+
+West of the clearing, toward the Old Ring, The Holly Rest is a moss pad, a dark holly, small red berries that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few berries. Trees stay off the pad. The Poplar Rest and The Ash Ledge now also gather on E, write a first-visit line, and lift their leaves and keys. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-30)
 
