@@ -94,4 +94,5 @@ export { makeLindenSeat, atLindenSeat } from './linden.js';
 export { makePoplarRest, atPoplarRest } from './poplar.js';
 export { makeAshLedge, atAshLedge } from './ash.js';
 export { makeHollyRest, atHollyRest } from './holly.js';
+export { makeWalnutBench, atWalnutBench } from './walnut.js';
 export { addDistantRidges } from './ridges.js';

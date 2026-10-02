@@ -25,7 +25,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 | Click | Enter the valley |
 | WASD | Walk |
 | Mouse / right pad | Look |
-| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries · sip the willow pool · sip the honey bowl · pick thistle seeds · sip the clover cup · pick daisy heads · sip the rush dish · pick birch bark · sip the alder bowl · pick hazel nuts · pick maple seeds · pick aspen leaves · sip the cedar bowl |
+| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries · sip the willow pool · sip the honey bowl · pick thistle seeds · sip the clover cup · pick daisy heads · sip the rush dish · pick birch bark · sip the alder bowl · pick hazel nuts · pick maple seeds · pick aspen leaves · sip the cedar bowl · sip the spruce cup · pick yew berries · sip the elm dish · pick beech hulls · pick linden blooms · sip the poplar dish · pick ash keys · pick holly berries · pick walnut hulls |
 | Tab or Q | Cycle build piece |
 | F | Place selected piece (post, fire, cabin, soil bed) |
 | G | Plant a crop in a soil bed (needs 1 berry) |
@@ -40,6 +40,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
 - Thicker timber (The Quiet Pines)
 - The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, the Evening Bell, the Rowan Lean, the Willow Dip, the Honey Stone, the Thistle Seat, the Clover Pad, the Daisy Ring, the Rush Nest, the Birch Shelf, the Alder Nook, the Hazel Rest, the Maple Sill, the Aspen Lean, and the Cedar Bowl — quiet named places
+- The Spruce Cup, the Yew Sill, the Elm Dish, the Beech Ledge, the Linden Seat, the Poplar Rest, the Ash Ledge, the Holly Rest, and the Walnut Bench — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
@@ -57,21 +58,22 @@ Walk east past the Quiet Well to the Split Oak — two trunks from one base and 
 Walk a little north of the Slow Bend to the Still Gate — two posts and a fallen lintel in the grass.
 Walk west of the clearing, toward the stream, to the Wash Rock — a flat stone, a paddle, a bucket, and cloth on a post.
 Walk south of the clearing to the Lark Post — a thin post, three slats, and a stump. The slats tap when the air moves.
-Walk northeast of the clearing to the Fern Stair — three low moss steps and fronds that move in the air.
+Walk northsouth of the clearing to the Fern Stair — three low moss steps and fronds that move in the air.
 Walk southwest of the clearing toward High Spine to the Evening Bell — two posts, a small bronze, and a bench in the moss.
-Walk a short way east of the clearing to the Rowan Lean — a thin tree that tips toward a stone seat. Red clusters hang. Press E for a few berries.
-Walk southeast of the clearing to the Willow Dip — a leaning willow, hanging strands, and a small pool at the roots. Press E for a sip.
+Walk a short way south of the clearing to the Rowan Lean — a thin tree that tips toward a stone seat. Red clusters hang. Press E for a few berries.
+Walk southsouth of the clearing to the Willow Dip — a leaning willow, hanging strands, and a small pool at the roots. Press E for a sip.
 Walk west-northwest of the clearing to the Honey Stone — a warm slab, a wooden bowl, gold drops on a post. Press E for a sip.
-Walk north-northeast of the clearing to the Thistle Seat — a low bench in the moss and purple heads that nod. Press E for a few seeds.
-Walk east-northeast of the clearing to the Clover Pad — a moss round, small leaves, a low stool, and a tin cup. Press E for a sip.
+Walk north-northsouth of the clearing to the Thistle Seat — a low bench in the moss and purple heads that nod. Press E for a few seeds.
+Walk east-northsouth of the clearing to the Clover Pad — a moss round, small leaves, a low stool, and a tin cup. Press E for a sip.
 Walk south of the clearing, toward the Reed Step, to the Daisy Ring — white heads in a small circle and a low bench in the moss. Press E for a few daisy heads.
-Walk east-southeast of the clearing, toward the Quiet Well, to the Rush Nest — a fan of pale rushes, a low bench, and a stone dish. Press E for a sip.
+Walk east-southsouth of the clearing, toward the Quiet Well, to the Rush Nest — a fan of pale rushes, a low bench, and a stone dish. Press E for a sip.
 Walk west-southwest of the clearing, toward the Old Ring, to the Birch Shelf — a pale leaning trunk, a stone shelf, and thin peels that lift. Press E for a curl of bark.
 Walk a short way north of the clearing, toward the Slow Bend, to the Alder Nook — a dark trunk, hanging catkins, a low seat, and a stone bowl of rain. Press E for a sip.
-Walk southeast of the clearing, toward the Quiet Well, to the Hazel Rest — a small leaning tree, hanging nuts, and a low seat in the moss. Press E for a few nuts.
-Walk a short way east-southeast of the clearing to the Maple Sill — a leaning maple, warm leaves, a stone sill, and thin seeds that spin. Press E for a few seeds.
-Walk southeast of the clearing, toward the Moss Seat, to the Aspen Lean — a pale trunk, flickering leaves, a low seat, and a stone sill. Press E for a few leaves.
+Walk southsouth of the clearing, toward the Quiet Well, to the Hazel Rest — a small leaning tree, hanging nuts, and a low seat in the moss. Press E for a few nuts.
+Walk a short way east-southsouth of the clearing to the Maple Sill — a leaning maple, warm leaves, a stone sill, and thin seeds that spin. Press E for a few seeds.
+Walk southsouth of the clearing, toward the Moss Seat, to the Aspen Lean — a pale trunk, flickering leaves, a low seat, and a stone sill. Press E for a few leaves.
 Walk west of the clearing, toward the Old Ring, to the Cedar Bowl — a dark cedar, small cones that lift, a low seat, and a stone bowl of rain. Press E for a sip.
+Walk south of the clearing, toward the Slow Bend, to the Walnut Bench — a leaning walnut, green hulls, a low wooden bench, and a pale stone sill. Press E for a few hulls.
 
 ## Project
 
@@ -98,6 +100,7 @@ Walk west of the clearing, toward the Old Ring, to the Cedar Bowl — a dark ced
 | `js/maple.js` | The Maple Sill |
 | `js/aspen.js` | The Aspen Lean |
 | `js/cedar.js` | The Cedar Bowl |
+| `js/walnut.js` | The Walnut Bench |
 | `js/shade.js` | The Shade Pool |
 | `js/oak.js` | The Split Oak |
 | `js/gate.js` | The Still Gate |

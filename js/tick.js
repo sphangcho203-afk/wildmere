@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish, beechLedge, lindenSeat,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest, walnutBench,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -159,6 +159,22 @@ export function startTick(ctx){
         ctx.foundLinden = true;
         ctx.toast('The Linden Seat. A round linden, gold blooms, a pale stone sill.');
       }
+      if (atPoplarRest && !ctx.foundPoplar && atPoplarRest(hero.position.x, hero.position.z)){
+        ctx.foundPoplar = true;
+        ctx.toast('The Poplar Rest. A pale trunk, lifting leaves, rain in a stone dish.');
+      }
+      if (atAshLedge && !ctx.foundAsh && atAshLedge(hero.position.x, hero.position.z)){
+        ctx.foundAsh = true;
+        ctx.toast('The Ash Ledge. A dark ash, thin keys that lift, a pale stone ledge.');
+      }
+      if (atHollyRest && !ctx.foundHolly && atHollyRest(hero.position.x, hero.position.z)){
+        ctx.foundHolly = true;
+        ctx.toast('The Holly Rest. A dark holly, small red berries, a pale stone sill.');
+      }
+      if (atWalnutBench && !ctx.foundWalnut && atWalnutBench(hero.position.x, hero.position.z)){
+        ctx.foundWalnut = true;
+        ctx.toast('The Walnut Bench. A leaning walnut, green hulls, a low wooden bench.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -181,6 +197,10 @@ export function startTick(ctx){
       else if (atElmDish && atElmDish(hero.position.x, hero.position.z)) hereName = 'The Elm Dish';
       else if (atBeechLedge && atBeechLedge(hero.position.x, hero.position.z)) hereName = 'The Beech Ledge';
       else if (atLindenSeat && atLindenSeat(hero.position.x, hero.position.z)) hereName = 'The Linden Seat';
+      else if (atPoplarRest && atPoplarRest(hero.position.x, hero.position.z)) hereName = 'The Poplar Rest';
+      else if (atAshLedge && atAshLedge(hero.position.x, hero.position.z)) hereName = 'The Ash Ledge';
+      else if (atHollyRest && atHollyRest(hero.position.x, hero.position.z)) hereName = 'The Holly Rest';
+      else if (atWalnutBench && atWalnutBench(hero.position.x, hero.position.z)) hereName = 'The Walnut Bench';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -360,6 +380,36 @@ export function startTick(ctx){
       for (let i = 0; i < lindenSeat.blooms.length; i++){
         const b = lindenSeat.blooms[i];
         b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.55 * wr + b.userData.phase) * 0.014 * wr;
+      }
+    }
+    if (poplarRest && poplarRest.leaves){
+      const wr = ctx.raining ? 1.5 : 1;
+      for (let i = 0; i < poplarRest.leaves.length; i++){
+        const leaf = poplarRest.leaves[i];
+        leaf.rotation.z = Math.sin(clock.elapsedTime * 1.8 * wr + leaf.userData.phase) * 0.18 * wr;
+        leaf.position.y = leaf.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + i) * 0.012 * wr;
+      }
+    }
+    if (ashLedge && ashLedge.keys){
+      const wr = ctx.raining ? 1.5 : 1;
+      for (let i = 0; i < ashLedge.keys.length; i++){
+        const k = ashLedge.keys[i];
+        k.rotation.z = Math.sin(clock.elapsedTime * 1.7 * wr + k.userData.phase) * 0.2 * wr;
+        k.position.y = k.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + i) * 0.012 * wr;
+      }
+    }
+    if (hollyRest && hollyRest.berries){
+      const wr = ctx.raining ? 1.4 : 1;
+      for (let i = 0; i < hollyRest.berries.length; i++){
+        const b = hollyRest.berries[i];
+        b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.6 * wr + b.userData.phase) * 0.012 * wr;
+      }
+    }
+    if (walnutBench && walnutBench.hulls){
+      const wr = ctx.raining ? 1.4 : 1;
+      for (let i = 0; i < walnutBench.hulls.length; i++){
+        const h = walnutBench.hulls[i];
+        h.position.y = h.userData.baseY + Math.sin(clock.elapsedTime * 1.55 * wr + h.userData.phase) * 0.014 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);

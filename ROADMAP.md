@@ -20,7 +20,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Sleep / rest by fire advances time through the night
 - [x] Fishing at the slow bend of the stream
 - [x] A second region past High Spine (stone terrace, thin grass)
-- [x] The Listening Pine, a lone marked tree southeast of the clearing
+- [x] The Listening Pine, a lone marked tree southsouth of the clearing
 - [x] The Wind Hollow, a stone bowl and moving cloth northwest of the clearing
 - [x] The Reed Step, stones and reeds on the shallow stream south of the clearing
 - [x] The Shade Pool, still water under a fallen log north of the clearing
@@ -28,31 +28,36 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Still Gate, two posts and a fallen lintel north of the bend
 - [x] The Wash Rock, a flat stream stone with a paddle, bucket, and drying cloth
 - [x] The Lark Post, a thin post and three slats south of the clearing
-- [x] The Fern Stair, three low moss steps and moving fronds northeast of the clearing
+- [x] The Fern Stair, three low moss steps and moving fronds northsouth of the clearing
 - [x] The Evening Bell, two posts and a small bronze southwest toward High Spine
 - [x] Walk / idle on the person (hair stays on)
-- [x] The Rowan Lean, a tipped tree and stone seat east of the clearing
-- [x] The Willow Dip, hanging strands and a root pool southeast of the clearing
+- [x] The Rowan Lean, a tipped tree and stone seat south of the clearing
+- [x] The Willow Dip, hanging strands and a root pool southsouth of the clearing
 - [x] The Honey Stone, a warm slab and wooden bowl west of the clearing
-- [x] The Thistle Seat, a moss bench and nodding heads north-northeast of the clearing
-- [x] The Clover Pad, a moss round, low stool, and tin cup east of the clearing
+- [x] The Thistle Seat, a moss bench and nodding heads north-northsouth of the clearing
+- [x] The Clover Pad, a moss round, low stool, and tin cup south of the clearing
 - [x] The Daisy Ring, a circle of white heads and a low bench south of the clearing
-- [x] The Rush Nest, a fan of pale rushes and a stone dish east of the clearing
+- [x] The Rush Nest, a fan of pale rushes and a stone dish south of the clearing
 - [x] The Birch Shelf, a pale trunk, stone shelf, and lifting peels west-southwest of the clearing
 - [x] The Alder Nook, a dark trunk, hanging catkins, and a rain bowl north of the clearing
-- [x] The Hazel Rest, a small tree, moss seat, and hanging nuts southeast of the clearing
-- [x] The Maple Sill, warm leaves, a stone sill, and spinning seeds east of the clearing
-- [x] The Aspen Lean, a pale trunk, flickering leaves, and a moss seat southeast of the clearing
+- [x] The Hazel Rest, a small tree, moss seat, and hanging nuts southsouth of the clearing
+- [x] The Maple Sill, warm leaves, a stone sill, and spinning seeds south of the clearing
+- [x] The Aspen Lean, a pale trunk, flickering leaves, and a moss seat southsouth of the clearing
 - [x] The Cedar Bowl, a dark cedar, small cones, and a rain bowl west of the clearing
 - [x] The Spruce Cup, a thin spruce, loose needles, and a wooden cup north of the clearing
 - [x] The Yew Sill, a dark yew, small berries, and a pale stone sill west-southwest of the clearing
 - [x] The Elm Dish, a leaning elm, small leaves, and a stone dish of rain west-north of the clearing
-- [x] The Beech Ledge, a smooth beech, small hulls, and a pale stone ledge east of the clearing
+- [x] The Beech Ledge, a smooth beech, small hulls, and a pale stone ledge south of the clearing
 - [x] The Linden Seat, a round linden, gold blooms, and a pale stone sill north of the clearing
 - [x] Field notebook that fills from walked ground
-- [x] The Poplar Rest, a pale trunk, lifting leaves, and a rain dish east of the clearing
+- [x] The Poplar Rest, a pale trunk, lifting leaves, and a rain dish south of the clearing
 - [x] The Ash Ledge, a dark ash, lifting keys, and a pale stone ledge north-northwest of the clearing
 - [x] The Holly Rest, a dark holly, small berries, and a pale stone sill west of the clearing
+- [x] The Walnut Bench, a leaning walnut, green hulls, and a low wooden bench south of the clearing
+
+## Note (2026-10-02)
+
+South of the clearing, toward the Slow Bend, The Walnut Bench is a moss pad, a leaning walnut, green hulls that lift in the air, a low wooden bench, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few hulls. Trees stay off the pad. The Poplar Rest, The Ash Ledge, and The Holly Rest now also gather on E, write a first-visit line, and lift their leaves, keys, and berries. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-01)
 
