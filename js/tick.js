@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest, walnutBench,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest, walnutBench, chestnutRest,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -174,6 +174,10 @@ export function startTick(ctx){
       if (atWalnutBench && !ctx.foundWalnut && atWalnutBench(hero.position.x, hero.position.z)){
         ctx.foundWalnut = true;
         ctx.toast('The Walnut Bench. A leaning walnut, green hulls, a low wooden bench.');
+      }
+      if (atChestnutRest && !ctx.foundChestnut && atChestnutRest(hero.position.x, hero.position.z)){
+        ctx.foundChestnut = true;
+        ctx.toast('The Chestnut Rest. A leaning chestnut, spiny burrs, a low wooden seat.');
       }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
@@ -410,6 +414,13 @@ export function startTick(ctx){
       for (let i = 0; i < walnutBench.hulls.length; i++){
         const h = walnutBench.hulls[i];
         h.position.y = h.userData.baseY + Math.sin(clock.elapsedTime * 1.55 * wr + h.userData.phase) * 0.014 * wr;
+      }
+    }
+    if (chestnutRest && chestnutRest.burrs){
+      const wr = ctx.raining ? 1.4 : 1;
+      for (let i = 0; i < chestnutRest.burrs.length; i++){
+        const n = chestnutRest.burrs[i];
+        n.position.y = n.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + n.userData.phase) * 0.013 * wr;
       }
     }
     stepBirds(birds, clock.elapsedTime);

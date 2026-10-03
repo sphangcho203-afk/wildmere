@@ -17,6 +17,8 @@ import { atPoplarRest } from './poplar.js';
 import { atAshLedge } from './ash.js';
 import { atHollyRest } from './holly.js';
 import { atWalnutBench } from './walnut.js';
+import { atChestnutRest } from './chestnut.js';
+import { atWalnutBench } from './walnut.js';
 
 function hash2(ix, iy){
   const SEED = 2041;
@@ -264,6 +266,7 @@ export function makeRiverWater(waterMat){
   return group;
 }
 export function currentPlace(x, z){
+  if (atChestnutRest(x, z)) return 'The Chestnut Rest';
   if (atWalnutBench(x, z)) return 'The Walnut Bench';
   if (atHollyRest(x, z)) return 'The Holly Rest';
   if (atAshLedge(x, z)) return 'The Ash Ledge';

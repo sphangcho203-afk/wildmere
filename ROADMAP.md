@@ -54,6 +54,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Ash Ledge, a dark ash, lifting keys, and a pale stone ledge north-northwest of the clearing
 - [x] The Holly Rest, a dark holly, small berries, and a pale stone sill west of the clearing
 - [x] The Walnut Bench, a leaning walnut, green hulls, and a low wooden bench south of the clearing
+- [x] The Chestnut Rest, a leaning chestnut, spiny burrs, and a low wooden seat north of the clearing
+
+## Note (2026-10-03)
+
+North of the clearing, a little west, The Chestnut Rest is a moss pad, a leaning chestnut, spiny burrs that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few burrs. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-02)
 

@@ -95,4 +95,5 @@ export { makePoplarRest, atPoplarRest } from './poplar.js';
 export { makeAshLedge, atAshLedge } from './ash.js';
 export { makeHollyRest, atHollyRest } from './holly.js';
 export { makeWalnutBench, atWalnutBench } from './walnut.js';
+export { makeChestnutRest, atChestnutRest } from './chestnut.js';
 export { addDistantRidges } from './ridges.js';
