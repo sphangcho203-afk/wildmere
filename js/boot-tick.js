@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
-import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, riverDist } from './world.js';
+import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -58,6 +58,12 @@ export function bootTick(parts){
     atElmDish,
     atBeechLedge,
     atLindenSeat,
+    atPoplarRest,
+    atAshLedge,
+    atHollyRest,
+    atWalnutBench,
+    atChestnutRest,
+    atHawthornBench,
     currentPlace,
     stepBirds,
     stepRain,
@@ -93,6 +99,7 @@ export function bootTick(parts){
     foundHolly: false,
     foundWalnut: false,
     foundChestnut: false,
+    foundHawthorn: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -359,6 +366,12 @@ export function bootTick(parts){
     if (atChestnutRest(hero.position.x, hero.position.z)){
       player.food = Math.min(player.food + 1, 24);
       ctx.toast('A few chestnut burrs. Spiny, and they keep.');
+      hud();
+      return;
+    }
+    if (atHawthornBench(hero.position.x, hero.position.z)){
+      player.food = Math.min(player.food + 1, 24);
+      ctx.toast('A few hawthorn blooms. Pale, and they keep.');
       hud();
       return;
     }

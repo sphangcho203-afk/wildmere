@@ -179,6 +179,14 @@ export function startTick(ctx){
         ctx.foundChestnut = true;
         ctx.toast('The Chestnut Rest. A leaning chestnut, spiny burrs, a low wooden seat.');
       }
+      if (atHawthornBench && !ctx.foundHawthorn && atHawthornBench(hero.position.x, hero.position.z)){
+        ctx.foundHawthorn = true;
+        ctx.toast('The Hawthorn Bench. A leaning hawthorn, pale blooms, a low wooden bench.');
+      }
+      if (atChestnutRest && !ctx.foundChestnut && atChestnutRest(hero.position.x, hero.position.z)){
+        ctx.foundChestnut = true;
+        ctx.toast('The Chestnut Rest. A leaning chestnut, spiny burrs, a low wooden seat.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
       if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -205,6 +213,8 @@ export function startTick(ctx){
       else if (atAshLedge && atAshLedge(hero.position.x, hero.position.z)) hereName = 'The Ash Ledge';
       else if (atHollyRest && atHollyRest(hero.position.x, hero.position.z)) hereName = 'The Holly Rest';
       else if (atWalnutBench && atWalnutBench(hero.position.x, hero.position.z)) hereName = 'The Walnut Bench';
+      else if (atChestnutRest && atChestnutRest(hero.position.x, hero.position.z)) hereName = 'The Chestnut Rest';
+      else if (atHawthornBench && atHawthornBench(hero.position.x, hero.position.z)) hereName = 'The Hawthorn Bench';
       rememberPlace(hereName);
       const pl = document.getElementById('place'); if (pl) pl.textContent = hereName;
       if (ctx.stepNeeds) ctx.stepNeeds(dt);
@@ -414,6 +424,21 @@ export function startTick(ctx){
       for (let i = 0; i < walnutBench.hulls.length; i++){
         const h = walnutBench.hulls[i];
         h.position.y = h.userData.baseY + Math.sin(clock.elapsedTime * 1.55 * wr + h.userData.phase) * 0.014 * wr;
+      }
+    }
+    if (chestnutRest && chestnutRest.burrs){
+      const wr = ctx.raining ? 1.4 : 1;
+      for (let i = 0; i < chestnutRest.burrs.length; i++){
+        const b = chestnutRest.burrs[i];
+        b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + b.userData.phase) * 0.012 * wr;
+      }
+    }
+    if (hawthornBench && hawthornBench.blooms){
+      const wr = ctx.raining ? 1.35 : 1;
+      for (let i = 0; i < hawthornBench.blooms.length; i++){
+        const b = hawthornBench.blooms[i];
+        b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.45 * wr + b.userData.phase) * 0.014 * wr;
+        b.rotation.z = Math.sin(clock.elapsedTime * 1.2 * wr + i) * 0.08 * wr;
       }
     }
     if (chestnutRest && chestnutRest.burrs){

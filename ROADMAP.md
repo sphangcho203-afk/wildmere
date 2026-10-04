@@ -55,6 +55,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Holly Rest, a dark holly, small berries, and a pale stone sill west of the clearing
 - [x] The Walnut Bench, a leaning walnut, green hulls, and a low wooden bench south of the clearing
 - [x] The Chestnut Rest, a leaning chestnut, spiny burrs, and a low wooden seat north of the clearing
+- [x] The Hawthorn Bench, a leaning hawthorn, pale blooms, and a low wooden bench east-northeast of the clearing
+
+## Note (2026-10-04)
+
+East-northeast of the clearing, toward the Quiet Well, The Hawthorn Bench is a moss pad, a leaning hawthorn, pale blooms that lift in the air, a low wooden bench, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. The Chestnut Rest now also writes a first-visit line and lifts its burrs. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-03)
 

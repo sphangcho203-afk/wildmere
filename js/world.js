@@ -96,4 +96,5 @@ export { makeAshLedge, atAshLedge } from './ash.js';
 export { makeHollyRest, atHollyRest } from './holly.js';
 export { makeWalnutBench, atWalnutBench } from './walnut.js';
 export { makeChestnutRest, atChestnutRest } from './chestnut.js';
+export { makeHawthornBench, atHawthornBench } from './hawthorn.js';
 export { addDistantRidges } from './ridges.js';
