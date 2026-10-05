@@ -56,6 +56,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Walnut Bench, a leaning walnut, green hulls, and a low wooden bench south of the clearing
 - [x] The Chestnut Rest, a leaning chestnut, spiny burrs, and a low wooden seat north of the clearing
 - [x] The Hawthorn Bench, a leaning hawthorn, pale blooms, and a low wooden bench east-northeast of the clearing
+- [x] The Elder Bowl, a dark elder, pale flower plates, and a stone bowl of rain south-southwest of the clearing
+
+## Note (2026-10-05)
+
+South-southwest of the clearing, toward the Reed Step, The Elder Bowl is a moss pad, a dark multi-stem elder, pale flower plates, a low wooden seat, and a stone bowl of rain. Compass and notebook write it. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-04)
 
