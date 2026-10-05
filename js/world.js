@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { atElderBowl } from './elder.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -58,7 +59,7 @@ export function heightAt(x, z){
 
 export { makeTree, treeKindAt, addBerryBush, makeHuman } from './trees.js';
 export {
-  makeRiverWater, currentPlace, makeStoneRing, makeMossSeat,
+  makeRiverWater, makeStoneRing, makeMossSeat,
   placeStoneTerrace, addGrassTufts, addValleyBirds, stepBirds,
   makeQuietWell, atQuietWell,
   makeListeningPine, atListeningPine,
@@ -66,6 +67,11 @@ export {
   makeReedStep, atReedStep,
   makeLowCairn, atLowCairn
 } from './places.js';
+import { currentPlace as rawPlace } from './places.js';
+export function currentPlace(x, z){
+  if (atElderBowl(x, z)) return 'The Elder Bowl';
+  return rawPlace(x, z);
+}
 export { makeShadePool, atShadePool } from './shade.js';
 export { makeSplitOak, atSplitOak } from './oak.js';
 export { makeStillGate, atStillGate } from './gate.js';
