@@ -25,7 +25,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 | Click | Enter the valley |
 | WASD | Walk |
 | Mouse / right pad | Look |
-| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries · sip the willow pool · sip the honey bowl · pick thistle seeds · sip the clover cup · pick daisy heads · sip the rush dish · pick birch bark · sip the alder bowl · pick hazel nuts · pick maple seeds · pick aspen leaves · sip the cedar bowl · sip the spruce cup · pick yew berries · sip the elm dish · pick beech hulls · pick linden blooms · sip the poplar dish · pick ash keys · pick holly berries · pick walnut hulls · pick chestnut burrs · pick hawthorn blooms |
+| E | Gather wood / berries / stone · water soil · harvest crops · drink · fish at the Slow Bend · pick rowan berries · sip the willow pool · sip the honey bowl · pick thistle seeds · sip the clover cup · pick daisy heads · sip the rush dish · pick birch bark · sip the alder bowl · pick hazel nuts · pick maple seeds · pick aspen leaves · sip the cedar bowl · sip the spruce cup · pick yew berries · sip the elm dish · pick beech hulls · pick linden blooms · sip the poplar dish · pick ash keys · pick holly berries · pick walnut hulls · pick chestnut burrs · pick hawthorn blooms · sip the elder bowl |
 | Tab or Q | Cycle build piece |
 | F | Place selected piece (post, fire, cabin, soil bed) |
 | G | Plant a crop in a soil bed (needs 1 berry) |
@@ -40,7 +40,7 @@ If the canvas stays black, you are on `file://` and the module imports were bloc
 - High ground (High Spine) and a stone terrace past it, with thin grass and loose rock
 - Thicker timber (The Quiet Pines)
 - The Old Ring, the Moss Seat, the Wind Hollow, the Reed Step, the Low Cairn, the Shade Pool, the Split Oak, the Still Gate, the Wash Rock, the Lark Post, the Fern Stair, the Evening Bell, the Rowan Lean, the Willow Dip, the Honey Stone, the Thistle Seat, the Clover Pad, the Daisy Ring, the Rush Nest, the Birch Shelf, the Alder Nook, the Hazel Rest, the Maple Sill, the Aspen Lean, and the Cedar Bowl — quiet named places
-- The Spruce Cup, the Yew Sill, the Elm Dish, the Beech Ledge, the Linden Seat, the Poplar Rest, the Ash Ledge, the Holly Rest, the Walnut Bench, the Chestnut Rest, and the Hawthorn Bench — quiet named places
+- The Spruce Cup, the Yew Sill, the Elm Dish, the Beech Ledge, the Linden Seat, the Poplar Rest, the Ash Ledge, the Holly Rest, the Walnut Bench, the Chestnut Rest, the Hawthorn Bench, and the Elder Bowl — quiet named places
 - Trees, berry bushes, stone, grass tufts
 - Birds circling high over the valley
 - Day and night with a real sky model
@@ -76,6 +76,7 @@ Walk west of the clearing, toward the Old Ring, to the Cedar Bowl — a dark ced
 Walk south of the clearing, toward the Slow Bend, to the Walnut Bench — a leaning walnut, green hulls, a low wooden bench, and a pale stone sill. Press E for a few hulls.
 Walk north of the clearing, a little west, to the Chestnut Rest — a leaning chestnut, spiny burrs, a low wooden seat, and a pale stone sill. Press E for a few burrs.
 Walk east-northeast of the clearing, toward the Quiet Well, to the Hawthorn Bench — a leaning hawthorn, pale blooms, a low wooden bench, and a pale stone sill. Press E for a few blooms.
+Walk south-southwest of the clearing, toward the Reed Step, to the Elder Bowl — a dark elder, pale flower plates, a low wooden seat, and a stone bowl of rain.
 
 ## Project
 
@@ -105,6 +106,7 @@ Walk east-northeast of the clearing, toward the Quiet Well, to the Hawthorn Benc
 | `js/walnut.js` | The Walnut Bench |
 | `js/chestnut.js` | The Chestnut Rest |
 | `js/hawthorn.js` | The Hawthorn Bench |
+| `js/elder.js` | The Elder Bowl |
 | `js/shade.js` | The Shade Pool |
 | `js/oak.js` | The Split Oak |
 | `js/gate.js` | The Still Gate |
