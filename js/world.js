@@ -97,4 +97,5 @@ export { makeHollyRest, atHollyRest } from './holly.js';
 export { makeWalnutBench, atWalnutBench } from './walnut.js';
 export { makeChestnutRest, atChestnutRest } from './chestnut.js';
 export { makeHawthornBench, atHawthornBench } from './hawthorn.js';
+export { makeElderBowl, atElderBowl } from './elder.js';
 export { addDistantRidges } from './ridges.js';
