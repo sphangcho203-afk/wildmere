@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest, walnutBench, chestnutRest,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest, walnutBench, chestnutRest, hawthornBench, elderBowl, juniperCup,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -183,12 +183,18 @@ export function startTick(ctx){
         ctx.foundHawthorn = true;
         ctx.toast('The Hawthorn Bench. A leaning hawthorn, pale blooms, a low wooden bench.');
       }
-      if (atChestnutRest && !ctx.foundChestnut && atChestnutRest(hero.position.x, hero.position.z)){
-        ctx.foundChestnut = true;
-        ctx.toast('The Chestnut Rest. A leaning chestnut, spiny burrs, a low wooden seat.');
+      if (atElderBowl && !ctx.foundElder && atElderBowl(hero.position.x, hero.position.z)){
+        ctx.foundElder = true;
+        ctx.toast('The Elder Bowl. A dark elder, pale flower plates, a stone bowl of rain.');
+      }
+      if (atJuniperCup && !ctx.foundJuniper && atJuniperCup(hero.position.x, hero.position.z)){
+        ctx.foundJuniper = true;
+        ctx.toast('The Juniper Cup. A low juniper, blue berries, a wooden cup of rain.');
       }
       let hereName = currentPlace(hero.position.x, hero.position.z);
-      if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
+      if (atJuniperCup && atJuniperCup(hero.position.x, hero.position.z)) hereName = 'The Juniper Cup';
+      else if (atElderBowl && atElderBowl(hero.position.x, hero.position.z)) hereName = 'The Elder Bowl';
+      else if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
       else if (atLarkPost(hero.position.x, hero.position.z)) hereName = 'The Lark Post';
       else if (atRowanLean && atRowanLean(hero.position.x, hero.position.z)) hereName = 'The Rowan Lean';
@@ -439,6 +445,20 @@ export function startTick(ctx){
         const b = hawthornBench.blooms[i];
         b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.45 * wr + b.userData.phase) * 0.014 * wr;
         b.rotation.z = Math.sin(clock.elapsedTime * 1.2 * wr + i) * 0.08 * wr;
+      }
+    }
+    if (elderBowl && elderBowl.blooms){
+      const wr = ctx.raining ? 1.3 : 1;
+      for (let i = 0; i < elderBowl.blooms.length; i++){
+        const b = elderBowl.blooms[i];
+        b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.35 * wr + b.userData.phase) * 0.012 * wr;
+      }
+    }
+    if (juniperCup && juniperCup.berries){
+      const wr = ctx.raining ? 1.3 : 1;
+      for (let i = 0; i < juniperCup.berries.length; i++){
+        const b = juniperCup.berries[i];
+        b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.4 * wr + b.userData.phase) * 0.012 * wr;
       }
     }
     if (chestnutRest && chestnutRest.burrs){

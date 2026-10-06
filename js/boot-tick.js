@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
-import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, riverDist } from './world.js';
+import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -64,6 +64,8 @@ export function bootTick(parts){
     atWalnutBench,
     atChestnutRest,
     atHawthornBench,
+    atElderBowl,
+    atJuniperCup,
     currentPlace,
     stepBirds,
     stepRain,
@@ -100,6 +102,8 @@ export function bootTick(parts){
     foundWalnut: false,
     foundChestnut: false,
     foundHawthorn: false,
+    foundElder: false,
+    foundJuniper: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -372,6 +376,18 @@ export function bootTick(parts){
     if (atHawthornBench(hero.position.x, hero.position.z)){
       player.food = Math.min(player.food + 1, 24);
       ctx.toast('A few hawthorn blooms. Pale, and they keep.');
+      hud();
+      return;
+    }
+    if (atElderBowl(hero.position.x, hero.position.z)){
+      player.thirst = Math.min(100, player.thirst + 16);
+      ctx.toast('A sip from the elder bowl. Cool, with a taste of flower.');
+      hud();
+      return;
+    }
+    if (atJuniperCup(hero.position.x, hero.position.z)){
+      player.thirst = Math.min(100, player.thirst + 16);
+      ctx.toast('A sip from the juniper cup. Cool, with a taste of berry.');
       hud();
       return;
     }

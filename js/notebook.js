@@ -32,6 +32,7 @@ import { WALNUT_X, WALNUT_Z } from './walnut.js';
 import { CHESTNUT_X, CHESTNUT_Z } from './chestnut.js';
 import { HAWTHORN_X, HAWTHORN_Z } from './hawthorn.js';
 import { ELDER_X, ELDER_Z } from './elder.js';
+import { JUNIPER_X, JUNIPER_Z } from './juniper.js';
 import { slowBendCenter } from './bend.js';
 
 const NOTES_KEY = 'wildmere-notes-v1';
@@ -80,6 +81,7 @@ const NOTES = [
   { id: 'chestnut-rest', name: 'The Chestnut Rest', x: CHESTNUT_X, z: CHESTNUT_Z, line: 'A leaning chestnut, spiny burrs, a low wooden seat.' },
   { id: 'hawthorn-bench', name: 'The Hawthorn Bench', x: HAWTHORN_X, z: HAWTHORN_Z, line: 'A leaning hawthorn, pale blooms, a low wooden bench.' },
   { id: 'elder-bowl', name: 'The Elder Bowl', x: ELDER_X, z: ELDER_Z, line: 'A dark elder, pale flower plates, rain in a stone bowl.' },
+  { id: 'juniper-cup', name: 'The Juniper Cup', x: JUNIPER_X, z: JUNIPER_Z, line: 'A low juniper, blue berries, rain in a wooden cup.' },
   { id: 'stone-terrace', name: 'The Stone Terrace', x: TERRACE_X, z: TERRACE_Z, line: 'A high shelf of rock and thin grass past High Spine.' },
   { id: 'slow-bend', name: 'The Slow Bend', x: 0, z: 48, line: 'Still water and a short plank. Fish if you can wait.' }
 ];

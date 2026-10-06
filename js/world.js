@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { atElderBowl } from './elder.js';
+import { atJuniperCup } from './juniper.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -69,6 +70,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atJuniperCup(x, z)) return 'The Juniper Cup';
   if (atElderBowl(x, z)) return 'The Elder Bowl';
   return rawPlace(x, z);
 }
@@ -104,4 +106,5 @@ export { makeWalnutBench, atWalnutBench } from './walnut.js';
 export { makeChestnutRest, atChestnutRest } from './chestnut.js';
 export { makeHawthornBench, atHawthornBench } from './hawthorn.js';
 export { makeElderBowl, atElderBowl } from './elder.js';
+export { makeJuniperCup, atJuniperCup } from './juniper.js';
 export { addDistantRidges } from './ridges.js';
