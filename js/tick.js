@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup, atMulberryRest,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest, walnutBench, chestnutRest, hawthornBench, elderBowl, juniperCup,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest, walnutBench, chestnutRest, hawthornBench, elderBowl, juniperCup, mulberryRest,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -191,8 +191,13 @@ export function startTick(ctx){
         ctx.foundJuniper = true;
         ctx.toast('The Juniper Cup. A low juniper, blue berries, a wooden cup of rain.');
       }
+      if (atMulberryRest && !ctx.foundMulberry && atMulberryRest(hero.position.x, hero.position.z)){
+        ctx.foundMulberry = true;
+        ctx.toast('The Mulberry Rest. A leaning mulberry, dark berries, a low wooden seat.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
-      if (atJuniperCup && atJuniperCup(hero.position.x, hero.position.z)) hereName = 'The Juniper Cup';
+      if (atMulberryRest && atMulberryRest(hero.position.x, hero.position.z)) hereName = 'The Mulberry Rest';
+      else if (atJuniperCup && atJuniperCup(hero.position.x, hero.position.z)) hereName = 'The Juniper Cup';
       else if (atElderBowl && atElderBowl(hero.position.x, hero.position.z)) hereName = 'The Elder Bowl';
       else if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
       else if (atFernStair(hero.position.x, hero.position.z)) hereName = 'The Fern Stair';
@@ -459,6 +464,13 @@ export function startTick(ctx){
       for (let i = 0; i < juniperCup.berries.length; i++){
         const b = juniperCup.berries[i];
         b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.4 * wr + b.userData.phase) * 0.012 * wr;
+      }
+    }
+    if (mulberryRest && mulberryRest.berries){
+      const wr = ctx.raining ? 1.35 : 1;
+      for (let i = 0; i < mulberryRest.berries.length; i++){
+        const b = mulberryRest.berries[i];
+        b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + b.userData.phase) * 0.014 * wr;
       }
     }
     if (chestnutRest && chestnutRest.burrs){

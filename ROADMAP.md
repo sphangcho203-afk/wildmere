@@ -58,6 +58,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Hawthorn Bench, a leaning hawthorn, pale blooms, and a low wooden bench east-northeast of the clearing
 - [x] The Elder Bowl, a dark elder, pale flower plates, and a stone bowl of rain south-southwest of the clearing
 - [x] The Juniper Cup, a low juniper, blue berries, and a wooden cup of rain west of the clearing
+- [x] The Mulberry Rest, a leaning mulberry, dark berries, and a low wooden seat east of the clearing
+
+## Note (2026-10-07)
+
+East of the clearing, a little south of the Quiet Well, The Mulberry Rest is a moss pad, a leaning mulberry, dark berries that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few berries. Trees stay off the pad. The Juniper Cup is spawned again so the valley starts. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-06)
 
