@@ -1,9 +1,9 @@
 export function startTick(ctx){
   const THREE = ctx.THREE;
   const {
-    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup, atMulberryRest,
+    scene, camera, renderer, hero, heightAt, atFernStair, atLarkPost, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup, atMulberryRest, atHornbeamShelf,
     currentPlace, rememberPlace, stepBirds, stepRain, rainWanted,
-    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest, walnutBench, chestnutRest, hawthornBench, elderBowl, juniperCup, mulberryRest,
+    birds, rain, fernStair, larkPost, eveningBell, washRock, windHollow, rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest, birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup, yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest, walnutBench, chestnutRest, hawthornBench, elderBowl, juniperCup, mulberryRest, hornbeamShelf,
     skyU, sun, dir, hemi, WATER_Y
   } = ctx;
   const keys = ctx.keys;
@@ -195,8 +195,13 @@ export function startTick(ctx){
         ctx.foundMulberry = true;
         ctx.toast('The Mulberry Rest. A leaning mulberry, dark berries, a low wooden seat.');
       }
+      if (atHornbeamShelf && !ctx.foundHornbeam && atHornbeamShelf(hero.position.x, hero.position.z)){
+        ctx.foundHornbeam = true;
+        ctx.toast('The Hornbeam Shelf. A fluted trunk, thin keys, a low wooden shelf.');
+      }
       let hereName = currentPlace(hero.position.x, hero.position.z);
-      if (atMulberryRest && atMulberryRest(hero.position.x, hero.position.z)) hereName = 'The Mulberry Rest';
+      if (atHornbeamShelf && atHornbeamShelf(hero.position.x, hero.position.z)) hereName = 'The Hornbeam Shelf';
+      else if (atMulberryRest && atMulberryRest(hero.position.x, hero.position.z)) hereName = 'The Mulberry Rest';
       else if (atJuniperCup && atJuniperCup(hero.position.x, hero.position.z)) hereName = 'The Juniper Cup';
       else if (atElderBowl && atElderBowl(hero.position.x, hero.position.z)) hereName = 'The Elder Bowl';
       else if (atEveningBell(hero.position.x, hero.position.z)) hereName = 'The Evening Bell';
@@ -471,6 +476,14 @@ export function startTick(ctx){
       for (let i = 0; i < mulberryRest.berries.length; i++){
         const b = mulberryRest.berries[i];
         b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.5 * wr + b.userData.phase) * 0.014 * wr;
+      }
+    }
+    if (hornbeamShelf && hornbeamShelf.keys){
+      const wr = ctx.raining ? 1.35 : 1;
+      for (let i = 0; i < hornbeamShelf.keys.length; i++){
+        const b = hornbeamShelf.keys[i];
+        b.position.y = b.userData.baseY + Math.sin(clock.elapsedTime * 1.35 * wr + b.userData.phase) * 0.016 * wr;
+        b.rotation.z = 0.4 + Math.sin(clock.elapsedTime * 0.9 + b.userData.phase) * 0.12;
       }
     }
     if (chestnutRest && chestnutRest.burrs){

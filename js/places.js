@@ -22,6 +22,7 @@ import { atHawthornBench } from './hawthorn.js';
 import { atElderBowl } from './elder.js';
 import { atJuniperCup } from './juniper.js';
 import { atMulberryRest } from './mulberry.js';
+import { atHornbeamShelf } from './hornbeam.js';
 
 function hash2(ix, iy){
   const SEED = 2041;
@@ -269,6 +270,7 @@ export function makeRiverWater(waterMat){
   return group;
 }
 export function currentPlace(x, z){
+  if (atHornbeamShelf(x, z)) return 'The Hornbeam Shelf';
   if (atMulberryRest(x, z)) return 'The Mulberry Rest';
   if (atJuniperCup(x, z)) return 'The Juniper Cup';
   if (atElderBowl(x, z)) return 'The Elder Bowl';

@@ -59,6 +59,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Elder Bowl, a dark elder, pale flower plates, and a stone bowl of rain south-southwest of the clearing
 - [x] The Juniper Cup, a low juniper, blue berries, and a wooden cup of rain west of the clearing
 - [x] The Mulberry Rest, a leaning mulberry, dark berries, and a low wooden seat east of the clearing
+- [x] The Hornbeam Shelf, a fluted trunk, thin keys, and a low wooden shelf west of the clearing
+
+## Note (2026-10-08)
+
+West of the clearing, a little north of the stream path, The Hornbeam Shelf is a moss pad, a fluted hornbeam, thin keys that lift in the air, a low wooden shelf, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few keys. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-07)
 
