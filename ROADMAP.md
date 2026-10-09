@@ -60,6 +60,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Juniper Cup, a low juniper, blue berries, and a wooden cup of rain west of the clearing
 - [x] The Mulberry Rest, a leaning mulberry, dark berries, and a low wooden seat east of the clearing
 - [x] The Hornbeam Shelf, a fluted trunk, thin keys, and a low wooden shelf west of the clearing
+- [x] The Sycamore Seat, a mottled trunk, round seed balls, and a low wooden seat east of the clearing
+
+## Note (2026-10-09)
+
+East of the clearing, a little south, The Sycamore Seat is a moss pad, a mottled sycamore, round seed balls that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few balls. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-08)
 
