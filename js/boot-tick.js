@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
-import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup, atMulberryRest, atHornbeamShelf, atSycamoreSeat, riverDist } from './world.js';
+import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup, atMulberryRest, atHornbeamShelf, atSycamoreSeat, atCrabappleRest, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -69,6 +69,7 @@ export function bootTick(parts){
     atMulberryRest,
     atHornbeamShelf,
     atSycamoreSeat,
+    atCrabappleRest,
     currentPlace,
     stepBirds,
     stepRain,
@@ -110,6 +111,7 @@ export function bootTick(parts){
     foundMulberry: false,
     foundHornbeam: false,
     foundSycamore: false,
+    foundCrabapple: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -415,6 +417,12 @@ export function bootTick(parts){
       hud();
       return;
     }
+    if (atCrabappleRest(hero.position.x, hero.position.z)){
+      player.food = Math.min(player.food + 1, 24);
+      ctx.toast('A few crabapples. Tart, and they keep.');
+      hud();
+      return;
+    }
     if (parts.atSlowBend && parts.atSlowBend(hero.position.x, hero.position.z)){
       if (player.thirst < 72){
         player.thirst = Math.min(100, player.thirst + 28);
@@ -526,85 +534,117 @@ export function bootTick(parts){
       hud(); return;
     }
     ctx.restTarget = 0.22;
-    let remain = ctx.restTarget - ctx.worldTime;
-    if (remain <= 0) remain += 1;
-    ctx.restSpeed = remain / 4.5;
+    ctx.restSpeed = 0.08;
     resting = true;
-    ctx.toast('Resting by the fire…');
+    ctx.toast('Resting through the night…');
   }
-  ctx.finishRest = function(){
+  function finishRest(){
     resting = false;
-    player.warmth = Math.min(100, player.warmth + 28);
-    player.health = Math.min(100, player.health + 10);
-    player.hunger = Math.max(0, player.hunger - 6);
-    player.thirst = Math.max(0, player.thirst - 4);
-    ctx.toast('Morning light. The valley is still.');
+    player.health = Math.min(100, player.health + 18);
+    player.hunger = Math.max(0, player.hunger - 8);
+    player.warmth = Math.min(100, player.warmth + 22);
+    ctx.toast('Morning. The fire is low.');
     hud();
-  };
+  }
+  ctx.finishRest = finishRest;
   ctx.stepNeeds = function(dt){
-    if (!parts.getPlaying() || ctx.notebookOpen) return;
+    if (resting) return;
+    player.hunger = Math.max(0, player.hunger - dt * 0.42);
+    player.thirst = Math.max(0, player.thirst - dt * 0.55);
+    if (player.hunger < 20 || player.thirst < 20){
+      player.health = Math.max(0, player.health - dt * 1.8);
+    } else if (player.health < 100){
+      player.health = Math.min(100, player.health + dt * 0.4);
+    }
+    let nearFire = nearAnyFire();
+    if (nearFire){
+      player.warmth = Math.min(100, player.warmth + dt * 8);
+    } else {
+      const night = Math.sin(ctx.worldTime * Math.PI * 2) < 0.05;
+      player.warmth = Math.max(0, player.warmth - dt * (night ? 1.6 : 0.35));
+    }
+    if (player.warmth < 30){
+      player.health = Math.max(0, player.health - dt * 1.2);
+    }
     if (fishing){
       fishWait -= dt;
       if (fishWait <= 0){
         fishing = false;
         player.fish += 1;
         player.food += 1;
-        ctx.toast('A small fish. Enough for a meal.');
+        ctx.toast('A small fish. +1 fish');
         hud();
       }
     }
     for (const p of plots){
-      if (p.crop && p.watered && p.growth < 1){
-        p.growth = Math.min(1, p.growth + dt * 0.035);
-        if (Math.random() < dt * 0.8) refreshPlotLook(p);
+      if (p.crop && p.growth < 1){
+        let rate = 0.012;
+        if (p.watered) rate *= 2.4;
+        if (ctx.raining) rate *= 1.6;
+        p.growth = Math.min(1, p.growth + dt * rate);
+        if (p.growth >= 1 && !p._ready){
+          p._ready = true;
+          ctx.toast(p.crop.label + ' ready to harvest');
+        }
+        refreshPlotLook(p);
       }
     }
-    if (ctx.raining){
-      for (const p of plots){ if (p.crop && !p.watered){ p.watered = true; refreshPlotLook(p); } }
-    }
+    hud();
   };
 
   addEventListener('keydown', e => {
-    const k = e.key.toLowerCase();
-    if (k === 'm'){ e.preventDefault(); toggleNotebook(); return; }
-    if (ctx.notebookOpen) return;
-    if (keys[k] !== undefined) keys[k] = 1;
-    if (k === 'e') gather();
-    if (k === 'f') place();
-    if (k === 'g') plant();
-    if (k === '1') eat();
-    if (k === 'r') startRest();
-    if (k === 'tab' || k === 'q'){
-      e.preventDefault();
-      if (!resting){
-        buildIndex = (buildIndex + 1) % BUILDS.length;
-        hud(); ctx.toast(BUILDS[buildIndex].label);
-      }
+    if (e.code === 'KeyW') keys.w = 1;
+    if (e.code === 'KeyA') keys.a = 1;
+    if (e.code === 'KeyS') keys.s = 1;
+    if (e.code === 'KeyD') keys.d = 1;
+    if (e.code === 'KeyE') gather();
+    if (e.code === 'KeyF') place();
+    if (e.code === 'KeyG') plant();
+    if (e.code === 'KeyR') startRest();
+    if (e.code === 'KeyM' || e.code === 'Tab'){ e.preventDefault(); toggleNotebook(); }
+    if (e.code === 'Digit1') eat();
+    if (e.code === 'KeyQ' || e.code === 'Tab'){
+      if (!resting && !ctx.notebookOpen){ buildIndex = (buildIndex + 1) % BUILDS.length; hud(); ctx.toast(BUILDS[buildIndex].label); }
     }
   });
   addEventListener('keyup', e => {
-    const k = e.key.toLowerCase();
-    if (keys[k] !== undefined) keys[k] = 0;
+    if (e.code === 'KeyW') keys.w = 0;
+    if (e.code === 'KeyA') keys.a = 0;
+    if (e.code === 'KeyS') keys.s = 0;
+    if (e.code === 'KeyD') keys.d = 0;
   });
 
-  const walk = document.getElementById('stick-walk');
-  const knob = walk && walk.querySelector('i');
+  const layer = document.getElementById('touch-layer');
+  const walk = document.getElementById('walk-pad');
+  const look = document.getElementById('look-pad');
+  const knob = document.getElementById('walk-knob');
   let walkId = null, lookId = null, lx = 0, ly = 0;
-  function setKnob(el, nx, nz){ if (el) el.style.transform = 'translate(' + (nx * 36) + 'px,' + (-nz * 36) + 'px)'; }
-  function applyWalk(t){
-    const cx = walk ? walk.getBoundingClientRect() : { left: 36, top: innerHeight - 190, width: 140, height: 140 };
-    stick.x = Math.max(-1, Math.min(1, (t.clientX - (cx.left + cx.width / 2)) / 58));
-    stick.z = -Math.max(-1, Math.min(1, (t.clientY - (cx.top + cx.height / 2)) / 58));
-    setKnob(knob, stick.x, stick.z);
+  function setKnob(el, x, z){
+    if (!el) return;
+    el.style.transform = 'translate(' + (x * 28) + 'px,' + (-z * 28) + 'px)';
   }
-  function find(id, list){ for (let i = 0; i < list.length; i++) if (list[i].identifier === id) return list[i]; return null; }
+  function applyWalk(t){
+    const r = walk.getBoundingClientRect();
+    const cx = r.left + r.width * 0.5, cy = r.top + r.height * 0.5;
+    let dx = (t.clientX - cx) / (r.width * 0.42);
+    let dz = (cy - t.clientY) / (r.height * 0.42);
+    const m = Math.hypot(dx, dz);
+    if (m > 1){ dx /= m; dz /= m; }
+    stick.x = dx; stick.z = dz;
+    setKnob(knob, dx, dz);
+  }
+  function find(id, list){
+    for (const t of list) if (t.identifier === id) return t;
+    return null;
+  }
   addEventListener('touchstart', e => {
-    if (!parts.getPlaying() || ctx.notebookOpen) return;
+    if (ctx.notebookOpen) return;
     for (const t of e.changedTouches){
-      const hit = document.elementFromPoint(t.clientX, t.clientY);
-      if (hit && hit.closest && hit.closest('#touch-actions')) continue;
-      if (walkId === null && t.clientX < innerWidth * 0.55){ walkId = t.identifier; applyWalk(t); e.preventDefault(); }
-      else if (lookId === null){ lookId = t.identifier; lx = t.clientX; ly = t.clientY; e.preventDefault(); }
+      if (walk && walk.contains(t.target) && walkId === null){
+        walkId = t.identifier; applyWalk(t); e.preventDefault();
+      } else if (look && look.contains(t.target) && lookId === null){
+        lookId = t.identifier; lx = t.clientX; ly = t.clientY; e.preventDefault();
+      }
     }
   }, { passive: false });
   addEventListener('touchmove', e => {
