@@ -36,6 +36,7 @@ import { JUNIPER_X, JUNIPER_Z } from './juniper.js';
 import { MULBERRY_X, MULBERRY_Z } from './mulberry.js';
 import { HORNBEAM_X, HORNBEAM_Z } from './hornbeam.js';
 import { SYCAMORE_X, SYCAMORE_Z } from './sycamore.js';
+import { CRAB_X, CRAB_Z } from './crabapple.js';
 import { slowBendCenter } from './bend.js';
 
 const NOTES_KEY = 'wildmere-notes-v1';
@@ -88,6 +89,7 @@ const NOTES = [
   { id: 'mulberry-rest', name: 'The Mulberry Rest', x: MULBERRY_X, z: MULBERRY_Z, line: 'A leaning mulberry, dark berries, a low wooden seat.' },
   { id: 'hornbeam-shelf', name: 'The Hornbeam Shelf', x: HORNBEAM_X, z: HORNBEAM_Z, line: 'A fluted trunk, thin keys, a low wooden shelf.' },
   { id: 'sycamore-seat', name: 'The Sycamore Seat', x: SYCAMORE_X, z: SYCAMORE_Z, line: 'A mottled trunk, round seed balls, a low wooden seat.' },
+  { id: 'crabapple-rest', name: 'The Crabapple Rest', x: CRAB_X, z: CRAB_Z, line: 'A leaning crabapple, small red fruits, a low wooden seat.' },
   { id: 'stone-terrace', name: 'The Stone Terrace', x: TERRACE_X, z: TERRACE_Z, line: 'A high shelf of rock and thin grass past High Spine.' },
   { id: 'slow-bend', name: 'The Slow Bend', x: 0, z: 48, line: 'Still water and a short plank. Fish if you can wait.' }
 ];
