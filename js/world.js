@@ -4,6 +4,7 @@ import { atJuniperCup } from './juniper.js';
 import { atMulberryRest } from './mulberry.js';
 import { atHornbeamShelf } from './hornbeam.js';
 import { atSycamoreSeat } from './sycamore.js';
+import { atCrabappleRest } from './crabapple.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -73,6 +74,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atCrabappleRest(x, z)) return 'The Crabapple Rest';
   if (atSycamoreSeat(x, z)) return 'The Sycamore Seat';
   if (atHornbeamShelf(x, z)) return 'The Hornbeam Shelf';
   if (atMulberryRest(x, z)) return 'The Mulberry Rest';
@@ -116,4 +118,5 @@ export { makeJuniperCup, atJuniperCup } from './juniper.js';
 export { makeMulberryRest, atMulberryRest } from './mulberry.js';
 export { makeHornbeamShelf, atHornbeamShelf } from './hornbeam.js';
 export { makeSycamoreSeat, atSycamoreSeat } from './sycamore.js';
+export { makeCrabappleRest, atCrabappleRest } from './crabapple.js';
 export { addDistantRidges } from './ridges.js';
