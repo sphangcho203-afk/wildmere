@@ -63,6 +63,10 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Sycamore Seat, a mottled trunk, round seed balls, and a low wooden seat east of the clearing
 - [x] The Crabapple Rest, a leaning crabapple, small red fruits, and a low wooden seat northwest of the clearing
 
+## Note (2026-10-11)
+
+The play loop was broken: js/tick.js contained only a shell snippet and the valley never ticked. Restored startTick with walk, right-half mouse look (no pointer lock), sky, rain, compass heading, place discovery, and rest. Phone pads and E/F/G/R/M/Tab stay wired.
+
 ## Note (2026-10-10)
 
 Northwest of the clearing, a little west, The Crabapple Rest is a moss pad, a leaning crabapple, small red fruits that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few crabapples. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
