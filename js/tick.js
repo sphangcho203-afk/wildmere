@@ -131,6 +131,7 @@ export function startTick(ctx){
     }
 
     if (stepNeeds) stepNeeds(dt);
+    if (ctx.stepLandmarkLifts) ctx.stepLandmarkLifts(now);
     if (stepBirds) stepBirds(birds, now * 0.001);
 
     renderer.render(scene, camera);
