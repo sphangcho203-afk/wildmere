@@ -63,6 +63,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Sycamore Seat, a mottled trunk, round seed balls, and a low wooden seat east of the clearing
 - [x] The Crabapple Rest, a leaning crabapple, small red fruits, and a low wooden seat northwest of the clearing
 - [x] The Dogwood Seat, a leaning dogwood, pale blooms, and a low wooden seat east of the clearing
+- [x] The Plum Rest, a leaning plum, dark fruits, and a low wooden seat east of the clearing
+
+## Note (2026-10-13)
+
+East of the clearing, a little north, The Plum Rest is a moss pad, a leaning plum, dark fruits that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few plums. Trees stay off the pad. The Dogwood Seat now also gathers on E and lifts its blooms. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-12)
 
