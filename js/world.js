@@ -6,6 +6,7 @@ import { atHornbeamShelf } from './hornbeam.js';
 import { atSycamoreSeat } from './sycamore.js';
 import { atCrabappleRest } from './crabapple.js';
 import { atDogwoodSeat } from './dogwood.js';
+import { atPlumRest } from './plum.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -75,6 +76,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atPlumRest(x, z)) return 'The Plum Rest';
   if (atDogwoodSeat(x, z)) return 'The Dogwood Seat';
   if (atCrabappleRest(x, z)) return 'The Crabapple Rest';
   if (atSycamoreSeat(x, z)) return 'The Sycamore Seat';
@@ -122,4 +124,5 @@ export { makeHornbeamShelf, atHornbeamShelf } from './hornbeam.js';
 export { makeSycamoreSeat, atSycamoreSeat } from './sycamore.js';
 export { makeCrabappleRest, atCrabappleRest } from './crabapple.js';
 export { makeDogwoodSeat, atDogwoodSeat } from './dogwood.js';
+export { makePlumRest, atPlumRest } from './plum.js';
 export { addDistantRidges } from './ridges.js';
