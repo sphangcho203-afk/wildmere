@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
-import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup, atMulberryRest, atHornbeamShelf, atSycamoreSeat, atCrabappleRest, atDogwoodSeat, atPlumRest, riverDist } from './world.js';
+import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup, atMulberryRest, atHornbeamShelf, atSycamoreSeat, atCrabappleRest, atDogwoodSeat, atPlumRest,
+    atPearRest, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -72,6 +73,7 @@ export function bootTick(parts){
     atCrabappleRest,
     atDogwoodSeat,
     atPlumRest,
+    atPearRest,
     currentPlace,
     stepBirds,
     stepRain,
@@ -116,6 +118,7 @@ export function bootTick(parts){
     foundCrabapple: false,
     foundDogwood: false,
     foundPlum: false,
+    foundPear: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -439,6 +442,12 @@ export function bootTick(parts){
       hud();
       return;
     }
+    if (atPearRest(hero.position.x, hero.position.z)){
+      player.food = Math.min(player.food + 1, 24);
+      ctx.toast('A few pears. Green and firm, and they keep.');
+      hud();
+      return;
+    }
     if (parts.atSlowBend && parts.atSlowBend(hero.position.x, hero.position.z)){
       if (player.thirst < 72){
         player.thirst = Math.min(100, player.thirst + 28);
@@ -557,48 +566,38 @@ export function bootTick(parts){
   }
   ctx.finishRest = function(){
     resting = false;
-    player.warmth = 100;
-    player.health = Math.min(100, player.health + 18);
-    player.hunger = Math.max(0, player.hunger - 8);
-    ctx.toast('Morning. The fire kept.');
+    player.warmth = Math.min(100, player.warmth + 28);
+    player.health = Math.min(100, player.health + 10);
+    player.hunger = Math.max(0, player.hunger - 6);
+    ctx.toast('Morning. The fire is low.');
     hud();
   };
-  ctx.stepNeeds = function(dt){
+  function stepNeeds(dt){
     if (resting) return;
-    player.hunger = Math.max(0, player.hunger - dt * 0.35);
-    player.thirst = Math.max(0, player.thirst - dt * 0.48);
-    let warmTarget = 42;
-    if (nearAnyFire()) warmTarget = 88;
-    else if (ctx.raining) warmTarget = 36;
-    player.warmth += (warmTarget - player.warmth) * Math.min(1, dt * 0.35);
-    if (player.hunger < 12 || player.thirst < 12 || player.warmth < 22){
-      player.health = Math.max(0, player.health - dt * 1.4);
+    player.hunger = Math.max(0, player.hunger - dt * 0.42);
+    player.thirst = Math.max(0, player.thirst - dt * 0.55);
+    const nearFire = nearAnyFire();
+    const night = Math.sin(ctx.worldTime * Math.PI * 2) < 0.02;
+    if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 8);
+    else if (night) player.warmth = Math.max(0, player.warmth - dt * 1.4);
+    else player.warmth = Math.min(100, player.warmth + dt * 0.6);
+    if (ctx.raining && !nearFire) player.warmth = Math.max(0, player.warmth - dt * 0.8);
+    if (player.hunger < 8 || player.thirst < 8 || player.warmth < 12){
+      player.health = Math.max(0, player.health - dt * 3.5);
     } else if (player.health < 100){
-      player.health = Math.min(100, player.health + dt * 0.6);
+      player.health = Math.min(100, player.health + dt * 0.8);
     }
-    for (const p of plots){
-      if (!p.crop || p.growth >= 1) continue;
-      const rate = p.watered || ctx.raining ? 0.018 : 0.004;
-      p.growth = Math.min(1, p.growth + dt * rate);
-      if (p.growth > 0.2 && (!p._lastGrow || p.growth - p._lastGrow > 0.12)){
-        p._lastGrow = p.growth;
-        refreshPlotLook(p);
-      }
-    }
-    if (fishing){
-      fishWait -= dt;
-      if (fishWait <= 0){
-        fishing = false;
-        player.fish += 1;
-        player.food += 1;
-        ctx.toast('A small fish. It keeps.');
-        hud();
-      }
+    if (player.health <= 0){
+      hero.position.set(10, heightAt(10, 26), 26);
+      player.health = 70; player.hunger = 60; player.thirst = 60; player.warmth = 60;
+      ctx.toast('You woke back in the clearing.');
     }
     hud();
-  };
+  }
+  ctx.stepNeeds = stepNeeds;
 
   addEventListener('keydown', e => {
+    if (e.repeat) return;
     const k = e.key.toLowerCase();
     if (k === 'w') keys.w = 1;
     if (k === 'a') keys.a = 1;
@@ -608,16 +607,11 @@ export function bootTick(parts){
     if (k === 'f') place();
     if (k === 'g') plant();
     if (k === 'r') startRest();
-    if (k === 'm') toggleNotebook();
-    if (k === '1') eat();
-    if (k === 'tab' || k === 'q'){
-      if (!resting && !ctx.notebookOpen){
-        buildIndex = (buildIndex + 1) % BUILDS.length;
-        hud();
-        ctx.toast(BUILDS[buildIndex].label);
-      }
-      e.preventDefault();
+    if (k === 'm' || k === 'tab' && e.shiftKey) toggleNotebook();
+    if (k === 'q' || k === 'tab'){
+      if (!resting && !ctx.notebookOpen){ buildIndex = (buildIndex + 1) % BUILDS.length; hud(); ctx.toast(BUILDS[buildIndex].label); }
     }
+    if (k === '1') eat();
   });
   addEventListener('keyup', e => {
     const k = e.key.toLowerCase();
@@ -627,23 +621,23 @@ export function bootTick(parts){
     if (k === 'd') keys.d = 0;
   });
 
-  const walk = document.getElementById('walk-pad');
-  const look = document.getElementById('look-pad');
-  const knob = document.getElementById('walk-knob');
+  const walk = document.getElementById('stick-walk');
+  const look = document.getElementById('stick-look');
+  const knob = walk ? walk.querySelector('i') : null;
   let walkId = null, lookId = null, lx = 0, ly = 0;
-  function setKnob(el, x, z){
+  function setKnob(el, x, y){
     if (!el) return;
-    el.style.transform = 'translate(' + (x * 28) + 'px,' + (-z * 28) + 'px)';
+    el.style.transform = 'translate(' + (x * 18) + 'px,' + (y * 18) + 'px)';
   }
   function applyWalk(t){
     const r = walk.getBoundingClientRect();
-    const cx = r.left + r.width * 0.5, cy = r.top + r.height * 0.5;
-    let dx = (t.clientX - cx) / (r.width * 0.42);
-    let dz = (cy - t.clientY) / (r.height * 0.42);
-    const m = Math.hypot(dx, dz);
-    if (m > 1){ dx /= m; dz /= m; }
-    stick.x = dx; stick.z = dz;
-    setKnob(knob, dx, dz);
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    let dx = (t.clientX - cx) / (r.width * 0.35);
+    let dy = (t.clientY - cy) / (r.height * 0.35);
+    const len = Math.hypot(dx, dy);
+    if (len > 1){ dx /= len; dy /= len; }
+    stick.x = dx; stick.z = -dy;
+    setKnob(knob, dx, dy);
   }
   function find(id, list){
     for (const t of list) if (t.identifier === id) return t;
@@ -689,7 +683,7 @@ export function bootTick(parts){
   ctx.stepLandmarkLifts = function(now){
     const list = [
       parts.dogwoodSeat, parts.crabappleRest, parts.sycamoreSeat,
-      parts.hornbeamShelf, parts.mulberryRest, parts.plumRest
+      parts.hornbeamShelf, parts.mulberryRest, parts.plumRest, parts.pearRest
     ];
     for (const lm of list){
       if (!lm) continue;
