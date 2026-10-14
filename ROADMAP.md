@@ -64,6 +64,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Crabapple Rest, a leaning crabapple, small red fruits, and a low wooden seat northwest of the clearing
 - [x] The Dogwood Seat, a leaning dogwood, pale blooms, and a low wooden seat east of the clearing
 - [x] The Plum Rest, a leaning plum, dark fruits, and a low wooden seat east of the clearing
+- [x] The Pear Rest, a leaning pear, green fruits, and a low wooden seat north of the clearing
+
+## Note (2026-10-14)
+
+North of the clearing, The Pear Rest is a moss pad, a leaning pear, green fruits that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few pears. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-13)
 
