@@ -9,6 +9,7 @@ import { atDogwoodSeat } from './dogwood.js';
 import { atPlumRest } from './plum.js';
 import { atPearRest } from './pear.js';
 import { atAppleRest } from './apple.js';
+import { atCherryRest } from './cherry.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -78,6 +79,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atCherryRest(x, z)) return 'The Cherry Rest';
   if (atAppleRest(x, z)) return 'The Apple Rest';
   if (atPearRest(x, z)) return 'The Pear Rest';
   if (atPlumRest(x, z)) return 'The Plum Rest';
@@ -131,4 +133,5 @@ export { makeDogwoodSeat, atDogwoodSeat } from './dogwood.js';
 export { makePlumRest, atPlumRest } from './plum.js';
 export { makePearRest, atPearRest } from './pear.js';
 export { makeAppleRest, atAppleRest } from './apple.js';
+export { makeCherryRest, atCherryRest } from './cherry.js';
 export { addDistantRidges } from './ridges.js';
