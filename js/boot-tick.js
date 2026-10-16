@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { startTick } from './tick.js';
 import { heightAt, currentPlace, atLarkPost, atFernStair, atEveningBell, atRowanLean, atWillowDip, atHoneyStone, atThistleSeat, atCloverPad, atDaisyRing, atRushNest, atBirchShelf, atAlderNook, atHazelRest, atMapleSill, atAspenLean, atCedarBowl, atSpruceCup, atYewSill, atElmDish, atBeechLedge, atLindenSeat, atPoplarRest, atAshLedge, atHollyRest, atWalnutBench, atChestnutRest, atHawthornBench, atElderBowl, atJuniperCup, atMulberryRest, atHornbeamShelf, atSycamoreSeat, atCrabappleRest, atDogwoodSeat, atPlumRest,
-    atPearRest, atAppleRest, riverDist } from './world.js';
+    atPearRest, atAppleRest, atCherryRest, riverDist } from './world.js';
 import { stepBirds } from './world.js';
 import { stepRain, rainWanted } from './weather.js';
 import { noteForPlace, saveNotes, renderNotebook } from './notebook.js';
@@ -75,6 +75,7 @@ export function bootTick(parts){
     atPlumRest,
     atPearRest,
     atAppleRest,
+    atCherryRest,
     currentPlace,
     stepBirds,
     stepRain,
@@ -121,6 +122,7 @@ export function bootTick(parts){
     foundPlum: false,
     foundPear: false,
     foundApple: false,
+    foundCherry: false,
     notebookOpen: false,
     get resting(){ return resting; },
     get fishing(){ return fishing; },
@@ -456,6 +458,12 @@ export function bootTick(parts){
       hud();
       return;
     }
+    if (atCherryRest(hero.position.x, hero.position.z)){
+      player.food = Math.min(player.food + 1, 24);
+      ctx.toast('A few cherries. Soft and sweet, and they keep.');
+      hud();
+      return;
+    }
     if (parts.atSlowBend && parts.atSlowBend(hero.position.x, hero.position.z)){
       if (player.thirst < 72){
         player.thirst = Math.min(100, player.thirst + 28);
@@ -570,15 +578,13 @@ export function bootTick(parts){
     }
     if (!nearFire){ ctx.toast('Stand by a campfire to rest'); return; }
     resting = true;
-    ctx.resting = true;
     ctx.restSpeed = 0.08;
     ctx.restTarget = 0.22;
     ctx.toast('Resting by the fire…');
   }
   function finishRest(){
     resting = false;
-    ctx.resting = false;
-    player.warmth = Math.min(100, player.warmth + 40);
+    player.warmth = Math.min(100, player.warmth + 30);
     player.hunger = Math.max(0, player.hunger - 8);
     ctx.toast('Morning. The fire is low.');
     hud();
@@ -588,49 +594,32 @@ export function bootTick(parts){
   function stepNeeds(dt){
     if (resting) return;
     player.hunger = Math.max(0, player.hunger - dt * 0.35);
-    player.thirst = Math.max(0, player.thirst - dt * 0.45);
-    let nearFire = false;
+    player.thirst = Math.max(0, player.thirst - dt * 0.42);
+    let warm = 74;
     for (const f of fires){
-      if (Math.hypot(f.x - hero.position.x, f.z - hero.position.z) < 4) nearFire = true;
+      const d = Math.hypot(f.x - hero.position.x, f.z - hero.position.z);
+      if (d < 4) warm = Math.min(100, warm + (4 - d) * 8);
     }
-    if (nearFire) player.warmth = Math.min(100, player.warmth + dt * 8);
-    else player.warmth = Math.max(0, player.warmth - dt * 0.4);
-    if (ctx.raining && !nearFire) player.warmth = Math.max(0, player.warmth - dt * 0.6);
-    if (player.hunger < 20) player.health = Math.max(0, player.health - dt * 0.8);
-    if (player.thirst < 15) player.health = Math.max(0, player.health - dt * 1.1);
-    if (player.warmth < 25) player.health = Math.max(0, player.health - dt * 0.5);
-    if (player.health <= 0){
-      ctx.toast('The valley takes you back to the clearing.');
-      hero.position.set(10, heightAt(10, 26), 26);
-      player.health = 60; player.hunger = 50; player.thirst = 50; player.warmth = 60;
-    }
-    for (const p of plots){
-      if (p.crop && p.watered){
-        p.growth = Math.min(1, p.growth + dt * 0.012);
-        if (p.growth >= 1 && !p.ripe){
-          p.ripe = true;
-          refreshPlotLook(p);
-        }
-      }
-      if (ctx.raining && p.crop) p.watered = true;
+    player.warmth = warm;
+    if (player.hunger < 20 || player.thirst < 20 || player.warmth < 30){
+      player.health = Math.max(0, player.health - dt * 1.2);
+    } else if (player.health < 100){
+      player.health = Math.min(100, player.health + dt * 0.4);
     }
     hud();
   }
   ctx.stepNeeds = stepNeeds;
 
-  // Phone pads and buttons
+  // Phone pads
   const leftPad = document.getElementById('left-pad');
-  const rightPad = document.getElementById('right-pad');
   const walkKnob = document.getElementById('walk-knob');
   if (leftPad){
     leftPad.addEventListener('pointerdown', e => {
       if (!parts.getPlaying() || ctx.notebookOpen) return;
-      e.preventDefault();
-      const rect = leftPad.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) / (rect.width / 2);
-      const dz = (e.clientY - cy) / (rect.height / 2);
+      const r = leftPad.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      const dx = (e.clientX - cx) / (r.width / 2);
+      const dz = (e.clientY - cy) / (r.height / 2);
       stick.x = Math.max(-1, Math.min(1, dx));
       stick.z = Math.max(-1, Math.min(1, -dz));
       if (walkKnob){
@@ -639,12 +628,11 @@ export function bootTick(parts){
       }
     });
     leftPad.addEventListener('pointermove', e => {
-      if (!e.buttons) return;
-      const rect = leftPad.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) / (rect.width / 2);
-      const dz = (e.clientY - cy) / (rect.height / 2);
+      if (e.buttons === 0 || !parts.getPlaying() || ctx.notebookOpen) return;
+      const r = leftPad.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      const dx = (e.clientX - cx) / (r.width / 2);
+      const dz = (e.clientY - cy) / (r.height / 2);
       stick.x = Math.max(-1, Math.min(1, dx));
       stick.z = Math.max(-1, Math.min(1, -dz));
       if (walkKnob){
@@ -700,7 +688,7 @@ export function bootTick(parts){
   ctx.stepLandmarkLifts = function(now){
     const list = [
       parts.dogwoodSeat, parts.crabappleRest, parts.sycamoreSeat,
-      parts.hornbeamShelf, parts.mulberryRest, parts.plumRest, parts.pearRest, parts.appleRest
+      parts.hornbeamShelf, parts.mulberryRest, parts.plumRest, parts.pearRest, parts.appleRest, parts.cherryRest
     ];
     for (const lm of list){
       if (!lm) continue;
