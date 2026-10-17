@@ -67,6 +67,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Pear Rest, a leaning pear, green fruits, and a low wooden seat north of the clearing
 - [x] The Apple Rest, a leaning apple, red fruits, and a low wooden seat east of the clearing
 - [x] The Cherry Rest, a leaning cherry, soft pink fruits, and a low wooden seat east of the clearing
+- [x] The Quince Rest, a leaning quince, yellow-green fruits, and a low wooden seat east of the clearing
+
+## Note (2026-10-17)
+
+A short way east of the clearing, a little south of the Plum Rest, The Quince Rest is a moss pad, a leaning quince, yellow-green fruits that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few quinces. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-16)
 
