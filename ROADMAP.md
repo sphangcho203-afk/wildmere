@@ -68,6 +68,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Apple Rest, a leaning apple, red fruits, and a low wooden seat east of the clearing
 - [x] The Cherry Rest, a leaning cherry, soft pink fruits, and a low wooden seat east of the clearing
 - [x] The Quince Rest, a leaning quince, yellow-green fruits, and a low wooden seat east of the clearing
+- [x] The Serviceberry Rest, a leaning serviceberry, dark berries, and a low wooden seat west of the clearing
+
+## Note (2026-10-18)
+
+West of the clearing, The Serviceberry Rest is a moss pad, a leaning serviceberry, dark berries that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few berries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-17)
 
@@ -151,7 +156,7 @@ The field notebook module was only imports, so M opened an empty book and first-
 
 ## Note (2026-09-27)
 
-North of the clearing, toward the Slow Bend, The Linden Seat is a moss pad, a round linden, gold blooms that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. The Beech Ledge now also gathers and lifts its hulls. `places.js` again holds the stream, birds, grass, named-ground compass, and older quiet spots so the play loop can import them. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
+North of the clearing, toward the Slow Bend, The Linden Seat is a moss pad, a round linden, gold blooms that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. `places.js` again holds the stream, birds, grass, named-ground compass, and older quiet spots so the play loop can import them. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-09-25)
 
