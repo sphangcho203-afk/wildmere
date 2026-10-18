@@ -11,6 +11,7 @@ import { atPearRest } from './pear.js';
 import { atAppleRest } from './apple.js';
 import { atCherryRest } from './cherry.js';
 import { atQuinceRest } from './quince.js';
+import { atServiceRest } from './service.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -80,6 +81,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atServiceRest(x, z)) return 'The Serviceberry Rest';
   if (atQuinceRest(x, z)) return 'The Quince Rest';
   if (atCherryRest(x, z)) return 'The Cherry Rest';
   if (atAppleRest(x, z)) return 'The Apple Rest';
@@ -137,4 +139,5 @@ export { makePearRest, atPearRest } from './pear.js';
 export { makeAppleRest, atAppleRest } from './apple.js';
 export { makeCherryRest, atCherryRest } from './cherry.js';
 export { makeQuinceRest, atQuinceRest } from './quince.js';
+export { makeServiceRest, atServiceRest } from './service.js';
 export { addDistantRidges } from './ridges.js';
