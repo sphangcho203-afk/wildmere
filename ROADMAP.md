@@ -70,6 +70,10 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Quince Rest, a leaning quince, yellow-green fruits, and a low wooden seat east of the clearing
 - [x] The Serviceberry Rest, a leaning serviceberry, dark berries, and a low wooden seat west of the clearing
 
+## Note (2026-10-19)
+
+West of the clearing, The Serviceberry Rest is now fully spawned and wired: compass, first-visit line, notebook, gather on E, and lifting berries. Stand there and press E for a few dark berries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
+
 ## Note (2026-10-18)
 
 West of the clearing, The Serviceberry Rest is a moss pad, a leaning serviceberry, dark berries that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few berries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
