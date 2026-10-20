@@ -52,7 +52,7 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] Field notebook that fills from walked ground
 - [x] The Poplar Rest, a pale trunk, lifting leaves, and a rain dish south of the clearing
 - [x] The Ash Ledge, a dark ash, lifting keys, and a pale stone ledge north-northwest of the clearing
-- [x] The Holly Rest, a dark holly, small berries, and a pale stone sill west of the clearing
+- [x] The Holly Rest, a dark holly, small red berries, and a pale stone sill west of the clearing
 - [x] The Walnut Bench, a leaning walnut, green hulls, and a low wooden bench south of the clearing
 - [x] The Chestnut Rest, a leaning chestnut, spiny burrs, and a low wooden seat north of the clearing
 - [x] The Hawthorn Bench, a leaning hawthorn, pale blooms, and a low wooden bench east-northeast of the clearing
@@ -69,6 +69,10 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Cherry Rest, a leaning cherry, soft pink fruits, and a low wooden seat east of the clearing
 - [x] The Quince Rest, a leaning quince, yellow-green fruits, and a low wooden seat east of the clearing
 - [x] The Serviceberry Rest, a leaning serviceberry, dark berries, and a low wooden seat west of the clearing
+
+## Note (2026-10-20)
+
+The play loop was broken again: js/boot-tick.js contained only a stub. Restored bootTick so walk, right-half look (no pointer lock), phone pads with visible walk knob, E/F/G/R/M/Tab buttons, gather on landmarks and resources, build, plant, rest by fire, fish at the Slow Bend, notebook, and HUD all run. Trees stay off pads. No pointer lock.
 
 ## Note (2026-10-19)
 
