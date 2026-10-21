@@ -69,6 +69,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Cherry Rest, a leaning cherry, soft pink fruits, and a low wooden seat east of the clearing
 - [x] The Quince Rest, a leaning quince, yellow-green fruits, and a low wooden seat east of the clearing
 - [x] The Serviceberry Rest, a leaning serviceberry, dark berries, and a low wooden seat west of the clearing
+- [x] The Larch Rest, a leaning larch, soft needles, and a low wooden seat northeast of the clearing
+
+## Note (2026-10-21)
+
+Northeast of the clearing, The Larch Rest is a moss pad, a leaning larch, soft needles that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few soft needles. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-20)
 
