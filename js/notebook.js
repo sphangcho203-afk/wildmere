@@ -44,6 +44,7 @@ import { APPLE_X, APPLE_Z } from './apple.js';
 import { CHERRY_X, CHERRY_Z } from './cherry.js';
 import { QUINCE_X, QUINCE_Z } from './quince.js';
 import { SERVICE_X, SERVICE_Z } from './service.js';
+import { LARCH_X, LARCH_Z } from './larch.js';
 import { slowBendCenter } from './bend.js';
 
 const NOTES_KEY = 'wildmere-notes-v1';
@@ -104,6 +105,7 @@ const NOTES = [
   { id: 'cherry-rest', name: 'The Cherry Rest', x: CHERRY_X, z: CHERRY_Z, line: 'A leaning cherry, soft pink fruits, a low wooden seat.' },
   { id: 'quince-rest', name: 'The Quince Rest', x: QUINCE_X, z: QUINCE_Z, line: 'A leaning quince, yellow-green fruits, a low wooden seat.' },
   { id: 'service-rest', name: 'The Serviceberry Rest', x: SERVICE_X, z: SERVICE_Z, line: 'A leaning serviceberry, dark berries, a low wooden seat.' },
+  { id: 'larch-rest', name: 'The Larch Rest', x: LARCH_X, z: LARCH_Z, line: 'A leaning larch, soft needles that lift, a low wooden seat.' },
   { id: 'stone-terrace', name: 'The Stone Terrace', x: TERRACE_X, z: TERRACE_Z, line: 'A high shelf of rock and thin grass past High Spine.' },
   { id: 'slow-bend', name: 'The Slow Bend', x: 0, z: 48, line: 'Still water and a short plank. Fish if you can wait.' }
 ];
