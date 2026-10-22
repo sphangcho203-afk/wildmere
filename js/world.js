@@ -13,6 +13,7 @@ import { atCherryRest } from './cherry.js';
 import { atQuinceRest } from './quince.js';
 import { atServiceRest } from './service.js';
 import { atLarchRest } from './larch.js';
+import { atFirRest } from './fir.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -82,6 +83,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atFirRest(x, z)) return 'The Fir Rest';
   if (atLarchRest(x, z)) return 'The Larch Rest';
   if (atServiceRest(x, z)) return 'The Serviceberry Rest';
   if (atQuinceRest(x, z)) return 'The Quince Rest';
@@ -143,4 +145,5 @@ export { makeCherryRest, atCherryRest } from './cherry.js';
 export { makeQuinceRest, atQuinceRest } from './quince.js';
 export { makeServiceRest, atServiceRest } from './service.js';
 export { makeLarchRest, atLarchRest } from './larch.js';
+export { makeFirRest, atFirRest } from './fir.js';
 export { addDistantRidges } from './ridges.js';
