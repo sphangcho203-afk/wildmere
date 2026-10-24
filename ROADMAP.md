@@ -72,6 +72,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Larch Rest, a leaning larch, soft needles, and a low wooden seat northeast of the clearing
 - [x] The Fir Rest, a leaning fir, soft needles, and a low wooden seat west of the clearing
 - [x] The Pine Rest, a leaning pine, soft needles, and a low wooden seat east of the clearing
+- [x] The Cypress Rest, a leaning cypress, soft needles, and a low wooden seat south-southeast of the clearing
+
+## Note (2026-10-24)
+
+South-southeast of the clearing, The Cypress Rest is a moss pad, a leaning cypress, soft needles that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few soft needles. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-23)
 
