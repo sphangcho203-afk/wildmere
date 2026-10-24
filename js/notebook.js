@@ -47,6 +47,7 @@ import { SERVICE_X, SERVICE_Z } from './service.js';
 import { LARCH_X, LARCH_Z } from './larch.js';
 import { FIR_X, FIR_Z } from './fir.js';
 import { PINE_REST_X, PINE_REST_Z } from './pine.js';
+import { CYPRESS_REST_X, CYPRESS_REST_Z } from './cypress.js';
 import { slowBendCenter } from './bend.js';
 
 const NOTES_KEY = 'wildmere-notes-v1';
@@ -110,6 +111,7 @@ const NOTES = [
   { id: 'larch-rest', name: 'The Larch Rest', x: LARCH_X, z: LARCH_Z, line: 'A leaning larch, soft needles that lift, a low wooden seat.' },
   { id: 'fir-rest', name: 'The Fir Rest', x: FIR_X, z: FIR_Z, line: 'A leaning fir, soft needles that lift, a low wooden seat.' },
   { id: 'pine-rest', name: 'The Pine Rest', x: PINE_REST_X, z: PINE_REST_Z, line: 'A leaning pine, soft needles that lift, a low wooden seat.' },
+  { id: 'cypress-rest', name: 'The Cypress Rest', x: CYPRESS_REST_X, z: CYPRESS_REST_Z, line: 'A leaning cypress, soft needles that lift, a low wooden seat.' },
   { id: 'stone-terrace', name: 'The Stone Terrace', x: TERRACE_X, z: TERRACE_Z, line: 'A high shelf of rock and thin grass past High Spine.' },
   { id: 'slow-bend', name: 'The Slow Bend', x: 0, z: 48, line: 'Still water and a short plank. Fish if you can wait.' }
 ];
