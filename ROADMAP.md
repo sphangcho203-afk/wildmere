@@ -73,6 +73,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Fir Rest, a leaning fir, soft needles, and a low wooden seat west of the clearing
 - [x] The Pine Rest, a leaning pine, soft needles, and a low wooden seat east of the clearing
 - [x] The Cypress Rest, a leaning cypress, soft needles, and a low wooden seat south-southeast of the clearing
+- [x] The Heather Rest, a moss pad, low heather clumps, a wooden seat, and lifting blooms west of the clearing
+
+## Note (2026-10-25)
+
+West of the clearing, a little north, The Heather Rest is a moss pad, low heather clumps, a wooden seat, and blooms that lift in the air. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-24)
 

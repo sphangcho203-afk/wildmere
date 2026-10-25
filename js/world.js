@@ -16,6 +16,7 @@ import { atLarchRest } from './larch.js';
 import { atFirRest } from './fir.js';
 import { atPineRest } from './pine.js';
 import { atCypressRest } from './cypress.js';
+import { atHeatherRest } from './heather.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -85,6 +86,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atHeatherRest(x, z)) return 'The Heather Rest';
   if (atCypressRest(x, z)) return 'The Cypress Rest';
   if (atPineRest(x, z)) return 'The Pine Rest';
   if (atFirRest(x, z)) return 'The Fir Rest';
@@ -152,4 +154,5 @@ export { makeLarchRest, atLarchRest } from './larch.js';
 export { makeFirRest, atFirRest } from './fir.js';
 export { makePineRest, atPineRest } from './pine.js';
 export { makeCypressRest, atCypressRest } from './cypress.js';
+export { makeHeatherRest, atHeatherRest } from './heather.js';
 export { addDistantRidges } from './ridges.js';
