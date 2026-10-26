@@ -74,6 +74,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Pine Rest, a leaning pine, soft needles, and a low wooden seat east of the clearing
 - [x] The Cypress Rest, a leaning cypress, soft needles, and a low wooden seat south-southeast of the clearing
 - [x] The Heather Rest, a moss pad, low heather clumps, a wooden seat, and lifting blooms west of the clearing
+- [x] The Violet Rest, a moss pad, low violet clumps, a wooden seat, and lifting blooms east of the clearing
+
+## Note (2026-10-26)
+
+East of the clearing, a little south, The Violet Rest is a moss pad, low violet clumps, a wooden seat, and blooms that lift in the air. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-25)
 
@@ -82,130 +87,6 @@ West of the clearing, a little north, The Heather Rest is a moss pad, low heathe
 ## Note (2026-10-24)
 
 South-southeast of the clearing, The Cypress Rest is a moss pad, a leaning cypress, soft needles that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few soft needles. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-23)
-
-A short way east of the clearing, The Pine Rest is a moss pad, a leaning pine, soft needles that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few soft needles. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-22)
-
-West of the clearing, a little north of the Old Ring, The Fir Rest is a moss pad, a leaning fir, soft needles that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few soft needles. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-21)
-
-Northeast of the clearing, The Larch Rest is a moss pad, a leaning larch, soft needles that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few soft needles. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-20)
-
-The play loop was broken again: js/boot-tick.js contained only a stub. Restored bootTick so walk, right-half look (no pointer lock), phone pads with visible walk knob, E/F/G/R/M/Tab buttons, gather on landmarks and resources, build, plant, rest by fire, fish at the Slow Bend, notebook, and HUD all run. Trees stay off pads. No pointer lock.
-
-## Note (2026-10-19)
-
-West of the clearing, The Serviceberry Rest is now fully spawned and wired: compass, first-visit line, notebook, gather on E, and lifting berries. Stand there and press E for a few dark berries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-18)
-
-West of the clearing, The Serviceberry Rest is a moss pad, a leaning serviceberry, dark berries that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few berries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-17)
-
-A short way east of the clearing, a little south of the Plum Rest, The Quince Rest is a moss pad, a leaning quince, yellow-green fruits that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few quinces. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-16)
-
-A short way east of the clearing, a little south of the Apple Rest, The Cherry Rest is a moss pad, a leaning cherry, soft pink fruits that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few cherries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-15)
-
-A short way east of the clearing, The Apple Rest is a moss pad, a leaning apple, red fruits that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few apples. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-14)
-
-North of the clearing, The Pear Rest is a moss pad, a leaning pear, green fruits that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few pears. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-13)
-
-East of the clearing, a little north, The Plum Rest is a moss pad, a leaning plum, dark fruits that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few plums. Trees stay off the pad. The Dogwood Seat now also gathers on E and lifts its blooms. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-12)
-
-East of the clearing, a little south, The Dogwood Seat is a moss pad, a leaning dogwood, pale blooms that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-11)
-
-The play loop was broken: js/tick.js contained only a shell snippet and the valley never ticked. Restored startTick with walk, right-half mouse look (no pointer lock), sky, rain, compass heading, place discovery, and rest. Phone pads and E/F/G/R/M/Tab stay wired.
-
-## Note (2026-10-10)
-
-Northwest of the clearing, a little west, The Crabapple Rest is a moss pad, a leaning crabapple, small red fruits that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few crabapples. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-09)
-
-East of the clearing, a little south, The Sycamore Seat is a moss pad, a mottled sycamore, round seed balls that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few balls. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-08)
-
-West of the clearing, a little north of the stream path, The Hornbeam Shelf is a moss pad, a fluted hornbeam, thin keys that lift in the air, a low wooden shelf, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few keys. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-07)
-
-East of the clearing, a little south of the Quiet Well, The Mulberry Rest is a moss pad, a leaning mulberry, dark berries that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few berries. Trees stay off the pad. The Juniper Cup is spawned again so the valley starts. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-06)
-
-West of the clearing, a little south of the Old Ring path, The Juniper Cup is a moss pad, a low spreading juniper, blue berries that lift in the air, and a wooden cup of rain. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. The Elder Bowl now also gathers on E, writes a first-visit line, and lifts its flower plates. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-05)
-
-South-southwest of the clearing, toward the Reed Step, The Elder Bowl is a moss pad, a dark multi-stem elder, pale flower plates, a low wooden seat, and a stone bowl of rain. Compass and notebook write it. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-04)
-
-East-northeast of the clearing, toward the Quiet Well, The Hawthorn Bench is a moss pad, a leaning hawthorn, pale blooms that lift in the air, a low wooden bench, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. The Chestnut Rest now also writes a first-visit line and lifts its burrs. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-03)
-
-North of the clearing, a little west, The Chestnut Rest is a moss pad, a leaning chestnut, spiny burrs that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few burrs. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-02)
-
-South of the clearing, toward the Slow Bend, The Walnut Bench is a moss pad, a leaning walnut, green hulls that lift in the air, a low wooden bench, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few hulls. Trees stay off the pad. The Poplar Rest, The Ash Ledge, and The Holly Rest now also gather on E, write a first-visit line, and lift their leaves, keys, and berries. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-10-01)
-
-West of the clearing, toward the Old Ring, The Holly Rest is a moss pad, a dark holly, small red berries that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few berries. Trees stay off the pad. The Poplar Rest and The Ash Ledge now also gather on E, write a first-visit line, and lift their leaves and keys. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-09-30)
-
-North-northwest of the clearing, toward the Slow Bend, The Ash Ledge is a moss pad, a dark leaning ash, thin keys that lift in the air, a low wooden seat, and a pale stone ledge. Compass, first-visit line, and notebook all write it. Stand there and press E for a few keys. The Poplar Rest now also gathers on E and lifts its leaves. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-09-29)
-
-East of the clearing, toward the Quiet Well, The Poplar Rest is a moss pad, a pale leaning poplar, leaves that lift in the air, a low wooden seat, and a stone dish of rain. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-09-28)
-
-The field notebook module was only imports, so M opened an empty book and first-visit notes never saved. `notebook.js` is whole again: allowlisted ids, sanitized localStorage, textContent rendering, and a map of walked ground. The Beech Ledge and The Linden Seat now gather on E, write a first-visit line, lift their hulls and blooms, and land in the book. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-09-27)
-
-North of the clearing, toward the Slow Bend, The Linden Seat is a moss pad, a round linden, gold blooms that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. `places.js` again holds the stream, birds, grass, named-ground compass, and older quiet spots so the play loop can import them. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-09-25)
-
-East of the clearing, toward the Quiet Well, The Beech Ledge is a moss pad, a smooth leaning beech, small hulls that lift in the air, a low wooden seat, and a pale stone ledge. Compass, first-visit line, and notebook all write it. Stand there and press E for a few hulls. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-09-24)
-
-West-north of the clearing, toward the stream, The Elm Dish is a moss pad, a leaning elm, small leaves that lift in the air, a low wooden seat, and a stone dish of rain. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. The Yew Sill now also gathers, writes a first-visit line, and lifts its berries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-09-23)
-
-West-southwest of the clearing, toward the Old Ring, The Yew Sill is a moss pad, a dark leaning yew, small red berries that lift in the air, a low wooden seat, and a pale stone sill. Compass, first-visit line, and notebook all write it. Stand there and press E for a few berries. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
-
-## Note (2026-09-22)
-
-North of the clearing, toward the Slow Bend, The Spruce Cup is a moss pad, a thin spruce, loose needles that lift in the air, a low wooden seat, and a wooden cup of rain. Compass, first-visit line, and notebook all write it. Stand there and press E for a sip. Trees stay off the pad. Named-place compass also lists the older quiet spots that were only living in the walk overlay. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Next
 
