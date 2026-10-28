@@ -19,6 +19,7 @@ import { atCypressRest } from './cypress.js';
 import { atHeatherRest } from './heather.js';
 import { atVioletRest } from './violet.js';
 import { atButtercupRest } from './buttercup.js';
+import { atPrimroseRest } from './primrose.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -88,6 +89,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atPrimroseRest(x, z)) return 'The Primrose Rest';
   if (atButtercupRest(x, z)) return 'The Buttercup Rest';
   if (atVioletRest(x, z)) return 'The Violet Rest';
   if (atHeatherRest(x, z)) return 'The Heather Rest';
@@ -161,4 +163,5 @@ export { makeCypressRest, atCypressRest } from './cypress.js';
 export { makeHeatherRest, atHeatherRest } from './heather.js';
 export { makeVioletRest, atVioletRest } from './violet.js';
 export { makeButtercupRest, atButtercupRest } from './buttercup.js';
+export { makePrimroseRest, atPrimroseRest } from './primrose.js';
 export { addDistantRidges } from './ridges.js';
