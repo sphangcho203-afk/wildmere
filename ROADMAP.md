@@ -76,6 +76,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Heather Rest, a moss pad, low heather clumps, a wooden seat, and lifting blooms west of the clearing
 - [x] The Violet Rest, a moss pad, low violet clumps, a wooden seat, and lifting blooms east of the clearing
 - [x] The Buttercup Rest, a moss pad, low buttercup clumps, a wooden seat, and lifting blooms east of the clearing
+- [x] The Primrose Rest, a moss pad, low primrose clumps, a wooden seat, and lifting blooms west of the clearing
+
+## Note (2026-10-28)
+
+West of the clearing, a little south, The Primrose Rest is a moss pad, low primrose clumps, a wooden seat, and blooms that lift in the air. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-27)
 
