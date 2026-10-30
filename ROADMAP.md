@@ -69,15 +69,20 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Cherry Rest, a leaning cherry, soft pink fruits, and a low wooden seat east of the clearing
 - [x] The Quince Rest, a leaning quince, yellow-green fruits, and a low wooden seat east of the clearing
 - [x] The Serviceberry Rest, a leaning serviceberry, dark berries, and a low wooden seat west of the clearing
-- [x] The Larch Rest, a leaning larch, soft needles, and a low wooden seat northeast of the clearing
-- [x] The Fir Rest, a leaning fir, soft needles, and a low wooden seat west of the clearing
-- [x] The Pine Rest, a leaning pine, soft needles, and a low wooden seat east of the clearing
-- [x] The Cypress Rest, a leaning cypress, soft needles, and a low wooden seat south-southeast of the clearing
+- [x] The Larch Rest, a leaning larch, soft needles that lift, a low wooden seat northeast of the clearing
+- [x] The Fir Rest, a leaning fir, soft needles that lift, a low wooden seat west of the clearing
+- [x] The Pine Rest, a leaning pine, soft needles that lift, a low wooden seat east of the clearing
+- [x] The Cypress Rest, a leaning cypress, soft needles that lift, a low wooden seat south-southeast of the clearing
 - [x] The Heather Rest, a moss pad, low heather clumps, a wooden seat, and lifting blooms west of the clearing
 - [x] The Violet Rest, a moss pad, low violet clumps, a wooden seat, and lifting blooms east of the clearing
 - [x] The Buttercup Rest, a moss pad, low buttercup clumps, a wooden seat, and lifting blooms east of the clearing
 - [x] The Primrose Rest, a moss pad, low primrose clumps, a wooden seat, and lifting blooms west of the clearing
 - [x] The Bluebell Rest, a moss pad, low bluebell clumps, a wooden seat, and lifting blooms west of the clearing
+- [x] The Snowdrop Rest, a moss pad, low snowdrop clumps, a wooden seat, and pale blooms that lift east of the clearing
+
+## Note (2026-10-30)
+
+East of the clearing, a little north, The Snowdrop Rest is a moss pad, low snowdrop clumps, a wooden seat, and pale blooms that lift in the air. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-29)
 
