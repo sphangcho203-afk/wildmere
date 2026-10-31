@@ -22,6 +22,7 @@ import { atButtercupRest } from './buttercup.js';
 import { atPrimroseRest } from './primrose.js';
 import { atBluebellRest } from './bluebell.js';
 import { atSnowdropRest } from './snowdrop.js';
+import { atCrocusRest } from './crocus.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -91,6 +92,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atCrocusRest(x, z)) return 'The Crocus Rest';
   if (atSnowdropRest(x, z)) return 'The Snowdrop Rest';
   if (atBluebellRest(x, z)) return 'The Bluebell Rest';
   if (atPrimroseRest(x, z)) return 'The Primrose Rest';
@@ -170,4 +172,5 @@ export { makeButtercupRest, atButtercupRest } from './buttercup.js';
 export { makePrimroseRest, atPrimroseRest } from './primrose.js';
 export { makeBluebellRest, atBluebellRest } from './bluebell.js';
 export { makeSnowdropRest, atSnowdropRest } from './snowdrop.js';
+export { makeCrocusRest, atCrocusRest } from './crocus.js';
 export { addDistantRidges } from './ridges.js';
