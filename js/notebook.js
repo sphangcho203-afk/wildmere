@@ -54,6 +54,7 @@ import { BUTTER_X, BUTTER_Z } from './buttercup.js';
 import { PRIM_X, PRIM_Z } from './primrose.js';
 import { BLUE_X, BLUE_Z } from './bluebell.js';
 import { SNOW_X, SNOW_Z } from './snowdrop.js';
+import { CROC_X, CROC_Z } from './crocus.js';
 import { slowBendCenter } from './bend.js';
 
 const NOTES_KEY = 'wildmere-notes-v1';
@@ -124,6 +125,7 @@ const NOTES = [
   { id: 'primrose-rest', name: 'The Primrose Rest', x: PRIM_X, z: PRIM_Z, line: 'A moss pad, low primrose clumps, a wooden seat, and blooms that lift.' },
   { id: 'bluebell-rest', name: 'The Bluebell Rest', x: BLUE_X, z: BLUE_Z, line: 'A moss pad, low bluebell clumps, a wooden seat, and blooms that lift.' },
   { id: 'snowdrop-rest', name: 'The Snowdrop Rest', x: SNOW_X, z: SNOW_Z, line: 'A moss pad, low snowdrop clumps, a wooden seat, and pale blooms that lift.' },
+  { id: 'crocus-rest', name: 'The Crocus Rest', x: CROC_X, z: CROC_Z, line: 'A moss pad, low crocus clumps, a wooden seat, and purple blooms that lift.' },
   { id: 'stone-terrace', name: 'The Stone Terrace', x: TERRACE_X, z: TERRACE_Z, line: 'A high shelf of rock and thin grass past High Spine.' },
   { id: 'slow-bend', name: 'The Slow Bend', x: 0, z: 48, line: 'Still water and a short plank. Fish if you can wait.' }
 ];
