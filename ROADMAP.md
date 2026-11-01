@@ -80,6 +80,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Bluebell Rest, a moss pad, low bluebell clumps, a wooden seat, and lifting blooms west of the clearing
 - [x] The Snowdrop Rest, a moss pad, low snowdrop clumps, a wooden seat, and pale blooms that lift east of the clearing
 - [x] The Crocus Rest, a moss pad, low crocus clumps, a wooden seat, and purple blooms that lift east of the clearing
+- [x] The Daffodil Rest, a moss pad, low daffodil clumps, a wooden seat, and yellow blooms that lift west of the clearing
+
+## Note (2026-11-01)
+
+West of the clearing, a little north of the Old Ring, The Daffodil Rest is a moss pad, low daffodil clumps, a wooden seat, and yellow blooms that lift in the air. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-10-31)
 
