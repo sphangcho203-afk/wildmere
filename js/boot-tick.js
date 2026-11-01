@@ -108,7 +108,7 @@ export function bootTick(ctx) {
         }
       }
     };
-    const landmarks = ['rowanLean', 'willowDip', 'honeyStone', 'thistleSeat', 'cloverPad', 'daisyRing', 'rushNest', 'birchShelf', 'alderNook', 'hazelRest', 'mapleSill', 'aspenLean', 'cedarBowl', 'spruceCup', 'yewSill', 'elmDish', 'beechLedge', 'lindenSeat', 'poplarRest', 'ashLedge', 'hollyRest', 'walnutBench', 'chestnutRest', 'hawthornBench', 'elderBowl', 'juniperCup', 'mulberryRest', 'hornbeamShelf', 'sycamoreSeat', 'crabappleRest', 'dogwoodSeat', 'plumRest', 'pearRest', 'appleRest', 'cherryRest', 'quinceRest', 'serviceRest', 'larchRest', 'firRest', 'pineRest', 'cypressRest', 'heatherRest', 'violetRest', 'buttercupRest', 'primroseRest', 'bluebellRest', 'snowdropRest', 'crocusRest'];
+    const landmarks = ['rowanLean', 'willowDip', 'honeyStone', 'thistleSeat', 'cloverPad', 'daisyRing', 'rushNest', 'birchShelf', 'alderNook', 'hazelRest', 'mapleSill', 'aspenLean', 'cedarBowl', 'spruceCup', 'yewSill', 'elmDish', 'beechLedge', 'lindenSeat', 'poplarRest', 'ashLedge', 'hollyRest', 'walnutBench', 'chestnutRest', 'hawthornBench', 'elderBowl', 'juniperCup', 'mulberryRest', 'hornbeamShelf', 'sycamoreSeat', 'crabappleRest', 'dogwoodSeat', 'plumRest', 'pearRest', 'appleRest', 'cherryRest', 'quinceRest', 'serviceRest', 'larchRest', 'firRest', 'pineRest', 'cypressRest', 'heatherRest', 'violetRest', 'buttercupRest', 'primroseRest', 'bluebellRest', 'snowdropRest', 'crocusRest', 'daffodilRest'];
     for (const name of landmarks) {
       const lm = ctx[name];
       if (lm && lm.berries) lift(lm.berries);
@@ -239,6 +239,7 @@ export function bootTick(ctx) {
   function doGather() {
     const hx = hero.position.x, hz = hero.position.z;
     const specials = [
+      [ctx.atDaffodilRest, 'Picked a few daffodil blooms.', 'food'],
       [ctx.atCrocusRest, 'Picked a few crocus blooms.', 'food'],
       [ctx.atSnowdropRest, 'Picked a few snowdrop blooms.', 'food'],
       [ctx.atBluebellRest, 'Picked a few bluebell blooms.', 'food'],
