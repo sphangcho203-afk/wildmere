@@ -58,6 +58,7 @@ import { CROC_X, CROC_Z } from './crocus.js';
 import { DAFF_X, DAFF_Z } from './daffodil.js';
 import { IRIS_X, IRIS_Z } from './iris.js';
 import { LILY_X, LILY_Z } from './lily.js';
+import { POPPY_X, POPPY_Z } from './poppy.js';
 import { slowBendCenter } from './bend.js';
 
 const NOTES_KEY = 'wildmere-notes-v1';
@@ -132,6 +133,7 @@ const NOTES = [
   { id: 'daffodil-rest', name: 'The Daffodil Rest', x: DAFF_X, z: DAFF_Z, line: 'A moss pad, low daffodil clumps, a wooden seat, and yellow blooms that lift.' },
   { id: 'iris-rest', name: 'The Iris Rest', x: IRIS_X, z: IRIS_Z, line: 'A moss pad, low iris clumps, a wooden seat, and blue blooms that lift.' },
   { id: 'lily-rest', name: 'The Lily Rest', x: LILY_X, z: LILY_Z, line: 'A moss pad, low lily clumps, a wooden seat, and pale blooms that lift.' },
+  { id: 'poppy-rest', name: 'The Poppy Rest', x: POPPY_X, z: POPPY_Z, line: 'A moss pad, low poppy clumps, a wooden seat, and red blooms that lift.' },
   { id: 'stone-terrace', name: 'The Stone Terrace', x: TERRACE_X, z: TERRACE_Z, line: 'A high shelf of rock and thin grass past High Spine.' },
   { id: 'slow-bend', name: 'The Slow Bend', x: 0, z: 48, line: 'Still water and a short plank. Fish if you can wait.' }
 ];

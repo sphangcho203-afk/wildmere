@@ -26,6 +26,7 @@ import { atCrocusRest } from './crocus.js';
 import { atDaffodilRest } from './daffodil.js';
 import { atIrisRest } from './iris.js';
 import { atLilyRest } from './lily.js';
+import { atPoppyRest } from './poppy.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -95,6 +96,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atPoppyRest(x, z)) return 'The Poppy Rest';
   if (atLilyRest(x, z)) return 'The Lily Rest';
   if (atIrisRest(x, z)) return 'The Iris Rest';
   if (atDaffodilRest(x, z)) return 'The Daffodil Rest';
@@ -182,4 +184,5 @@ export { makeCrocusRest, atCrocusRest } from './crocus.js';
 export { makeDaffodilRest, atDaffodilRest } from './daffodil.js';
 export { makeIrisRest, atIrisRest } from './iris.js';
 export { makeLilyRest, atLilyRest } from './lily.js';
+export { makePoppyRest, atPoppyRest } from './poppy.js';
 export { addDistantRidges } from './ridges.js';
