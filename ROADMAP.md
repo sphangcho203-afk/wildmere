@@ -85,6 +85,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Lily Rest, a moss pad, low lily clumps, a wooden seat, and pale blooms that lift west-northwest of the clearing
 - [x] The Poppy Rest, a moss pad, low poppy clumps, a wooden seat, and red blooms that lift east of the clearing
 - [x] The Aster Rest, a moss pad, low aster clumps, a wooden seat, and pale purple blooms that lift south of the clearing
+- [x] The Lavender Rest, a moss pad, low lavender clumps, a wooden seat, and purple blooms that lift west of the clearing
+
+## Note (2026-11-06)
+
+West of the clearing, a little north, The Lavender Rest is a moss pad, low lavender clumps, a wooden seat, and purple blooms that lift in the air. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-11-05)
 
