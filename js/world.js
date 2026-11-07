@@ -29,6 +29,7 @@ import { atLilyRest } from './lily.js';
 import { atPoppyRest } from './poppy.js';
 import { atAsterRest } from './aster.js';
 import { atLavenderRest } from './lavender.js';
+import { atMarigoldRest } from './marigold.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -98,6 +99,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atMarigoldRest(x, z)) return 'The Marigold Rest';
   if (atLavenderRest(x, z)) return 'The Lavender Rest';
   if (atAsterRest(x, z)) return 'The Aster Rest';
   if (atPoppyRest(x, z)) return 'The Poppy Rest';
@@ -191,4 +193,5 @@ export { makeLilyRest, atLilyRest } from './lily.js';
 export { makePoppyRest, atPoppyRest } from './poppy.js';
 export { makeAsterRest, atAsterRest } from './aster.js';
 export { makeLavenderRest, atLavenderRest } from './lavender.js';
+export { makeMarigoldRest, atMarigoldRest } from './marigold.js';
 export { addDistantRidges } from './ridges.js';
