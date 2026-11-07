@@ -108,7 +108,7 @@ export function bootTick(ctx) {
         }
       }
     };
-    const landmarks = ['rowanLean', 'willowDip', 'honeyStone', 'thistleSeat', 'cloverPad', 'daisyRing', 'rushNest', 'birchShelf', 'alderNook', 'hazelRest', 'mapleSill', 'aspenLean', 'cedarBowl', 'spruceCup', 'yewSill', 'elmDish', 'beechLedge', 'lindenSeat', 'poplarRest', 'ashLedge', 'hollyRest', 'walnutBench', 'chestnutRest', 'hawthornBench', 'elderBowl', 'juniperCup', 'mulberryRest', 'hornbeamShelf', 'sycamoreSeat', 'crabappleRest', 'dogwoodSeat', 'plumRest', 'pearRest', 'appleRest', 'cherryRest', 'quinceRest', 'serviceRest', 'larchRest', 'firRest', 'pineRest', 'cypressRest', 'heatherRest', 'violetRest', 'buttercupRest', 'primroseRest', 'bluebellRest', 'snowdropRest', 'crocusRest', 'daffodilRest', 'irisRest', 'lilyRest', 'poppyRest', 'asterRest', 'lavenderRest'];
+    const landmarks = ['rowanLean', 'willowDip', 'honeyStone', 'thistleSeat', 'cloverPad', 'daisyRing', 'rushNest', 'birchShelf', 'alderNook', 'hazelRest', 'mapleSill', 'aspenLean', 'cedarBowl', 'spruceCup', 'yewSill', 'elmDish', 'beechLedge', 'lindenSeat', 'poplarRest', 'ashLedge', 'hollyRest', 'walnutBench', 'chestnutRest', 'hawthornBench', 'elderBowl', 'juniperCup', 'mulberryRest', 'hornbeamShelf', 'sycamoreSeat', 'crabappleRest', 'dogwoodSeat', 'plumRest', 'pearRest', 'appleRest', 'cherryRest', 'quinceRest', 'serviceRest', 'larchRest', 'firRest', 'pineRest', 'cypressRest', 'heatherRest', 'violetRest', 'buttercupRest', 'primroseRest', 'bluebellRest', 'snowdropRest', 'crocusRest', 'daffodilRest', 'irisRest', 'lilyRest', 'poppyRest', 'asterRest', 'lavenderRest', 'marigoldRest'];
     for (const name of landmarks) {
       const lm = ctx[name];
       if (lm && lm.berries) lift(lm.berries);
@@ -239,6 +239,7 @@ export function bootTick(ctx) {
   function doGather() {
     const hx = hero.position.x, hz = hero.position.z;
     const specials = [
+      [ctx.atMarigoldRest, 'Picked a few marigold blooms.', 'food'],
       [ctx.atLavenderRest, 'Picked a few lavender blooms.', 'food'],
       [ctx.atAsterRest, 'Picked a few aster blooms.', 'food'],
       [ctx.atPoppyRest, 'Picked a few poppy blooms.', 'food'],
