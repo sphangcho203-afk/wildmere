@@ -88,6 +88,11 @@ The rule: it has to feel like ground a person could stand on. No voxels. No joke
 - [x] The Lavender Rest, a moss pad, low lavender clumps, a wooden seat, and purple blooms that lift west of the clearing
 - [x] The Marigold Rest, a moss pad, low marigold clumps, a wooden seat, and orange blooms that lift east of the clearing
 - [x] The Rose Rest, a moss pad, low rose clumps, a wooden seat, and red blooms that lift west of the clearing
+- [x] The Yarrow Rest, a moss pad, low yarrow clumps, a wooden seat, and pale blooms that lift south of the clearing
+
+## Note (2026-11-09)
+
+A short way south of the clearing, The Yarrow Rest is a moss pad, low yarrow clumps, a wooden seat, and pale blooms that lift in the air. Compass, first-visit line, and notebook all write it. Stand there and press E for a few blooms. Trees stay off the pad. Phone walk / look pads and E/F/G/R/M/Tab stay wired. No pointer lock.
 
 ## Note (2026-11-08)
 
