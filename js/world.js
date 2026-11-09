@@ -31,6 +31,7 @@ import { atAsterRest } from './aster.js';
 import { atLavenderRest } from './lavender.js';
 import { atMarigoldRest } from './marigold.js';
 import { atRoseRest } from './rose.js';
+import { atYarrowRest } from './yarrow.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -100,6 +101,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atYarrowRest(x, z)) return 'The Yarrow Rest';
   if (atRoseRest(x, z)) return 'The Rose Rest';
   if (atMarigoldRest(x, z)) return 'The Marigold Rest';
   if (atLavenderRest(x, z)) return 'The Lavender Rest';
@@ -197,4 +199,5 @@ export { makeAsterRest, atAsterRest } from './aster.js';
 export { makeLavenderRest, atLavenderRest } from './lavender.js';
 export { makeMarigoldRest, atMarigoldRest } from './marigold.js';
 export { makeRoseRest, atRoseRest } from './rose.js';
+export { makeYarrowRest, atYarrowRest } from './yarrow.js';
 export { addDistantRidges } from './ridges.js';
