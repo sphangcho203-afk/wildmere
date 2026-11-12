@@ -66,6 +66,7 @@ import { ROSE_X, ROSE_Z } from './rose.js';
 import { YARROW_X, YARROW_Z } from './yarrow.js';
 import { CHAM_X, CHAM_Z } from './chamomile.js';
 import { FOX_X, FOX_Z } from './foxglove.js';
+import { MINT_X, MINT_Z } from './mint.js';
 import { slowBendCenter } from './bend.js';
 
 const NOTES_KEY = 'wildmere-notes-v1';
@@ -148,6 +149,7 @@ const NOTES = [
   { id: 'yarrow-rest', name: 'The Yarrow Rest', x: YARROW_X, z: YARROW_Z, line: 'A moss pad, low yarrow clumps, a wooden seat, and pale blooms that lift.' },
   { id: 'chamomile-rest', name: 'The Chamomile Rest', x: CHAM_X, z: CHAM_Z, line: 'A moss pad, low chamomile clumps, a wooden seat, and pale yellow blooms that lift.' },
   { id: 'foxglove-rest', name: 'The Foxglove Rest', x: FOX_X, z: FOX_Z, line: 'A moss pad, tall foxglove stalks, a wooden seat, and purple blooms that lift.' },
+  { id: 'mint-rest', name: 'The Mint Rest', x: MINT_X, z: MINT_Z, line: 'A moss pad, low mint clumps, a wooden seat, and green leaves that lift.' },
   { id: 'stone-terrace', name: 'The Stone Terrace', x: TERRACE_X, z: TERRACE_Z, line: 'A high shelf of rock and thin grass past High Spine.' },
   { id: 'slow-bend', name: 'The Slow Bend', x: 0, z: 48, line: 'Still water and a short plank. Fish if you can wait.' }
 ];
