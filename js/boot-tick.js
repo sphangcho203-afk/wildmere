@@ -238,6 +238,40 @@ export function bootTick(ctx) {
 
   function doGather() {
     const hx = hero.position.x, hz = hero.position.z;
+    // Harvest mature soil beds first
+    let bestPlot = null, bestPD = 2.8;
+    for (const p of plots) {
+      if (p.crop && p.growth >= 1) {
+        const d = Math.hypot(hx - p.x, hz - p.z);
+        if (d < bestPD) { bestPlot = p; bestPD = d; }
+      }
+    }
+    if (bestPlot) {
+      player.food += 3;
+      bestPlot.crop = null;
+      bestPlot.growth = 0;
+      bestPlot.watered = false;
+      if (bestPlot.sprout) {
+        scene.remove(bestPlot.sprout);
+        bestPlot.sprout = null;
+      }
+      toast('Harvested fresh greens.');
+      return;
+    }
+    // Feedback on immature beds
+    let immature = null, immD = 2.8;
+    for (const p of plots) {
+      if (p.crop && p.growth < 1) {
+        const d = Math.hypot(hx - p.x, hz - p.z);
+        if (d < immD) { immature = p; immD = d; }
+      }
+    }
+    if (immature) {
+      if (!immature.watered) toast('The bed needs water.');
+      else toast('Not ready to harvest yet.');
+      return;
+    }
+
     const specials = [
       [ctx.atMintRest, 'Picked a few mint leaves.', 'food'],
       [ctx.atFoxgloveRest, 'Picked a few foxglove blooms.', 'food'],
@@ -458,10 +492,13 @@ export function bootTick(ctx) {
     origStep(dt);
     for (const p of plots) {
       if (p.crop && p.watered && p.growth < 1) {
-        p.growth = Math.min(1, p.growth + dt * 0.02);
-        if (p.sprout) p.sprout.scale.y = 0.4 + p.growth * 1.6;
+        p.growth = Math.min(1, p.growth + dt * 0.035);
+        if (p.sprout) {
+          p.sprout.scale.y = 0.4 + p.growth * 1.8;
+          if (p.growth > 0.7) p.sprout.material.color.setHex(0x5a8a42);
+        }
       }
-      if (ctx.raining && !p.watered) p.watered = true;
+      if (ctx.raining && !p.watered && p.crop) p.watered = true;
     }
   };
 
