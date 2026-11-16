@@ -78,6 +78,7 @@ import {
   makeFoxgloveRest, atFoxgloveRest,
   makeMintRest, atMintRest,
   makeThymeRest, atThymeRest,
+  makeSageRest, atSageRest,
   addDistantRidges, addGrassTufts, addValleyBirds
 } from './world.js';
 import { loadNotes, renderNotebook } from './notebook.js';
@@ -261,6 +262,7 @@ const chamomileRest = makeChamomileRest(scene);
 const foxgloveRest = makeFoxgloveRest(scene);
 const mintRest = makeMintRest(scene);
 const thymeRest = makeThymeRest(scene);
+const sageRest = makeSageRest(scene);
 
 renderNotebook(foundNotes);
 
@@ -284,7 +286,7 @@ bootTick({
   atHeatherRest, atVioletRest, atButtercupRest, atPrimroseRest, atBluebellRest,
   atSnowdropRest, atCrocusRest, atDaffodilRest, atIrisRest, atLilyRest, atPoppyRest,
   atAsterRest, atLavenderRest, atMarigoldRest, atRoseRest, atYarrowRest,
-  atChamomileRest, atFoxgloveRest, atMintRest, atThymeRest,
+  atChamomileRest, atFoxgloveRest, atMintRest, atThymeRest, atSageRest,
   rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest,
   birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup,
   yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest,
@@ -294,7 +296,7 @@ bootTick({
   cypressRest, heatherRest, violetRest, buttercupRest, primroseRest, bluebellRest,
   snowdropRest, crocusRest, daffodilRest, irisRest, lilyRest, poppyRest, asterRest,
   lavenderRest, marigoldRest, roseRest, yarrowRest, chamomileRest, foxgloveRest,
-  mintRest, thymeRest
+  mintRest, thymeRest, sageRest
 });
 
 addEventListener('resize', () => {
