@@ -36,6 +36,7 @@ import { atChamomileRest } from './chamomile.js';
 import { atFoxgloveRest } from './foxglove.js';
 import { atMintRest } from './mint.js';
 import { atThymeRest } from './thyme.js';
+import { atSageRest } from './sage.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -105,6 +106,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atSageRest(x, z)) return 'The Sage Rest';
   if (atThymeRest(x, z)) return 'The Thyme Rest';
   if (atMintRest(x, z)) return 'The Mint Rest';
   if (atFoxgloveRest(x, z)) return 'The Foxglove Rest';
@@ -212,4 +214,5 @@ export { makeChamomileRest, atChamomileRest } from './chamomile.js';
 export { makeFoxgloveRest, atFoxgloveRest } from './foxglove.js';
 export { makeMintRest, atMintRest } from './mint.js';
 export { makeThymeRest, atThymeRest } from './thyme.js';
+export { makeSageRest, atSageRest } from './sage.js';
 export { addDistantRidges } from './ridges.js';
