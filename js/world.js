@@ -38,6 +38,7 @@ import { atMintRest } from './mint.js';
 import { atThymeRest } from './thyme.js';
 import { atSageRest } from './sage.js';
 import { atRosemaryRest } from './rosemary.js';
+import { atBasilRest } from './basil.js';
 
 export const WORLD = 460;
 export const WATER_Y = 1.35;
@@ -107,6 +108,7 @@ export {
 } from './places.js';
 import { currentPlace as rawPlace } from './places.js';
 export function currentPlace(x, z){
+  if (atBasilRest(x, z)) return 'The Basil Rest';
   if (atRosemaryRest(x, z)) return 'The Rosemary Rest';
   if (atSageRest(x, z)) return 'The Sage Rest';
   if (atThymeRest(x, z)) return 'The Thyme Rest';
@@ -218,4 +220,5 @@ export { makeMintRest, atMintRest } from './mint.js';
 export { makeThymeRest, atThymeRest } from './thyme.js';
 export { makeSageRest, atSageRest } from './sage.js';
 export { makeRosemaryRest, atRosemaryRest } from './rosemary.js';
+export { makeBasilRest, atBasilRest } from './basil.js';
 export { addDistantRidges } from './ridges.js';
