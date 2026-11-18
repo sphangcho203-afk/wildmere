@@ -15,6 +15,7 @@ A quiet phone-first valley survival sketch in Three.js.
 - Phone HUD polish.
 
 ## Notes
+2026-11-18: Added The Basil Rest — a moss pad with basil leaves you can pick for food, wired into place name, compass, first-visit toast, and notebook.
 2026-11-17: Added The Rosemary Rest — a moss pad with rosemary sprigs you can pick for food, wired into place name, compass, first-visit toast, and notebook.
 2026-11-16: Added The Sage Rest — a moss pad with low sage clumps you can pick for food, wired into place name, compass, first-visit toast, and notebook.
 2026-11-15: Restored the play loop (loop.js was a placeholder) with full landmark spawn, compass, first-visit, and notebook wiring including The Thyme Rest. Gather picks thyme leaves. No pointer lock; phone controls intact.
