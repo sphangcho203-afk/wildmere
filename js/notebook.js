@@ -5,6 +5,7 @@ import { MINT_X, MINT_Z } from './mint.js';
 import { SAGE_X, SAGE_Z } from './sage.js';
 import { ROSEMARY_X, ROSEMARY_Z } from './rosemary.js';
 import { BASIL_X, BASIL_Z } from './basil.js';
+import { OREGANO_X, OREGANO_Z } from './oregano.js';
 
 const NOTES_KEY = 'wildmere-notes-v1';
 
@@ -25,6 +26,7 @@ const NOTES = [
   { id: 'sage-rest', name: 'The Sage Rest', x: SAGE_X, z: SAGE_Z, line: 'A moss pad with low sage clumps. Soft gray-green leaves you can pick.' },
   { id: 'rosemary-rest', name: 'The Rosemary Rest', x: ROSEMARY_X, z: ROSEMARY_Z, line: 'A moss pad with rosemary sprigs. Needle leaves you can pick.' },
   { id: 'basil-rest', name: 'The Basil Rest', x: BASIL_X, z: BASIL_Z, line: 'A moss pad with basil leaves. Soft green leaves you can pick.' },
+  { id: 'oregano-rest', name: 'The Oregano Rest', x: OREGANO_X, z: OREGANO_Z, line: 'A moss pad with oregano leaves. Soft green leaves you can pick.' },
   { id: 'stone-terrace', name: 'The Stone Terrace', x: TERRACE_X, z: TERRACE_Z, line: 'A broad shelf of stone above the valley floor.' }
 ];
 
