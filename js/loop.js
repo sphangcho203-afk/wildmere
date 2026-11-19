@@ -81,6 +81,7 @@ import {
   makeSageRest, atSageRest,
   makeRosemaryRest, atRosemaryRest,
   makeBasilRest, atBasilRest,
+  makeOreganoRest, atOreganoRest,
   addDistantRidges, addGrassTufts, addValleyBirds
 } from './world.js';
 import { loadNotes, renderNotebook } from './notebook.js';
@@ -267,6 +268,7 @@ const thymeRest = makeThymeRest(scene);
 const sageRest = makeSageRest(scene);
 const rosemaryRest = makeRosemaryRest(scene);
 const basilRest = makeBasilRest(scene);
+const oreganoRest = makeOreganoRest(scene);
 
 renderNotebook(foundNotes);
 
@@ -290,7 +292,7 @@ bootTick({
   atHeatherRest, atVioletRest, atButtercupRest, atPrimroseRest, atBluebellRest,
   atSnowdropRest, atCrocusRest, atDaffodilRest, atIrisRest, atLilyRest, atPoppyRest,
   atAsterRest, atLavenderRest, atMarigoldRest, atRoseRest, atYarrowRest,
-  atChamomileRest, atFoxgloveRest, atMintRest, atThymeRest, atSageRest, atRosemaryRest, atBasilRest,
+  atChamomileRest, atFoxgloveRest, atMintRest, atThymeRest, atSageRest, atRosemaryRest, atBasilRest, atOreganoRest,
   rowanLean, willowDip, honeyStone, thistleSeat, cloverPad, daisyRing, rushNest,
   birchShelf, alderNook, hazelRest, mapleSill, aspenLean, cedarBowl, spruceCup,
   yewSill, elmDish, beechLedge, lindenSeat, poplarRest, ashLedge, hollyRest,
@@ -300,7 +302,7 @@ bootTick({
   cypressRest, heatherRest, violetRest, buttercupRest, primroseRest, bluebellRest,
   snowdropRest, crocusRest, daffodilRest, irisRest, lilyRest, poppyRest, asterRest,
   lavenderRest, marigoldRest, roseRest, yarrowRest, chamomileRest, foxgloveRest,
-  mintRest, thymeRest, sageRest, rosemaryRest, basilRest
+  mintRest, thymeRest, sageRest, rosemaryRest, basilRest, oreganoRest
 });
 
 addEventListener('resize', () => {
