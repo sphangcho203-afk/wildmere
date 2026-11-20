@@ -15,6 +15,7 @@ A quiet phone-first valley survival sketch in Three.js.
 - Phone HUD polish.
 
 ## Notes
+2026-11-20: Restored the play loop (boot-tick.js was a placeholder). Full mobile stick (visible knob), right-half look, E/F/G/R/M/Tab buttons, gather (herbs, water, berries, stone, wood, fish, harvest), build (post/campfire/wall/soil bed), plant, rest by fire, eat, notebook first-visit notes, needs HUD. enterValley only hides start card and shows touch layer. No pointer lock.
 2026-11-19: Added The Oregano Rest — a moss pad with oregano leaves you can pick for food, wired into place name, compass, first-visit toast, and notebook.
 2026-11-18: Added The Basil Rest — a moss pad with basil leaves you can pick for food, wired into place name, compass, first-visit toast, and notebook.
 2026-11-17: Added The Rosemary Rest — a moss pad with rosemary sprigs you can pick for food, wired into place name, compass, first-visit toast, and notebook.
